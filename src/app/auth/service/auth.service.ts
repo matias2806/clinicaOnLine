@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(public afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user =>{
-      console.log("Estado del usuario", user);
+      // console.log("Estado del usuario", user);
       if(!user){
         return;
       }
