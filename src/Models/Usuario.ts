@@ -1,3 +1,5 @@
+import { Especialidad } from "./Especialidad";
+
 export class Usuario {
     public nombre: string = ''; //Obli
     public apellido: string = '';//Obli
@@ -7,9 +9,13 @@ export class Usuario {
     public contraseña: string = ''; //Obli
     public tipoPerfil: string = ''; //Obli
     public foto1: any; //Obli
+    public uid?:any;//Obli
 
-    public obraSocial: string = ''; //Solo Paciente
-    public foto2: any; //Solo Paciente
+    public obraSocial?: string = ''; //Solo Paciente
+    public foto2?: any; //Solo Paciente
     
-    public especialidad: string = ''; //Solo Especialista
+    public especialidades?:Array<Especialidad>; //Solo Especialista
+
+    public URLfoto1?:string; //Obli
+    public URLfoto2?:string; //Solo paciente
 }

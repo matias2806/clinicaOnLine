@@ -55,23 +55,25 @@
                                 La contraseña es requerida</small>
                         </div>
 
-                        
+
 
                         <div class="form-group col-md-6 mb-3">
                             <label for="obraSocial" class="form-label">Tipo de perfil</label>
                             <div class="custom-control custom-radio" (click)="CambiaPerfil()">
-                                <input type="radio" id="Paciente" name="tipoPerfil" class="custom-control-input"
-                                    checked formControlName="tipoPerfil" value="Paciente" (click)="CambiaPerfil()">
-                                <label class="custom-control-label" for="Paciente" (click)="CambiaPerfil()">Paciente</label>
+                                <input type="radio" id="Paciente" name="tipoPerfil" class="custom-control-input" checked
+                                    formControlName="tipoPerfil" value="Paciente" (click)="CambiaPerfil()">
+                                <label class="custom-control-label" for="Paciente"
+                                    (click)="CambiaPerfil()">Paciente</label>
                             </div>
                             <div class="custom-control custom-radio" (click)="CambiaPerfil()">
-                                <input type="radio" id="Especialista" name="tipoPerfil" class="custom-control-input" 
-                                value="Especialista" formControlName="tipoPerfil" (click)="CambiaPerfil()">
-                                <label class="custom-control-label" for="Especialista" (click)="CambiaPerfil()">Especialista</label>
+                                <input type="radio" id="Especialista" name="tipoPerfil" class="custom-control-input"
+                                    value="Especialista" formControlName="tipoPerfil" (click)="CambiaPerfil()">
+                                <label class="custom-control-label" for="Especialista"
+                                    (click)="CambiaPerfil()">Especialista</label>
                             </div>
                         </div>
-                        
-                        <div class="form-group col-md-6 mb-3">
+
+                        <div class="form-group col-md-6 mb-3" *ngIf="perfil =='Paciente'">
                             <label for="obraSocial" class="form-label">Seleccione su obra social &nbsp;&nbsp;</label>
                             <select class="form-select" id="obraSocial" formControlName="obraSocial">
                                 <option value="" selected="true">Seleccione uno</option>
@@ -85,22 +87,43 @@
                                 La obra social es requerida</small>
                         </div>
 
-                        <!-- <div class="col-sm-12">
+                        <div class="col-sm-12">
                             <label for="foto1" class="form-label">Foto numero 1</label>
                             <input type="file" class="form-control" id="foto1" formControlName="foto1"
                                 (change)="nuevaImagen($event, 'foto1')">
                         </div>
 
-                        <div class="col-sm-12 mb-4">
+                        <div class="col-sm-12" *ngIf="perfil =='Paciente'">
                             <label for="foto2" class="form-label">Foto numero 2</label>
                             <input type="file" class="form-control" id="foto2" formControlName="foto2"
                                 (change)="nuevaImagen($event, 'foto2')">
-                        </div> -->
-                       
+                        </div>
+
+
+                        <div class="col-sm-12" *ngIf="perfil =='Especialista'" >
+                            <h4 class="mb-3 text-center mt-3">Especialidades</h4>
+                            <div class="actorPrincipal"> 
+                                <h6 class=" text-center"> Seleccione uno o varias especialidades de la lista de la derecha o genere una nueva</h6>
+                            </div>
+                            <div class="col-md-12 mb-4" *ngIf="!banderaEspecialidadSeleccionada">
+                                <ul class="list-group mb-3 card-body overflow-auto" id="boxConScroll"
+                                    style="height: 130px;" #scrollMe [scrollTop]="scrollMe">
+                                    <li type="text"
+                                        class="list-group-item d-flex justify-content-between lh-condensed elegido"
+                                        *ngFor="let especialidad of listaEspecialidadesSeleccionadas" disable>
+
+                                        <input type="text" class="form-control"
+                                            value="{{especialidad.nombre}} {{especialidad.duracion}}" disabled>
+                                        <button class="btn btn-danger" (click)="eliminarEspecialidad(especialidad)"><b>X</b></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                     <!-- <button type="submit" class="btn btn-primary btn-lg btn-block"
                         [disabled]="registerForm.invalid">Crear cuenta nueva</button> -->
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Crear cuenta nueva</button>
+                    <button type="submit" class=" mt-4 btn btn-primary btn-lg btn-block">Crear cuenta nueva</button>
 
                 </form>
                 <button type="submit" class="btn btn-primary" (click)="CargaDatos()">Carga trucho</button>
@@ -109,5 +132,52 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-5 col-lg-4 order-md-last mt-5" id="box" *ngIf="perfil =='Especialista'">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="d-flex justify-content-between align-items-center mb-3"
+                    *ngIf="listadoEspecialidades != null">
+                    <h4 class="text-primary text-center">Listado de especialidades</h4>
+                    <span class="badge bg-primary rounded-pill">{{listadoEspecialidades.length}}</span>
+                </h4>
+                <ul class="list-group mb-3 table-light" >
+                    <li class="list-group-item d-flex justify-content-between lh-sm"
+                        *ngFor="let especialidad of listadoEspecialidades let i=index" (click)="agregarEspecialidad(especialidad)">
+                        <div class="marco">
+                            <h6 class="my-0 text-info"><b>{{especialidad.nombre}} </b></h6>
+                            <small class="text-muted">{{especialidad.duracion}} minutos </small>
+                        </div>
+                    </li>
+                </ul>
+                <br>
+                <hr>
+                <div>
+                    <h5 class="blanco text-center">Nueva especialidad</h5>
+                    <div class="form-group">
+                        <label class="col-form-label" for="nombreE">Nombre</label>
+                        <input type="text" class="form-control nombreE" id="nombreE" [(ngModel)]="nombreEspecialidad"
+                            name="nombreE" placeholder="Ingrese el nombre de la especialidad">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label" for="duracion">Duración de la sesión</label>
+                        <select class="form-select" id="duracion" [(ngModel)]="duracionEspecialidad">
+                            <option value="" selected="true">Seleccione uno</option>
+                            <option value="30">30 minutos</option>
+                            <option value="45">45 minutos</option>
+                            <option value="60">60 minutos</option>
+                        </select>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-block" (click)="agregarNuevaEspecialidad()">Agregar
+                        Especialidad</button>
+                    <small class="invalid" name="errorEspecialidad" [(ngModel)]="errorEspecialidad"
+                        ngDefaultControl>{{errorEspecialidad}}</small>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
