@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
+import { MensajesService } from 'src/app/services/mensajes/mensajes.service';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
 import { Especialidad } from 'src/Models/Especialidad';
 import { Usuario } from 'src/Models/Usuario';
@@ -27,12 +28,12 @@ export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
   private foto1: any;
   private foto2: any;
-  public perfil: string = "Especialista"; //"Paciente";
+  public perfil: string = "Paciente"; //"Especialista"; // "Paciente";
 
   listaEspecialidadesSeleccionadas: Array<Especialidad> = new Array<Especialidad>();
   public banderaEspecialidadSeleccionada = true;
 
-  constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService) {
+  constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService) {
 
     this._Eservice.traerTodos().subscribe((especialidad: Especialidad[]) => {
       console.log(especialidad);
@@ -55,7 +56,7 @@ export class RegisterComponent implements OnInit {
       //public especialidad: string = ''; //Solo Especialista
 
     });
-    this.registerForm.controls['tipoPerfil'].setValue('Especialista');
+    this.registerForm.controls['tipoPerfil'].setValue('Paciente');
   }
 
   ngOnInit(): void { }
@@ -98,10 +99,11 @@ export class RegisterComponent implements OnInit {
 
 
           this._Uservice.subirUsuarioCon2Imagenes(this.foto1, this.foto2, user);
-          console.log("ALTA PACIENTE");
+          
+          this._Mservice.mensajeExitoso("Paciente dado de alta");
 
           //redirect login
-          //this.router.navigate(['/']);
+          this.router.navigate(['/verificacion']);
         });
       }
       if (this.perfil == "Especialista" && this.listaEspecialidadesSeleccionadas.length >= 1) {
@@ -125,13 +127,15 @@ export class RegisterComponent implements OnInit {
           };
 
           this._Uservice.subirUsuarioCon1Imagenes(this.foto1, user);
-          console.log("ALTA ESPECIALISTA");
+          this._Mservice.mensajeExitoso("Especialista dado de alta");
+          this.router.navigate(['/verificacion']);
           
         });
       }
       else{
         // this.errorSinSeleccion = 'Seleccione 1 especialidad como minimo';
         console.log('Seleccione 1 especialidad como minimo');
+        this._Mservice.mensajeError("Seleccione 1 especialidad como minimo");
       }
       if (this.perfil != "Especialista" && this.perfil != "Paciente") {
         console.log("OCURRIO UN ERROR GRABE");

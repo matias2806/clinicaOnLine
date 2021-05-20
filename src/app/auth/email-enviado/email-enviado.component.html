@@ -1,0 +1,23 @@
+<div class="row">
+    <!-- <div class="col-md-9 mx-auto mt-5" *ngIf="user$ | async as user; else loading"> -->
+    <div class="col-md-9 mx-auto mt-5" *ngIf="user$ | async as user">
+        <div class="card mt-5">
+            <div class="card-body">
+                <h3 class="card-title text-center"><b>Gracias por registrarse!</b></h3>
+                <div class="form-group">
+                    <p class="text-center mt-4">Hemos enviado un email de activación a la cuenta
+                        <b>{{user?.email}}</b>.
+                    </p>
+                    <p class="text-center mt-2">Por favor revise su email y presione en el link para verificar.</p>
+                </div>
+            </div>
+            <div class="form-group text-center mb-4 mt-2">
+                <button class="btn btn-primary" (click)="reenviarEmail()">Reenviar email de verificación</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <ng-templete #loading>
+    Loading....
+</ng-templete> -->

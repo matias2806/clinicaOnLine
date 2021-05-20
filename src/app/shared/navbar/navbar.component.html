@@ -12,6 +12,9 @@
                 <a class="nav-link" [routerLink]="['/home']">Home</a>
             </li>
             <li class="nav-item active">
+                <a class="nav-link" [routerLink]="['/']">Prueba</a>
+            </li>
+            <!-- <li class="nav-item active">
                 <a class="nav-link" [routerLink]="['/quienSoy']">¿Quien soy?</a>
             </li>
             <li class="nav-item active" *ngIf="authSvc.usuario.uid">
@@ -25,7 +28,7 @@
             </li>
             <li class="nav-item active" *ngIf="authSvc.usuario.uid">
                 <a class="nav-link" [routerLink]="['/resultados']">Resultados</a>
-            </li>
+            </li> -->
         </ul>
         <ul class="navbar-nav mx-auto" *ngIf="user$ |async as user; else login">
 
