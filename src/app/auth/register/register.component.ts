@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService) {
 
     this._Eservice.traerTodos().subscribe((especialidad: Especialidad[]) => {
-      console.log(especialidad);
+      // console.log(especialidad);
       this.listadoEspecialidades = especialidad;
     });
 
@@ -77,10 +77,11 @@ export class RegisterComponent implements OnInit {
 
     const { email, contraseña } = this.registerForm.value;
     try {
+      console.log(this.perfil);
       if (this.perfil == "Paciente") {
         this.AuthSvc.register(email, contraseña).then((r) => {
           // console.log(r);
-          // console.log(r?.user?.uid);
+           console.log(r?.user?.uid);
           // console.log(r?.operationType);
 
           let user: Usuario = {
@@ -96,7 +97,7 @@ export class RegisterComponent implements OnInit {
             obraSocial: this.registerForm.controls['obraSocial'].value,
             foto2: this.registerForm.controls['foto2'].value,
           };
-
+          console.log(user);
 
           this._Uservice.subirUsuarioCon2Imagenes(this.foto1, this.foto2, user);
           
@@ -108,8 +109,8 @@ export class RegisterComponent implements OnInit {
       }
       if (this.perfil == "Especialista" && this.listaEspecialidadesSeleccionadas.length >= 1) {
         this.AuthSvc.register(email, contraseña).then((r) => {
-          // console.log(r);
-          // console.log(r?.user?.uid);
+           console.log(r);
+           console.log(r?.user?.uid);
           // console.log(r?.operationType);
 
           let user: Usuario = {
@@ -132,7 +133,7 @@ export class RegisterComponent implements OnInit {
           
         });
       }
-      else{
+      if(this.perfil == "Especialista" && this.listaEspecialidadesSeleccionadas.length == 0){
         // this.errorSinSeleccion = 'Seleccione 1 especialidad como minimo';
         console.log('Seleccione 1 especialidad como minimo');
         this._Mservice.mensajeError("Seleccione 1 especialidad como minimo");

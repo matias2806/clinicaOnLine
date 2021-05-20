@@ -58,16 +58,17 @@ export class UsuariosService {
     this.subirImagen(imagen, usuario, 'f1');
     this.subirImagen(imagen2, usuario, 'f2');
 
-   
+    console.log("estoy");
     setTimeout(() => {
-      // console.log("adentro",usuario);
+
+      console.log("adentro", usuario);
       this.altaUsuario(usuario);
-    }, 2000);
+    }, 3000);
   }
 
   async subirUsuarioCon1Imagenes(imagen: any, usuario: Usuario) {
 
-    this.subirImagen(imagen, usuario, 'f1');   
+    this.subirImagen(imagen, usuario, 'f1');
     setTimeout(() => {
       // console.log("adentro",usuario);
       this.altaUsuario(usuario);
