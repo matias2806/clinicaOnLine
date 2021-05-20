@@ -15,7 +15,7 @@ export class Usuario {
     public foto2?: any; //Solo Paciente
     
     public especialidades?:Array<Especialidad>; //Solo Especialista
-    public aprovadoPorAdmin?:boolean;//Solo Especialista
+    public aprovadoPorAdmin?:boolean=true;//Solo Especialista
 
     public URLfoto1?:string; //Obli
     public URLfoto2?:string; //Solo paciente

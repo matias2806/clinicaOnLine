@@ -123,7 +123,7 @@ export class RegisterComponent implements OnInit {
             email: this.registerForm.controls['email'].value,
             contraseña: this.registerForm.controls['contraseña'].value,
             uid: r?.user?.uid,
-
+            aprovadoPorAdmin: false,
           };
 
           this._Uservice.subirUsuarioCon1Imagenes(this.foto1, user);
