@@ -34,6 +34,10 @@ export class AuthService {
     return null;
   }
 
+  async darUsuario(){
+    return this.afAuth.currentUser;
+  }
+
   async register(email: string, password: string) {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password);

@@ -24,9 +24,21 @@ export class UsuarioComponent implements OnInit {
   constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService) {
 
     this._Uservice.traerTodos().subscribe((usuarios: Usuario[]) => {
-      // console.log(especialidad);
+      // console.log(usuarios);
       this.listadoUsuarios = usuarios;
+      // for (const key of usuarios) {
+      //    console.log(key);
+      // }
+      // for (const key in usuarios) {
+      //   if (Object.prototype.hasOwnProperty.call(usuarios, key)) {
+      //     const element = usuarios[key];
+      //     console.log(usuarios[key]);
+          
+      //   }
+      // }
     });
+
+    
 
     this.registerForm = this.fb.group({
       'nombre': ['', [Validators.required]],//Obli
@@ -63,7 +75,13 @@ export class UsuarioComponent implements OnInit {
   }
 
   aprobarUsuario(usuario: Usuario){
-    console.log(usuario);
+    var auxUi;
+    this.AuthSvc.darUsuario().then(resp=>{
+      auxUi = resp?.uid;
+    });
+    // console.log(auxUi);
+
+    console.log(this.AuthSvc.usuario);
   }
 
 

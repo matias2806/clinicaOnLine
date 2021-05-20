@@ -10,6 +10,7 @@ import { Usuario } from '../../../Models/Usuario';
 })
 export class UsuariosService {
 
+  public usuario: any = {};
   private filePath: any;
   // private dowloadURL: Observable<string>;
 
@@ -22,6 +23,7 @@ export class UsuariosService {
 
     this.usuarios = this.usuariosColecction.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
+        console.log(a);
         const data = a.payload.doc.data() as unknown as Usuario;
         return data;
       });
@@ -35,6 +37,25 @@ export class UsuariosService {
   traerTodos() {
     return this.usuarios;
   }
+
+  // addItem(newName: string) {
+  //   this.itemsRef.push({ text: newName });
+  // }
+  updateItem(key: string, newText: string) {
+
+    this.usuarios.subscribe(items=>{
+      // this.db.doc(`jobs/${job.id}`).update({name:profile.name});
+    })
+  }
+  // deleteItem(key: string) {
+  //   this.itemsRef.remove(key);
+  // }
+  // deleteEverything() {
+  //   this.itemsRef.remove();
+  // }
+
+
+
 
   subirImagen(imagen: any, usuario: Usuario, fotoNumero: string) {
     this.filePath = `images/${usuario.uid}/${imagen.name}`;
