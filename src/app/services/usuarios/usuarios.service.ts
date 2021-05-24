@@ -17,14 +17,19 @@ export class UsuariosService {
   private path = '/usuarios';
   usuariosColecction: AngularFirestoreCollection<Usuario>;
   public usuarios: Observable<Usuario[]>;
+  public usuarioUnico: Observable<Usuario> | undefined;
+  userPrueba: Observable<Usuario[]>;
+  // public urlImage2: Observable<string>;
 
   constructor(public db: AngularFirestore, private storage: AngularFireStorage) {
     this.usuariosColecction = db.collection(this.path);
+    this.userPrueba = this.usuariosColecction.valueChanges();
 
     this.usuarios = this.usuariosColecction.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
         console.log(a);
         const data = a.payload.doc.data() as unknown as Usuario;
+        data.auxId = a.payload.doc.id;
         return data;
       });
     }));
@@ -38,23 +43,46 @@ export class UsuariosService {
     return this.usuarios;
   }
 
-  // addItem(newName: string) {
-  //   this.itemsRef.push({ text: newName });
-  // }
-  updateItem(key: string, newText: string) {
-
-    this.usuarios.subscribe(items=>{
-      // this.db.doc(`jobs/${job.id}`).update({name:profile.name});
-    })
+  public getUsuarioPorEmail(email: string) {
+    return new Promise((resolve, reject) => {
+      this.db.collection(this.path).get().subscribe((querySnapshot) => {
+        let doc = querySnapshot.docs.find(doc => (doc.data() as Usuario ).email == email);
+        resolve(doc?.data());
+      })
+    });
   }
-  // deleteItem(key: string) {
-  //   this.itemsRef.remove(key);
-  // }
-  // deleteEverything() {
-  //   this.itemsRef.remove();
-  // }
+
+  update(id: string, data: any): Promise<void> {
+    return this.usuariosColecction.doc(id).update(data);
+  }
+
+  delete(id: string): Promise<void> {
+    return this.usuariosColecction.doc(id).delete();
+  }
 
 
+
+
+  subirImagenConUid(uid: string, imagen: any) {
+    let aux = "";
+    this.filePath = `images/${uid}/${imagen.name}`;
+    const fileRef = this.storage.ref(this.filePath);
+    const task = this.storage.upload(this.filePath, imagen);
+    task.snapshotChanges().pipe(finalize(() => {
+      fileRef.getDownloadURL().subscribe(urlImagen => {
+        aux = urlImagen;
+        //this.dowloadURL = urlImagen;
+        // // console.log('URL_IMAGEN', urlImagen);
+        // if (fotoNumero == 'f1') {
+        //   usuario.URLfoto1 = urlImagen;
+        // } else {
+        //   usuario.URLfoto2 = urlImagen;
+        // }
+      })
+      console.log("mi aux", aux);
+      return aux;
+    })).subscribe();
+  }
 
 
   subirImagen(imagen: any, usuario: Usuario, fotoNumero: string) {

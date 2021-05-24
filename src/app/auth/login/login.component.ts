@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
   })
-  constructor(private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Mservice: MensajesService) { }
+  constructor(private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Mservice: MensajesService) { 
+    
+  }
 
   ngOnInit(): void {
   }
@@ -44,20 +46,23 @@ export class LoginComponent implements OnInit {
           });
           console.log("EL ACTUAL", userActual);
           if (userActual.tipoPerfil == "Especialista" && userActual.aprovadoPorAdmin == true) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
           }
           if (userActual.tipoPerfil == "Especialista" && userActual.aprovadoPorAdmin == false) {
             this._Mservice.mensajeError("Su cuenta todavia no fue aprovada por un administrador, Tenga paciencia");
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
             this.AuthSvc.logout();
+          }
+          else{
+            this.router.navigate(['/home']);
           }
         });
         
       } else if (user) {
-        this.router.navigate(['/verificacion']);
+        this.router.navigate(['/verificacion', email]);
       }
       else {
-        this.router.navigate(['/register']);
+        this.router.navigate(['/register', "Paciente"]);
       }
     } catch (error) {
       console.log("aa", error);
@@ -70,6 +75,33 @@ export class LoginComponent implements OnInit {
 
   cargarMatias() {
     this.loginForm.setValue({ email: 'matias.palmieri.01@gmail.com', password: 'matias1' });
+  }
+
+  ingresoTest(){
+    // console.log("pepe");
+
+  }
+
+  carga5usuarios(){
+    this._Uservice.getUsuarioPorEmail("alabordeparodi@gmail.com").then(user=>{
+      if(user){
+        console.log(user);
+      }
+    });
+
+    var aux = this._Uservice.getUsuarioPorEmail("alabordeparodi@gmail.com").then(user=>{
+      if(user){
+        console.log(user);
+      }
+    });
+
+    var aux = this._Uservice.getUsuarioPorEmail("alabordeparodi@gmail.com").then(user=>{
+      if(user){
+        console.log(user);
+      }
+    });
+
+
   }
 
 }

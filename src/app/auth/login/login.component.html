@@ -14,12 +14,18 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
                 </form>
-                <button (click)="cargarAdmin()" class="btn btn-success btn-md btn-block mt-2">Ingresar como Admin</button>
-                <button (click)="cargarMatias()" class="btn btn-success btn-md btn-block mt-2">Ingresar como Matias</button>
+                <button (click)="cargarAdmin()" class="btn btn-success btn-md btn-block mt-2 ">Ingresar como
+                    Admin</button>
+                <button (click)="cargarMatias()" class="btn btn-success btn-md btn-block mt-2">Ingresar como
+                    Matias</button>
                 <div class="form-group mt-3">
                     <p>Create an account? <a [routerLink]="['/register']">Register</a></p>
                 </div>
             </div>
+        </div>
+
+        <div >
+            <button class="animate__animated animate__backInUp" (click)="ingresoTest()">ADMIN <img src="../../../assets/logo.png" class="tamanioFoto"alt=""> </button>
         </div>
     </div>
 </div>

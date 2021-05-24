@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { EmailEnviadoComponent } from './auth/email-enviado/email-enviado.component';
 import { UsuarioComponent } from './auth/usuario/usuario.component';
+import { OpcionesDeUsuariosComponent } from './auth/opciones-de-usuarios/opciones-de-usuarios.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { UsuarioComponent } from './auth/usuario/usuario.component';
     NavbarComponent,
     EmailEnviadoComponent,
     UsuarioComponent,
+    OpcionesDeUsuariosComponent,
   ],
   imports: [
     BrowserModule,

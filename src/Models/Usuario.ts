@@ -7,7 +7,7 @@ export class Usuario {
     public dni: number = 0; //Obli
     public email: string = ''; //Obli
     public contraseña: string = ''; //Obli
-    public tipoPerfil: string = ''; //Obli
+    public tipoPerfil: string | null = ''; //Obli
     public foto1: any; //Obli
     public uid?:any;//Obli
 
@@ -19,4 +19,5 @@ export class Usuario {
 
     public URLfoto1?:string; //Obli
     public URLfoto2?:string; //Solo paciente
+    public auxId?:any;//Prueba
 }

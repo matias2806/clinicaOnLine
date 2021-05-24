@@ -1,0 +1,33 @@
+<!-- Three columns of text below the carousel -->
+<div class="row mt-5">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-4">
+        <div class="centrado">
+            <img src="../../../assets/medico.jpg" alt="Foto Medico" class="imagenPerfil">
+        </div>
+        <h2 class="text-center mt-2">Especialista</h2>
+        <p class="text-center">Este tipo de perfil es un medico contratado por nuestra clinica, que puede poseer una o
+            varias
+            especialidades. Una vez se haya registrado este usuario recibira un email de confirmación de
+            identidad y ademas tendra que ser validado por un administrador del sistema.</p>
+        <p class="text-center"><button class="btn btn-secondary " (click)="redirigir('Especialista')" >Registrar Especialista</button></p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+        <div class="centrado">
+            <img src="../../../assets/paciente5.jpg" alt="Foto Paciente" class="imagenPerfil">
+        </div>
+        <h2  class="text-center mt-2">Paciente</h2>
+        <p  class="text-center">Este tipo de perfil es de una persona particular, para que pueda sacar turnos medicos para atenderse en
+            nuestra clinica. Una vez se haya registrado este usuario recibira un email de confirmación de identidad.</p>
+        <p  class="text-center"><button class="btn btn-secondary mt-4" (click)="redirigir('Paciente')">Registrar Paciente</button></p>
+    </div><!-- /.col-lg-4 -->
+
+    <!-- ESTE PARA EL ADMIN -->
+    <div class="col-lg-4" *ngIf="false">
+        <img src="../../../assets/medico.jpg" alt="Foto Medico" class="imagenPerfil">
+
+        <h2></h2>
+        <p></p>
+        <p><button class="btn btn-secondary" >sad</button></p>
+    </div><!-- /.col-lg-4 -->
+</div><!-- /.row -->
