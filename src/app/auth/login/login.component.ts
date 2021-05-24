@@ -53,8 +53,8 @@ export class LoginComponent implements OnInit {
           }
           if (userActual.tipoPerfil == "Especialista" && userActual.aprovadoPorAdmin == false) {
             // this._Mservice.mensajeError("Su cuenta todavia no fue aprovada por un administrador, Tenga paciencia");
+            // this.AuthSvc.logout(); NO VA
             this.router.navigate(['/home']);
-            this.AuthSvc.logout();
           }
           else {
             this.router.navigate(['/home']);

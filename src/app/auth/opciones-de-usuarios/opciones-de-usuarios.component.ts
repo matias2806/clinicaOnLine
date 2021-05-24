@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -7,10 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./opciones-de-usuarios.component.scss']
 })
 export class OpcionesDeUsuariosComponent implements OnInit {
+  @Input() minimalista: boolean=false;
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.minimalista);
   }
 
 

@@ -14,32 +14,22 @@ import { AuthService } from '../service/auth.service';
 })
 export class UsuarioComponent implements OnInit {
 
-  public registerForm: FormGroup;
+  public registerForm: FormGroup | undefined;
   private foto1: any;
-  private foto2: any;
-  public perfil: string = "Paciente"; //"Especialista"; // "Paciente";
+
 
   public listadoUsuarios!: Usuario[];
 
   constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService) {
 
     this._Uservice.traerTodos().subscribe((usuarios: Usuario[]) => {
-      // console.log(usuarios);
       this.listadoUsuarios = usuarios;
-      // for (const key of usuarios) {
-      //    console.log(key);
-      // }
-      // for (const key in usuarios) {
-      //   if (Object.prototype.hasOwnProperty.call(usuarios, key)) {
-      //     const element = usuarios[key];
-      //     console.log(usuarios[key]);
-          
-      //   }
-      // }
     });
 
-    
 
+   }
+
+  ngOnInit(): void {
     this.registerForm = this.fb.group({
       'nombre': ['', [Validators.required]],//Obli
       'apellido': ['', [Validators.required]],//Obli
@@ -48,23 +38,45 @@ export class UsuarioComponent implements OnInit {
       'email': ['', [Validators.required]],//Obli
       'contraseña': ['', [Validators.required, Validators.minLength(6)]],//Obli
       'foto1': ['', [Validators.required]],//Obli
-      'tipoPerfil': ['', [Validators.required]],//Obli
     });
-    this.registerForm.controls['tipoPerfil'].setValue('Paciente');
-   }
+  }
 
-  ngOnInit(): void {
+  veoForm() {
+    console.log(this.registerForm);
   }
 
   onRegister() {
+    const { email, contraseña } = this.registerForm?.value;
+    console.log("Entro al registro de admin");
+    this.AuthSvc.register(email, contraseña).then((r) => {
+      console.log(r?.user?.uid);
 
+      let user: Usuario = {
+        nombre: this.registerForm?.controls['nombre'].value,
+        apellido: this.registerForm?.controls['apellido'].value,
+        edad: this.registerForm?.controls['edad'].value,
+        dni: this.registerForm?.controls['dni'].value,
+        foto1: this.registerForm?.controls['foto1'].value,
+        tipoPerfil: 'Admin',
+        email: this.registerForm?.controls['email'].value,
+        contraseña: this.registerForm?.controls['contraseña'].value,
+        uid: r?.user?.uid,
+        aprovadoPorAdmin: true,
+      };
+      console.log(user);
+      console.log(this.foto1);
+      this._Uservice.subirUsuarioCon1Imagenes(this.foto1, user);
+      this._Mservice.mensajeExitoso("Admin dado de alta");
+      this.foto1= null;
+      //redirect login +agregar parametro
+      this.router.navigate(['/verificacion', user.email]);
+
+    });
   }
 
   nuevaImagen(event: any, cual: string): void {
     if (cual == 'foto1') {
       this.foto1 = event.target.files[0];
-    } else {
-      this.foto2 = event.target.files[0];
     }
   }
 
@@ -75,24 +87,24 @@ export class UsuarioComponent implements OnInit {
   }
 
   aprobarUsuario(usuario: Usuario){
-    var auxUi;
-    this.AuthSvc.darUsuario().then(resp=>{
-      auxUi = resp?.uid;
-    });
-    // console.log(auxUi);
+    // var auxUi;
+    // this.AuthSvc.darUsuario().then(resp=>{
+    //   auxUi = resp?.uid;
+    // });
+    // // console.log(auxUi);
 
-    console.log(this.AuthSvc.usuario);
+    // console.log(this.AuthSvc.usuario);
   }
 
 
   CargaDatos() {
 
-    this.registerForm.controls['nombre'].setValue('admin');
-    this.registerForm.controls['apellido'].setValue('admin');
-    this.registerForm.controls['edad'].setValue(22);
-    this.registerForm.controls['dni'].setValue(12345678);
-    this.registerForm.controls['email'].setValue('matias.palmieri.01@gmail.com');
-    this.registerForm.controls['contraseña'].setValue('matias1');
+    this.registerForm?.controls['nombre'].setValue('admin');
+    this.registerForm?.controls['apellido'].setValue('admin');
+    this.registerForm?.controls['edad'].setValue(22);
+    this.registerForm?.controls['dni'].setValue(12345678);
+    this.registerForm?.controls['email'].setValue('matias.palmieri.01@gmail.com');
+    this.registerForm?.controls['contraseña'].setValue('matias1');
   }
 
 }

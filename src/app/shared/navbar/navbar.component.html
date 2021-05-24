@@ -11,8 +11,8 @@
             <li class="nav-item active">
                 <a class="nav-link" [routerLink]="['/home']">Home</a>
             </li>
-            <li class="nav-item active" >
-                <a class="nav-link" [routerLink]="['/usuarios']">Usuarios</a>
+            <li class="nav-item active" *ngIf="authSvc.usuario.uid" >
+                <a class="nav-link"  [routerLink]="['/usuarios']">Usuarios</a>
             </li>
             <!-- <li class="nav-item active">
                 <a class="nav-link" [routerLink]="['/quienSoy']">¿Quien soy?</a>

@@ -1,5 +1,5 @@
 <!-- Three columns of text below the carousel -->
-<div class="row mt-5">
+<div class="row mt-5" *ngIf="minimalista == false">
     <div class="col-lg-2"></div>
     <div class="col-lg-4">
         <div class="centrado">
@@ -31,3 +31,19 @@
         <p><button class="btn btn-secondary" >sad</button></p>
     </div><!-- /.col-lg-4 -->
 </div><!-- /.row -->
+
+
+<div class="row mt-2" *ngIf="minimalista == true">
+    <div class="col-lg-6">
+        <div class="centrado">
+            <img src="../../../assets/medico.jpg" alt="Foto Medico" class="imagenPerfilChica">
+        </div>
+        <p class="text-center"><button class="btn btn-info mt-3" (click)="redirigir('Especialista')" >Registrar Especialista</button></p>
+    </div>
+    <div class="col-lg-6">
+        <div class="centrado">
+            <img src="../../../assets/paciente5.jpg" alt="Foto Paciente" class="imagenPerfilChica">
+        </div>
+        <p  class="text-center"><button class="btn btn-info mt-3" (click)="redirigir('Paciente')">Registrar Paciente</button></p>
+    </div>
+</div>

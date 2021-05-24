@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6 mx-auto mt-5">
+    <div class="col-md-4 mx-auto mt-4" *ngIf="registerForm != undefined">
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center mb-3"><b>Registro de Admins</b></h1>
@@ -9,14 +9,14 @@
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" class="form-control" formControlName="nombre">
                             <small class="invalid"
-                                *ngIf="registerForm.get('nombre')?.errors?.required && registerForm.get('nombre')?.touched">El
+                                *ngIf="registerForm?.get('nombre')?.errors?.required && registerForm?.get('nombre')?.touched">El
                                 nombre es requerido</small>
                         </div>
                         <div class="form-group col-md-6 mb-3">
                             <label for="apellido">Apellido</label>
                             <input type="text" id="apellido" class="form-control" formControlName="apellido">
                             <small class="invalid"
-                                *ngIf="registerForm.get('apellido')?.errors?.required && registerForm.get('apellido')?.touched ">El
+                                *ngIf="registerForm?.get('apellido')?.errors?.required && registerForm?.get('apellido')?.touched ">El
                                 apellido es
                                 requerido</small>
                         </div>
@@ -24,34 +24,34 @@
                             <label for="edad">Edad</label>
                             <input type="number" id="edad" class="form-control" formControlName="edad">
                             <small class="invalid"
-                                *ngIf="registerForm.get('edad')?.errors?.required && registerForm.get('edad')?.touched ">
+                                *ngIf="registerForm?.get('edad')?.errors?.required && registerForm?.get('edad')?.touched ">
                                 La edad es requerida</small>
                             <small class="invalid"
-                                *ngIf="registerForm.get('edad')?.errors?.min || registerForm.get('edad')?.errors?.max   && registerForm.get('edad')?.touched ">La
+                                *ngIf="registerForm?.get('edad')?.errors?.min || registerForm?.get('edad')?.errors?.max   && registerForm?.get('edad')?.touched ">La
                                 edad debe ser entre 18 a 99 años</small>
                         </div>
                         <div class="form-group col-md-6 mb-3">
                             <label for="dni">DNI</label>
                             <input type="number" id="dni" class="form-control" formControlName="dni">
                             <small class="invalid"
-                                *ngIf="registerForm.get('dni')?.errors?.required && registerForm.get('dni')?.touched ">
+                                *ngIf="registerForm?.get('dni')?.errors?.required && registerForm?.get('dni')?.touched ">
                                 El DNI es requerido</small>
                             <small class="invalid"
-                                *ngIf="registerForm.get('dni')?.errors?.min || registerForm.get('dni')?.errors?.max   && registerForm.get('dni')?.touched ">El
+                                *ngIf="registerForm?.get('dni')?.errors?.min || registerForm?.get('dni')?.errors?.max   && registerForm?.get('dni')?.touched ">El
                                 DNI debe ser entre 1.000.000 a 99.999.999</small>
                         </div>
                         <div class="form-group col-md-6 mb-3">
                             <label for="email">Email</label>
                             <input type="text" id="email" class="form-control" formControlName="email">
                             <small class="invalid"
-                                *ngIf="registerForm.get('email')?.errors?.required && registerForm.get('email')?.touched ">
+                                *ngIf="registerForm?.get('email')?.errors?.required && registerForm?.get('email')?.touched ">
                                 El email es requerido</small>
                         </div>
                         <div class="form-group col-md-6 mb-3">
                             <label for="contraseña">Contraseña</label>&nbsp;<small>(minimo 6 caracteres)</small>
                             <input type="password" id="contraseña" class="form-control" formControlName="contraseña">
                             <small class="invalid"
-                                *ngIf="registerForm.get('contraseña')?.errors?.required && registerForm.get('contraseña')?.touched ">
+                                *ngIf="registerForm?.get('contraseña')?.errors?.required && registerForm?.get('contraseña')?.touched ">
                                 La contraseña es requerida</small>
                         </div>
 
@@ -62,12 +62,12 @@
                         </div>
 
                     </div>
-                    <!-- <button type="submit" class="btn btn-primary btn-lg btn-block"
-                        [disabled]="registerForm.invalid">Crear cuenta nueva</button> -->
-                    <button type="submit" class=" mt-4 btn btn-primary btn-lg btn-block">Crear cuenta nueva</button>
-
+                        <button type="submit" class="btn btn-primary btn-lg btn-block"
+                        [disabled]="registerForm.invalid">Crear cuenta nueva</button>
+                    
                 </form>
                 <button type="submit" class="btn btn-primary" (click)="CargaDatos()">Carga trucho</button>
+                <button type="submit" class="btn btn-primary" (click)="veoForm()">VeoForm</button>
                 <div class="form-group mt-3">
                     <p>¿Ya tienes una cuenta?&nbsp; <a [routerLink]="['/login']">Iniciar Sesión</a></p>
                 </div>
@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <div class="col-md-6 col-lg-6 order-md-last mt-5" id="box">
+    <div class="col-md-8 col-lg-8 order-md-last mt-5" id="box">
         <div class="card">
             <div class="card-body">
                 <h2 class="mb-3 mt-3 text-center"><b>Listado de Usuarios.</b></h2>
@@ -112,4 +112,15 @@
         </div>
     </div>
 
+</div>
+
+<div class="row">
+    <div class="col-md-4 mx-auto mt-4">
+        <div class="card">
+            <div class="card-body">
+                <app-opciones-de-usuarios [minimalista]="true"></app-opciones-de-usuarios>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-lg-8 order-md-last mt-5"></div>
 </div>
