@@ -14,8 +14,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
                 </form>
-                <button (click)="cargarAdmin()" class="btn btn-success btn-md btn-block mt-2 ">Ingresar como
-                    Admin</button>
                 <button (click)="cargarMatias()" class="btn btn-success btn-md btn-block mt-2">Ingresar como
                     Matias</button>
                 <div class="form-group mt-3">
@@ -23,9 +21,14 @@
                 </div>
             </div>
         </div>
-
-        <div >
-            <button class="animate__animated animate__backInUp" (click)="ingresoTest()">ADMIN <img src="../../../assets/logo.png" class="tamanioFoto"alt=""> </button>
+        <div class="row">
+            <div *ngFor="let user of usuariosAccesoRapido" class="mt-2 col-md-3">
+                <button class="animate__animated animate__backInUp btn btn-info mt-1 largo"
+                    (click)="cargaUsuario(user.nombre)">{{user.tipoPerfil | uppercase}}: {{user.nombre}}<img src="{{user.URLfoto1}}"
+                        class="tamanioFoto" alt=""> </button>
+            </div>
         </div>
+
+
     </div>
 </div>

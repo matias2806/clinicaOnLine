@@ -177,11 +177,16 @@ export class RegisterComponent implements OnInit {
             aprovadoPorAdmin: true,
           };
           console.log(user);
-          this._Uservice.altaUsuario(user);
-          this.SubirFoto(user.uid);
+          console.log(this.foto1);
+          this._Uservice.subirUsuarioCon2Imagenes(this.foto1, this.foto2, user);
+
+
+          // this._Uservice.altaUsuario(user);
+          // this.SubirFoto(user.uid);
 
           this._Mservice.mensajeExitoso("Paciente dado de alta");
-
+          this.foto1= null;
+          this.foto2= null;
           //redirect login +agregar parametro
           this.router.navigate(['/verificacion', user.email]);
 
@@ -211,9 +216,11 @@ export class RegisterComponent implements OnInit {
           // console.log("ADENTRO3");
           // this._Mservice.mensajeExitoso("Especialista dado de alta");
           // this.router.navigate(['/verificacion', user.email]);
-
+          
           this._Uservice.subirUsuarioCon1Imagenes(this.foto1, user);
           this._Mservice.mensajeExitoso("Especialista dado de alta");
+          this.foto1= null;
+          this.foto2= null;
           this.router.navigate(['/verificacion', user.email]);
 
         });

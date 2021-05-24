@@ -18,8 +18,11 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
   })
-  constructor(private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Mservice: MensajesService) { 
-    
+  public usuariosAccesoRapido: any[] = [];
+
+  constructor(private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Mservice: MensajesService) {
+    this.carga5usuarios();
+    console.log(this.usuariosAccesoRapido);
   }
 
   ngOnInit(): void {
@@ -49,15 +52,15 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/home']);
           }
           if (userActual.tipoPerfil == "Especialista" && userActual.aprovadoPorAdmin == false) {
-            this._Mservice.mensajeError("Su cuenta todavia no fue aprovada por un administrador, Tenga paciencia");
+            // this._Mservice.mensajeError("Su cuenta todavia no fue aprovada por un administrador, Tenga paciencia");
             this.router.navigate(['/home']);
             this.AuthSvc.logout();
           }
-          else{
+          else {
             this.router.navigate(['/home']);
           }
         });
-        
+
       } else if (user) {
         this.router.navigate(['/verificacion', email]);
       }
@@ -77,27 +80,51 @@ export class LoginComponent implements OnInit {
     this.loginForm.setValue({ email: 'matias.palmieri.01@gmail.com', password: 'matias1' });
   }
 
-  ingresoTest(){
-    // console.log("pepe");
-
+  cargaUsuario(nombre: string) {
+    switch (nombre) {
+      case "Alejandro":
+        this.loginForm.setValue({ email: 'alabordeparodi@gmail.com', password: '123456' });
+        break;
+      case "Claudio":
+        this.loginForm.setValue({ email: 'cppalmieri@hotmail.com', password: '123456' });
+        break;
+      case "Facundo":
+        this.loginForm.setValue({ email: 'facundo.palmieri.01@gmail.com', password: '123456' });
+        break;
+      case "Lorena":
+        this.loginForm.setValue({ email: 'lorena.bevilacqua75@gmail.com', password: '123456' });
+        break;
+      default:
+        break;
+    }
   }
 
-  carga5usuarios(){
-    this._Uservice.getUsuarioPorEmail("alabordeparodi@gmail.com").then(user=>{
-      if(user){
+  carga5usuarios() {
+    this._Uservice.getUsuarioPorEmail("alabordeparodi@gmail.com").then(user => {
+      if (user) {
         console.log(user);
+        this.usuariosAccesoRapido?.push(user);
       }
     });
 
-    var aux = this._Uservice.getUsuarioPorEmail("alabordeparodi@gmail.com").then(user=>{
-      if(user){
+    this._Uservice.getUsuarioPorEmail("cppalmieri@hotmail.com").then(user => {
+      if (user) {
         console.log(user);
+        this.usuariosAccesoRapido?.push(user);
       }
     });
 
-    var aux = this._Uservice.getUsuarioPorEmail("alabordeparodi@gmail.com").then(user=>{
-      if(user){
+    this._Uservice.getUsuarioPorEmail("facundo.palmieri.01@gmail.com").then(user => {
+      if (user) {
         console.log(user);
+        this.usuariosAccesoRapido?.push(user);
+      }
+    });
+
+    this._Uservice.getUsuarioPorEmail("lorena.bevilacqua75@gmail.com").then(user => {
+      if (user) {
+        console.log(user);
+        this.usuariosAccesoRapido?.push(user);
       }
     });
 

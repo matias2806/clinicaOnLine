@@ -1,4 +1,9 @@
 .tamanioFoto{
 height: 60px;
 width: 60px;
+margin-left: 5px;
+}
+
+.largo{
+    width: 200px;
 }

@@ -36,6 +36,7 @@ export class UsuariosService {
   }
 
   altaUsuario(usuario: Usuario) {
+    console.log("Alta exitosa");
     return this.usuariosColecction.add(JSON.parse(JSON.stringify(usuario)));
   }
 
@@ -107,10 +108,9 @@ export class UsuariosService {
     this.subirImagen(imagen, usuario, 'f1');
     this.subirImagen(imagen2, usuario, 'f2');
 
-    console.log("estoy");
     setTimeout(() => {
 
-      console.log("adentro", usuario);
+      console.log("adentro22", usuario);
       this.altaUsuario(usuario);
     }, 3000);
   }
