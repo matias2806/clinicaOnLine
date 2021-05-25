@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/home']);
           }
           if (userActual.tipoPerfil == "Especialista" && userActual.aprovadoPorAdmin == false) {
-            // this._Mservice.mensajeError("Su cuenta todavia no fue aprovada por un administrador, Tenga paciencia");
-            // this.AuthSvc.logout(); NO VA
+            this._Mservice.mensajeError("Su cuenta todavia no fue aprovada por un administrador, Tenga paciencia");
+            this.AuthSvc.logout();
             this.router.navigate(['/home']);
           }
           else {
@@ -94,6 +94,9 @@ export class LoginComponent implements OnInit {
       case "Lorena":
         this.loginForm.setValue({ email: 'lorena.bevilacqua75@gmail.com', password: '123456' });
         break;
+      case "Cristian":
+        this.loginForm.setValue({ email: 'cristianfabiocelano@gmail.com', password: '123456' });
+        break;
       default:
         break;
     }
@@ -122,6 +125,13 @@ export class LoginComponent implements OnInit {
     });
 
     this._Uservice.getUsuarioPorEmail("lorena.bevilacqua75@gmail.com").then(user => {
+      if (user) {
+        console.log(user);
+        this.usuariosAccesoRapido?.push(user);
+      }
+    });
+
+    this._Uservice.getUsuarioPorEmail("cristianfabiocelano@gmail.com").then(user => {
       if (user) {
         console.log(user);
         this.usuariosAccesoRapido?.push(user);

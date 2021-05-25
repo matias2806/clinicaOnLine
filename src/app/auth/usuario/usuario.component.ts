@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
@@ -12,22 +12,26 @@ import { AuthService } from '../service/auth.service';
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.scss']
 })
-export class UsuarioComponent implements OnInit {
+export class UsuarioComponent implements OnInit, OnDestroy {
 
   public registerForm: FormGroup | undefined;
   private foto1: any;
+  public primeraVez: boolean = true;
 
+  // public listadoUsuarios!: Usuario[];
+  public listadoUsuariosEspecialistas: Usuario[] = [];
 
-  public listadoUsuarios!: Usuario[];
 
   constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService) {
+    this.actualizarListas();
 
-    this._Uservice.traerTodos().subscribe((usuarios: Usuario[]) => {
-      this.listadoUsuarios = usuarios;
-    });
+  }
 
-
-   }
+  async actualizarListas() {
+    var aux = this._Uservice.obtenerEspecialistas().subscribe(data=>{
+      this.listadoUsuariosEspecialistas = data;
+    })
+  }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -41,15 +45,19 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(){
+    console.log("se destruyo");
+  }
+
   veoForm() {
     console.log(this.registerForm);
   }
 
   onRegister() {
     const { email, contraseña } = this.registerForm?.value;
-    console.log("Entro al registro de admin");
+    // console.log("Entro al registro de admin");
     this.AuthSvc.register(email, contraseña).then((r) => {
-      console.log(r?.user?.uid);
+      // console.log(r?.user?.uid);
 
       let user: Usuario = {
         nombre: this.registerForm?.controls['nombre'].value,
@@ -63,11 +71,11 @@ export class UsuarioComponent implements OnInit {
         uid: r?.user?.uid,
         aprovadoPorAdmin: true,
       };
-      console.log(user);
-      console.log(this.foto1);
+      // console.log(user);
+      // console.log(this.foto1);
       this._Uservice.subirUsuarioCon1Imagenes(this.foto1, user);
       this._Mservice.mensajeExitoso("Admin dado de alta");
-      this.foto1= null;
+      this.foto1 = null;
       //redirect login +agregar parametro
       this.router.navigate(['/verificacion', user.email]);
 
@@ -81,19 +89,22 @@ export class UsuarioComponent implements OnInit {
   }
 
 
-  rechazarUsuario(usuario: Usuario)
-  {
-
+  async rechazarUsuario(usuario: Usuario) {
+    usuario.aprovadoPorAdmin = false;
+    var idUser = await this._Uservice.obtenerKeyUsuario(usuario);
+    console.log(idUser);
+    if (idUser != null) {
+      this._Uservice.updateAprovadoPorAdmin(idUser, usuario);
+    }
   }
 
-  aprobarUsuario(usuario: Usuario){
-    // var auxUi;
-    // this.AuthSvc.darUsuario().then(resp=>{
-    //   auxUi = resp?.uid;
-    // });
-    // // console.log(auxUi);
-
-    // console.log(this.AuthSvc.usuario);
+  async aprobarUsuario(usuario: Usuario) {
+    usuario.aprovadoPorAdmin = true;
+    var idUser = await this._Uservice.obtenerKeyUsuario(usuario);
+    console.log(idUser);
+    if (idUser != null) {
+      this._Uservice.updateAprovadoPorAdmin(idUser, usuario);
+    }
   }
 
 

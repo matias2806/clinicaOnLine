@@ -62,23 +62,23 @@
                         </div>
 
                     </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block"
+                        <button type="submit" class="btn btn-primary btn-lg btn-block mt-2"
                         [disabled]="registerForm.invalid">Crear cuenta nueva</button>
                     
                 </form>
-                <button type="submit" class="btn btn-primary" (click)="CargaDatos()">Carga trucho</button>
-                <button type="submit" class="btn btn-primary" (click)="veoForm()">VeoForm</button>
-                <div class="form-group mt-3">
+                <!-- <button type="submit" class="btn btn-primary" (click)="CargaDatos()">Carga trucho</button>
+                <button type="submit" class="btn btn-primary" (click)="veoForm()">VeoForm</button> -->
+                <!-- <div class="form-group mt-3">
                     <p>¿Ya tienes una cuenta?&nbsp; <a [routerLink]="['/login']">Iniciar Sesión</a></p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 
-    <div class="col-md-8 col-lg-8 order-md-last mt-5" id="box">
+    <div class="col-md-8 col-lg-8 order-md-last mt-4" id="box">
         <div class="card">
             <div class="card-body">
-                <h2 class="mb-3 mt-3 text-center"><b>Listado de Usuarios.</b></h2>
+                <h2 class="mb-3 mt-3 text-center"><b>Listado de Usuarios ESPECIALISTAS.</b></h2>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -86,17 +86,18 @@
                             <th scope="col">Apellido</th>
                             <th scope="col">Email</th>
                             <th scope="col">Tipo Usuario</th>
+                            <th scope="col">Estado Actual</th>
                             <th scope="col">Aprobar</th>
                             <th scope="col">Rechazar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let usuario of listadoUsuarios">
+                        <tr *ngFor="let usuario of listadoUsuariosEspecialistas ">
                             <td>{{usuario.nombre}}</td>
                             <td>{{usuario.apellido}}</td>
                             <td>{{usuario.email}}</td>
                             <td>{{usuario.tipoPerfil}}</td>
-
+                            <td>{{usuario.aprovadoPorAdmin}}</td>
                             <td><button class="btn btn-success" *ngIf="usuario.tipoPerfil == 'Especialista'"
                                     (click)="aprobarUsuario(usuario)">Aprobar</button></td>
                             <td><button class="btn btn-danger" *ngIf="usuario.tipoPerfil == 'Especialista'"

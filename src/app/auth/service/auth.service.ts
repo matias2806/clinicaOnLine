@@ -62,4 +62,8 @@ export class AuthService {
   getCurrentUser() {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
+
+  GetCurrentUser2() {
+    return this.afAuth.currentUser;
+  }
 }

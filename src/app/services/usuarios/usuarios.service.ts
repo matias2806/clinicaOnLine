@@ -4,6 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage'
 import { map, finalize } from 'rxjs/operators';
 import { observable, Observable } from 'rxjs';
 import { Usuario } from '../../../Models/Usuario';
+import { AuthService } from 'src/app/auth/service/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +22,13 @@ export class UsuariosService {
   userPrueba: Observable<Usuario[]>;
   // public urlImage2: Observable<string>;
 
-  constructor(public db: AngularFirestore, private storage: AngularFireStorage) {
+  constructor(public db: AngularFirestore, private storage: AngularFireStorage, private AuthSvc: AuthService) {
     this.usuariosColecction = db.collection(this.path);
     this.userPrueba = this.usuariosColecction.valueChanges();
 
     this.usuarios = this.usuariosColecction.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
-        console.log(a);
+        // console.log(a);
         const data = a.payload.doc.data() as unknown as Usuario;
         data.auxId = a.payload.doc.id;
         return data;
@@ -47,15 +48,80 @@ export class UsuariosService {
   public getUsuarioPorEmail(email: string) {
     return new Promise((resolve, reject) => {
       this.db.collection(this.path).get().subscribe((querySnapshot) => {
-        let doc = querySnapshot.docs.find(doc => (doc.data() as Usuario ).email == email);
+        let doc = querySnapshot.docs.find(doc => (doc.data() as Usuario).email == email);
         resolve(doc?.data());
       })
     });
   }
 
-  update(id: string, data: any): Promise<void> {
-    return this.usuariosColecction.doc(id).update(data);
+  public getUsuarioPorTipoPerfil(tipoPerfil: string) {
+    return new Promise((resolve, reject) => {
+      this.db.collection(this.path).get().subscribe((querySnapshot) => {
+        let doc = querySnapshot.docs.find(doc => (doc.data() as Usuario).tipoPerfil == tipoPerfil);
+        resolve(doc?.data());
+      })
+    });
   }
+
+  updateAprovadoPorAdmin(id: any, user: Usuario){
+    var usuario = this.db.collection(this.path).doc(id);
+
+    return usuario.update({
+      aprovadoPorAdmin: user.aprovadoPorAdmin,
+    })
+      .then(() => {
+        console.log("Documento actualizado!");
+      })
+      .catch((error) => {
+        console.error("Error en la actualizacion: ", error);
+      });
+  }
+
+  update2() {
+    var cuidad1 = this.db.collection("cuidades").doc("j4EhEDKNm3BgRXx41GET");
+    // console.log(cuidad1);
+
+    return cuidad1.update({
+      miCuidad: true,
+      nombre: "Paraguay",
+    })
+      .then(() => {
+        console.log("Document successfully updated!");
+      })
+      .catch((error) => {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+  }
+
+  obtenerEspecialistas() {
+    return this.usuarios.pipe(map(dato =>{
+      return dato.filter(f=>{
+        return f.tipoPerfil == "Especialista";
+      });
+    }));
+  }
+
+ 
+
+  async obtenerKeyUsuario(user: Usuario) {
+    var aux = await this.db.collection(this.path).ref.where('email', '==', user.email).get();
+    if (aux.docs[0].exists) {
+      return aux.docs[0].id;
+    }
+    else {
+      return null;
+    }
+  }
+
+  // actualizarUsuario(value:Usuario) {
+  //   this.AuthSvc.GetCurrentUser2().then((response: any) => {
+  //     console.log(response);
+
+  //     // this.context.list('usuarios').update(value.id, value);
+  //   });
+  // }
+
 
   delete(id: string): Promise<void> {
     return this.usuariosColecction.doc(id).delete();
@@ -84,7 +150,6 @@ export class UsuariosService {
       return aux;
     })).subscribe();
   }
-
 
   subirImagen(imagen: any, usuario: Usuario, fotoNumero: string) {
     this.filePath = `images/${usuario.uid}/${imagen.name}`;
