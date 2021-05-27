@@ -60,23 +60,7 @@ export class SolicitarTurnoComponent implements OnInit {
     // console.log("entra");
   }
 
-  cargar15dias() {
-    var fecha = new Date(Date.now());
-    var fecha2 = new Date(Date.now());
-    this.listadoDias.push(fecha);
-    console.log( this.listadoDias);
-  
-    fecha2.setDate(fecha2.getDate() + 1);
-    this.listadoDias.push(fecha2);
-    console.log( this.listadoDias);
-    // console.log( fecha);
-    // for (let i = 0; i < 15; i++) {
-    //   this.listadoDias.push(fecha);
-    //   fecha.setDate(fecha2.getDate() + 1);
-    // }
 
-    
-  }
 
   onChangeEspecialidad(data: any) {
     // console.log(this.especialidadNombre);
@@ -107,4 +91,54 @@ export class SolicitarTurnoComponent implements OnInit {
     // console.log(this.listadoUsuariosEspecialistasCalificados);
   }
 
+  cargar15dias() {
+    var fecha1 = new Date(Date.now());
+    var fecha2 = new Date(Date.now());
+    var fecha3 = new Date(Date.now());
+    var fecha4 = new Date(Date.now());
+    var fecha5 = new Date(Date.now());
+    var fecha6 = new Date(Date.now());
+    var fecha7 = new Date(Date.now());
+    var fecha8 = new Date(Date.now());
+    var fecha9 = new Date(Date.now());
+    var fecha10 = new Date(Date.now());
+    var fecha11= new Date(Date.now());
+    var fecha12 = new Date(Date.now());
+    var fecha13 = new Date(Date.now());
+    var fecha14 = new Date(Date.now());
+    var fecha15 = new Date(Date.now());
+    
+    fecha2.setDate(fecha2.getDate() + 1);
+    fecha3.setDate(fecha3.getDate() + 2);
+    fecha4.setDate(fecha4.getDate() + 3);
+    fecha5.setDate(fecha5.getDate() + 4);
+    fecha6.setDate(fecha6.getDate() + 5);
+    fecha7.setDate(fecha7.getDate() + 6);
+    fecha8.setDate(fecha8.getDate() + 7);
+    fecha9.setDate(fecha9.getDate() + 8);
+    fecha10.setDate(fecha10.getDate() + 9);
+    fecha11.setDate(fecha11.getDate() + 10);
+    fecha12.setDate(fecha12.getDate() + 11);
+    fecha13.setDate(fecha13.getDate() + 12);
+    fecha14.setDate(fecha14.getDate() + 13);
+    fecha15.setDate(fecha15.getDate() + 14);
+
+    this.listadoDias.push(fecha1);
+    this.listadoDias.push(fecha2);
+    this.listadoDias.push(fecha3);
+    this.listadoDias.push(fecha4);
+    this.listadoDias.push(fecha5);
+    this.listadoDias.push(fecha6);
+    this.listadoDias.push(fecha7);
+    this.listadoDias.push(fecha8);
+    this.listadoDias.push(fecha9);
+    this.listadoDias.push(fecha10);
+    this.listadoDias.push(fecha11);
+    this.listadoDias.push(fecha12);
+    this.listadoDias.push(fecha13);
+    this.listadoDias.push(fecha14);
+    this.listadoDias.push(fecha15);
+
+    console.log( this.listadoDias);
+  }
 }

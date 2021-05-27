@@ -7,20 +7,23 @@
                     <div class="form-group col-md-6 mb-3">
                         <label for="especialidadElejida" class="form-label">Seleccione la especialidad
                             &nbsp;&nbsp;</label>
-                        <select class="form-select" name="especialidadElejida" id="especialidadElejida" [(ngModel)]="especialidadNombre"
-                            (change)="onChangeEspecialidad($event)">
+                        <select class="form-select" name="especialidadElejida" id="especialidadElejida"
+                            [(ngModel)]="especialidadNombre" (change)="onChangeEspecialidad($event)">
                             <option *ngFor="let especialidad of listadoEspecialidades let i=index"
                                 value="{{especialidad.nombre}}">{{especialidad.nombre}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6 mb-3" *ngIf="especialidadElejida != null">
                         <label for="profesional" class="form-label">Seleccione el profesional &nbsp;&nbsp;</label>
-                        <select class="form-select" name="profesional" id="profesional" [(ngModel)]="especialistaNombre" (change)="onChangeEspecialista($event)">
-                            <option *ngFor="let especialista of listadoUsuariosEspecialistasCalificados let i=index" value={{especialista.nombre}} >{{especialista.nombre}}</option>
+                        <select class="form-select" name="profesional" id="profesional" [(ngModel)]="especialistaNombre"
+                            (change)="onChangeEspecialista($event)">
+                            <option *ngFor="let especialista of listadoUsuariosEspecialistasCalificados let i=index"
+                                value={{especialista.nombre}}>{{especialista.nombre}}</option>
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block mt-2" (click)="pedirTurno()">Solicitar Turno</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block mt-2" (click)="pedirTurno()">Solicitar
+                    Turno</button>
             </div>
         </div>
     </div>
@@ -31,9 +34,28 @@
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center mb-3"><b>Listado de dias y horarios.</b></h1>
-                <div class="row ">
-                    
-                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Dia del turno</th>
+                            <th scope="col">Especialidad</th>
+                            <th scope="col">Profesional</th>
+                            <th scope="col">Horario del turno</th>
+                            <th scope="col">Pedir Turno</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dias of listadoDias ">
+                            <td>{{dias | date: 'fullDate'}}</td>
+                            <td>{{especialidadNombre}}</td>
+                            <td>{{especialistaNombre}}</td>
+                            <td></td>
+                            <td><button class="btn btn-success">Reservar Turno</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
