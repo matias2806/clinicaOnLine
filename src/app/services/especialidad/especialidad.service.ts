@@ -31,4 +31,13 @@ export class EspecialidadService {
   traerTodos(){
     return this.especialidades;
   }
+
+  traerPorNombre(nombre: string){
+    return new Promise((resolve, reject) => {
+      this.db.collection(this.path).get().subscribe((querySnapshot) => {
+        let doc = querySnapshot.docs.find(doc => (doc.data() as Especialidad).nombre == nombre);
+        resolve(doc?.data());
+      })
+    });
+  }
 }

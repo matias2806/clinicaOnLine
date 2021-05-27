@@ -6,6 +6,7 @@ import { observable, Observable } from 'rxjs';
 import { Usuario } from '../../../Models/Usuario';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { Dia } from 'src/Models/Dia';
+import { MensajesService } from '../mensajes/mensajes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,31 +25,9 @@ export class UsuariosService {
   // public urlImage2: Observable<string>;
 
 
-  public cargaHorarios() {
-    let horarios = [];
-    // let Aux = new Dia(true,'LUNES','8:00','19:00');
-    // let Aux2 = new Dia(true,'MARTES','8:00','19:00');
-    // let Aux3= new Dia(true,'MIERCOLES','8:00','19:00');
-    // let Aux4 = new Dia(true,'JUEVES','8:00','19:00');
-    // let Aux5 = new Dia(true,'VIERNES','8:00','19:00');
-    // let Aux6 = new Dia(true,'SABADO','8:00','14:00');
-    // horarios.push(Aux2);
-    // horarios.push(Aux3);
-    // horarios.push(Aux4);
-    // horarios.push(Aux5);
-    // horarios.push(Aux6);
-    horarios.push({ id: 0, trabaja: true, dia: 'LUNES', inicia: '8:00', finaliza: '19:00' });
-    horarios.push({ id: 1, trabaja: true, dia: 'MARTES', inicia: '8:00', finaliza: '19:00' });
-    horarios.push({ id: 2, trabaja: true, dia: 'MIERCOLES', inicia: '8:00', finaliza: '19:00' });
-    horarios.push({ id: 3, trabaja: true, dia: 'JUEVES', inicia: '8:00', finaliza: '19:00' });
-    horarios.push({ id: 4, trabaja: true, dia: 'VIERNES', inicia: '8:00', finaliza: '19:00' });
-    horarios.push({ id: 5, trabaja: true, dia: 'SABADO', inicia: '8:00', finaliza: '14:00' });
 
 
-    return horarios;
-  }
-
-  constructor(public db: AngularFirestore, private storage: AngularFireStorage, private AuthSvc: AuthService) {
+  constructor(public db: AngularFirestore, private storage: AngularFireStorage, private AuthSvc: AuthService, private _Mservice: MensajesService) {
     this.usuariosColecction = db.collection(this.path);
     this.userPrueba = this.usuariosColecction.valueChanges();
 
@@ -89,7 +68,28 @@ export class UsuariosService {
     });
   }
 
-  updateAgregaDiasAEspecialistas(id: any, user: Usuario) {
+  obtenerEspecialistas() {
+    return this.usuarios.pipe(map(dato => {
+      return dato.filter(f => {
+        return f.tipoPerfil == "Especialista";
+      });
+    }));
+  }
+
+
+
+  async obtenerKeyUsuario(user: Usuario) {
+    var aux = await this.db.collection(this.path).ref.where('email', '==', user.email).get();
+    if (aux.docs[0].exists) {
+      return aux.docs[0].id;
+    }
+    else {
+      return null;
+    }
+  }
+
+
+  updateDiasEspecialistas(id: any, user: Usuario) {
     var usuario = this.db.collection(this.path).doc(id);
     console.log(usuario);
     return usuario.update({
@@ -97,6 +97,7 @@ export class UsuariosService {
     })
       .then(() => {
         console.log("Documento actualizado!");
+        this._Mservice.mensajeExitoso("Se actualizaron los horarios de atención");
       })
       .catch((error) => {
         console.error("Error en la actualizacion: ", error);
@@ -134,33 +135,6 @@ export class UsuariosService {
       });
   }
 
-  obtenerEspecialistas() {
-    return this.usuarios.pipe(map(dato => {
-      return dato.filter(f => {
-        return f.tipoPerfil == "Especialista";
-      });
-    }));
-  }
-
-
-
-  async obtenerKeyUsuario(user: Usuario) {
-    var aux = await this.db.collection(this.path).ref.where('email', '==', user.email).get();
-    if (aux.docs[0].exists) {
-      return aux.docs[0].id;
-    }
-    else {
-      return null;
-    }
-  }
-
-  // actualizarUsuario(value:Usuario) {
-  //   this.AuthSvc.GetCurrentUser2().then((response: any) => {
-  //     console.log(response);
-
-  //     // this.context.list('usuarios').update(value.id, value);
-  //   });
-  // }
 
 
   delete(id: string): Promise<void> {
@@ -229,5 +203,16 @@ export class UsuariosService {
     }, 2000);
   }
 
+  public cargaHorarios() {
+    let horarios = [];
+    horarios.push({ id: 0, trabaja: true, dia: 'LUNES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 1, trabaja: true, dia: 'MARTES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 2, trabaja: true, dia: 'MIERCOLES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 3, trabaja: true, dia: 'JUEVES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 4, trabaja: true, dia: 'VIERNES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 5, trabaja: true, dia: 'SABADO', inicia: '8:00', finaliza: '14:00' });
+
+    return horarios;
+  }
 
 }

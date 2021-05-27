@@ -97,17 +97,6 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     if (idUser != null) {
       this._Uservice.updateAprovadoPorAdmin(idUser, usuario);
     }
-
-    //ACA AGREGUE LOS DIAS A LOS ESPECIALISTAS VIEJOS
-    // usuario.diasDeAtencion = this._Uservice.cargaHorarios();
-    // console.log(usuario);
-    // var idUser = await this._Uservice.obtenerKeyUsuario(usuario);
-    // console.log(idUser);
-    // if (idUser != null) {
-    //   this._Uservice.updateAgregaDiasAEspecialistas(idUser, usuario);
-    // }
-
-
   }
 
   async aprobarUsuario(usuario: Usuario) {
