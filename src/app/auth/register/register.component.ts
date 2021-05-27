@@ -11,6 +11,7 @@ import { AuthService } from '../service/auth.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { map, finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Dia } from 'src/Models/Dia';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
   public errorEspecialidad: string = "";
   public banderaEspecialidadSeleccionada = true;
   public listaEspecialidadesSeleccionadas: Array<Especialidad> = new Array<Especialidad>();
+  public listaDiasSeleccionadas: Array<Dia> = new Array<Dia>();
 
   private foto1: any | null = null;
   private foto2: any | null = null;
@@ -80,6 +82,8 @@ export class RegisterComponent implements OnInit {
     this._Eservice.traerTodos().subscribe((especialidad: Especialidad[]) => {
       this.listadoEspecialidades = especialidad;
     });
+
+    this.agregarDias();
   }
 
 
@@ -93,7 +97,8 @@ export class RegisterComponent implements OnInit {
 
   veoForm() {
     console.log(this.registerForm);
-    console.log(this.listaEspecialidadesSeleccionadas)
+    console.log(this.listaEspecialidadesSeleccionadas);
+    console.log(this.listaDiasSeleccionadas);
   }
 
   agregarNuevaEspecialidad() {
@@ -119,6 +124,16 @@ export class RegisterComponent implements OnInit {
       this.listaEspecialidadesSeleccionadas.push(especialidad);
       this.registerForm?.controls['especialidad'].setValue(this.listaEspecialidadesSeleccionadas);
     }
+  }
+
+  agregarDias() {
+
+    this.listaDiasSeleccionadas.push(new Dia(true,'LUNES','8:00','19:00'));
+    this.listaDiasSeleccionadas.push(new Dia(true,'MARTES','8:00','19:00'));
+    this.listaDiasSeleccionadas.push(new Dia(true,'MIERCOLES','8:00','19:00'));
+    this.listaDiasSeleccionadas.push(new Dia(true,'JUEVES','8:00','19:00'));
+    this.listaDiasSeleccionadas.push(new Dia(true,'VIERNES','8:00','19:00'));
+    this.listaDiasSeleccionadas.push(new Dia(true,'SABADO','8:00','14:00'));
   }
 
   eliminarEspecialidad(especialidad: Especialidad) {
@@ -185,8 +200,8 @@ export class RegisterComponent implements OnInit {
           // this.SubirFoto(user.uid);
 
           this._Mservice.mensajeExitoso("Paciente dado de alta");
-          this.foto1= null;
-          this.foto2= null;
+          this.foto1 = null;
+          this.foto2 = null;
           //redirect login +agregar parametro
           this.router.navigate(['/verificacion', user.email]);
 
@@ -208,6 +223,7 @@ export class RegisterComponent implements OnInit {
             uid: r?.user?.uid,
             aprovadoPorAdmin: false,
             especialidades: this.listaEspecialidadesSeleccionadas,
+            diasDeAtencion: this.listaDiasSeleccionadas,
           };
           console.log(user);
           // console.log("ADENTRO4");
@@ -216,11 +232,11 @@ export class RegisterComponent implements OnInit {
           // console.log("ADENTRO3");
           // this._Mservice.mensajeExitoso("Especialista dado de alta");
           // this.router.navigate(['/verificacion', user.email]);
-          
+
           this._Uservice.subirUsuarioCon1Imagenes(this.foto1, user);
           this._Mservice.mensajeExitoso("Especialista dado de alta");
-          this.foto1= null;
-          this.foto2= null;
+          this.foto1 = null;
+          this.foto2 = null;
           this.router.navigate(['/verificacion', user.email]);
 
         });
@@ -249,17 +265,17 @@ console.log(r?.user?.uid);
 // console.log(r?.operationType);
 
 let user: Usuario = {
-  nombre: this.registerForm.controls['nombre'].value,
-  apellido: this.registerForm.controls['apellido'].value,
-  edad: this.registerForm.controls['edad'].value,
-  dni: this.registerForm.controls['dni'].value,
-  foto1: this.registerForm.controls['foto1'].value,
-  tipoPerfil: this.tipoPerfil,
-  email: this.registerForm.controls['email'].value,
-  contraseña: this.registerForm.controls['contraseña'].value,
-  uid: r?.user?.uid,
-  obraSocial: this.registerForm.controls['obraSocial'].value,
-  foto2: this.registerForm.controls['foto2'].value,
+nombre: this.registerForm.controls['nombre'].value,
+apellido: this.registerForm.controls['apellido'].value,
+edad: this.registerForm.controls['edad'].value,
+dni: this.registerForm.controls['dni'].value,
+foto1: this.registerForm.controls['foto1'].value,
+tipoPerfil: this.tipoPerfil,
+email: this.registerForm.controls['email'].value,
+contraseña: this.registerForm.controls['contraseña'].value,
+uid: r?.user?.uid,
+obraSocial: this.registerForm.controls['obraSocial'].value,
+foto2: this.registerForm.controls['foto2'].value,
 };
 console.log(user);
 
@@ -278,17 +294,17 @@ console.log(r?.user?.uid);
 // console.log(r?.operationType);
 
 let user: Usuario = {
-  nombre: this.registerForm.controls['nombre'].value,
-  apellido: this.registerForm.controls['apellido'].value,
-  edad: this.registerForm.controls['edad'].value,
-  dni: this.registerForm.controls['dni'].value,
-  especialidades: this.listaEspecialidadesSeleccionadas,
-  foto1: this.registerForm.controls['foto1'].value,
-  tipoPerfil: this.registerForm.controls['tipoPerfil'].value,
-  email: this.registerForm.controls['email'].value,
-  contraseña: this.registerForm.controls['contraseña'].value,
-  uid: r?.user?.uid,
-  aprovadoPorAdmin: false,
+nombre: this.registerForm.controls['nombre'].value,
+apellido: this.registerForm.controls['apellido'].value,
+edad: this.registerForm.controls['edad'].value,
+dni: this.registerForm.controls['dni'].value,
+especialidades: this.listaEspecialidadesSeleccionadas,
+foto1: this.registerForm.controls['foto1'].value,
+tipoPerfil: this.registerForm.controls['tipoPerfil'].value,
+email: this.registerForm.controls['email'].value,
+contraseña: this.registerForm.controls['contraseña'].value,
+uid: r?.user?.uid,
+aprovadoPorAdmin: false,
 };
 
 this._Uservice.subirUsuarioCon1Imagenes(this.foto1, user);

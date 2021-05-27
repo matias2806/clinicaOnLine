@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { EmailEnviadoComponent } from './auth/email-enviado/email-enviado.component';
 import { OpcionesDeUsuariosComponent } from './auth/opciones-de-usuarios/opciones-de-usuarios.component';
 import { UsuarioComponent } from './auth/usuario/usuario.component';
+import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
+import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,6 +15,9 @@ const routes: Routes = [
   { path: 'verificacion/:email', component:  EmailEnviadoComponent },
   { path: 'tiposDeRegistros', component:  OpcionesDeUsuariosComponent },
   { path: 'usuarios', component:  UsuarioComponent },
+  { path: 'solicitarTurno', component:  SolicitarTurnoComponent },
+  { path: 'miPerfil', component:  MiPerfilComponent },
+  
 ];
 
 @NgModule({

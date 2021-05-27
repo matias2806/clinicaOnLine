@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
 import { MensajesService } from 'src/app/services/mensajes/mensajes.service';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
+import { Dia } from 'src/Models/Dia';
 import { Usuario } from 'src/Models/Usuario';
 import { AuthService } from '../service/auth.service';
 
@@ -96,6 +97,17 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     if (idUser != null) {
       this._Uservice.updateAprovadoPorAdmin(idUser, usuario);
     }
+
+    //ACA AGREGUE LOS DIAS A LOS ESPECIALISTAS VIEJOS
+    // usuario.diasDeAtencion = this._Uservice.cargaHorarios();
+    // console.log(usuario);
+    // var idUser = await this._Uservice.obtenerKeyUsuario(usuario);
+    // console.log(idUser);
+    // if (idUser != null) {
+    //   this._Uservice.updateAgregaDiasAEspecialistas(idUser, usuario);
+    // }
+
+
   }
 
   async aprobarUsuario(usuario: Usuario) {

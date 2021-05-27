@@ -5,6 +5,7 @@ import { map, finalize } from 'rxjs/operators';
 import { observable, Observable } from 'rxjs';
 import { Usuario } from '../../../Models/Usuario';
 import { AuthService } from 'src/app/auth/service/auth.service';
+import { Dia } from 'src/Models/Dia';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,31 @@ export class UsuariosService {
   public usuarioUnico: Observable<Usuario> | undefined;
   userPrueba: Observable<Usuario[]>;
   // public urlImage2: Observable<string>;
+
+
+  public cargaHorarios() {
+    let horarios = [];
+    // let Aux = new Dia(true,'LUNES','8:00','19:00');
+    // let Aux2 = new Dia(true,'MARTES','8:00','19:00');
+    // let Aux3= new Dia(true,'MIERCOLES','8:00','19:00');
+    // let Aux4 = new Dia(true,'JUEVES','8:00','19:00');
+    // let Aux5 = new Dia(true,'VIERNES','8:00','19:00');
+    // let Aux6 = new Dia(true,'SABADO','8:00','14:00');
+    // horarios.push(Aux2);
+    // horarios.push(Aux3);
+    // horarios.push(Aux4);
+    // horarios.push(Aux5);
+    // horarios.push(Aux6);
+    horarios.push({ id: 0, trabaja: true, dia: 'LUNES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 1, trabaja: true, dia: 'MARTES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 2, trabaja: true, dia: 'MIERCOLES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 3, trabaja: true, dia: 'JUEVES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 4, trabaja: true, dia: 'VIERNES', inicia: '8:00', finaliza: '19:00' });
+    horarios.push({ id: 5, trabaja: true, dia: 'SABADO', inicia: '8:00', finaliza: '14:00' });
+
+
+    return horarios;
+  }
 
   constructor(public db: AngularFirestore, private storage: AngularFireStorage, private AuthSvc: AuthService) {
     this.usuariosColecction = db.collection(this.path);
@@ -63,7 +89,21 @@ export class UsuariosService {
     });
   }
 
-  updateAprovadoPorAdmin(id: any, user: Usuario){
+  updateAgregaDiasAEspecialistas(id: any, user: Usuario) {
+    var usuario = this.db.collection(this.path).doc(id);
+    console.log(usuario);
+    return usuario.update({
+      diasDeAtencion: user.diasDeAtencion,
+    })
+      .then(() => {
+        console.log("Documento actualizado!");
+      })
+      .catch((error) => {
+        console.error("Error en la actualizacion: ", error);
+      });
+  }
+
+  updateAprovadoPorAdmin(id: any, user: Usuario) {
     var usuario = this.db.collection(this.path).doc(id);
 
     return usuario.update({
@@ -95,14 +135,14 @@ export class UsuariosService {
   }
 
   obtenerEspecialistas() {
-    return this.usuarios.pipe(map(dato =>{
-      return dato.filter(f=>{
+    return this.usuarios.pipe(map(dato => {
+      return dato.filter(f => {
         return f.tipoPerfil == "Especialista";
       });
     }));
   }
 
- 
+
 
   async obtenerKeyUsuario(user: Usuario) {
     var aux = await this.db.collection(this.path).ref.where('email', '==', user.email).get();

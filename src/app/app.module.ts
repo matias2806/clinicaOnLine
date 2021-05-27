@@ -18,6 +18,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { EmailEnviadoComponent } from './auth/email-enviado/email-enviado.component';
 import { UsuarioComponent } from './auth/usuario/usuario.component';
 import { OpcionesDeUsuariosComponent } from './auth/opciones-de-usuarios/opciones-de-usuarios.component';
+import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
+import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { OpcionesDeUsuariosComponent } from './auth/opciones-de-usuarios/opcione
     EmailEnviadoComponent,
     UsuarioComponent,
     OpcionesDeUsuariosComponent,
+    SolicitarTurnoComponent,
+    MiPerfilComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,10 +14,10 @@
             <li class="nav-item active" *ngIf="authSvc.usuario.uid && this.usuario?.tipoPerfil =='Admin' " >
                 <a class="nav-link"  [routerLink]="['/usuarios']">Usuarios</a>
             </li>
-            <!-- <li class="nav-item active">
-                <a class="nav-link" [routerLink]="['/quienSoy']">¿Quien soy?</a>
+             <li class="nav-item active" *ngIf="authSvc.usuario.uid && this.usuario?.tipoPerfil !='Especialista' ">
+                <a class="nav-link" [routerLink]="['/solicitarTurno']">Solicitar Turno</a>
             </li>
-            <li class="nav-item active" *ngIf="authSvc.usuario.uid">
+            <!--<li class="nav-item active" *ngIf="authSvc.usuario.uid">
                 <a class="nav-link" [routerLink]="['/Listado']">Juegos</a>
             </li>
             <li class="nav-item active" *ngIf="authSvc.usuario.uid">
@@ -34,10 +34,10 @@
 
             <li class="nav-item " *ngIf="user">
                 <a href="#" class="nav-link" (click)="onLogout()">Logout</a>
-            </li>
+            </li>            
 
             <li class="nav-item">
-                <a class="nav-link active">{{user?.email}}</a>
+                <a class="nav-link active" [routerLink]="['/miPerfil']">{{user?.email}} (Mi Perfil)</a>
             </li>
         </ul>
         <ng-template #login>
