@@ -46,9 +46,9 @@
                             <th scope="col">Pedir Turno</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let dias of listadoDias ">
-                            <td>{{dias | date: 'fullDate'}}</td>
+                    <tbody *ngFor="let dia of listadoDeObjetosDias">
+                        <tr *ngIf="dia.diaSemana != 'DOMINGO' && dia.data.trabaja != false ">
+                            <td>{{dia.dia | date: 'fullDate'}}</td>
                             <td>{{especialidadNombre}}</td>
                             <td>{{especialistaNombre}}</td>
                             <td></td>

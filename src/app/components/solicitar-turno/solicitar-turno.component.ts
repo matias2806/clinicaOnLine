@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/service/auth.service';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
 import { MensajesService } from 'src/app/services/mensajes/mensajes.service';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
+import { Dia } from 'src/Models/Dia';
 import { Especialidad } from 'src/Models/Especialidad';
 import { Usuario } from 'src/Models/Usuario';
 
@@ -22,10 +23,11 @@ export class SolicitarTurnoComponent implements OnInit {
   public listadoUsuariosEspecialistas: Usuario[] = [];
   public listadoUsuariosEspecialistasCalificados: Usuario[] = [];
   public especialistaNombre: string = "";
-  public especialistaElejido!: any ;
+  public especialistaElejido!: any;
 
   public fechaActual: Date | null = null;
   public listadoDias: Date[] = [];
+  public listadoDeObjetosDias: any[] = [];
 
   constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService) {
     this._Eservice.traerTodos().subscribe((especialidad: Especialidad[]) => {
@@ -58,11 +60,84 @@ export class SolicitarTurnoComponent implements OnInit {
 
   cargarListaDeTurnos() {
     this.cargar15dias();
+    this.filtradoDeDias();
     // console.log("entra");
   }
 
-  auxiliar(){
-    console.log("p");
+  filtradoDeDias() {
+    if (this.especialistaElejido == undefined && this.listadoDias != []) {
+      console.log("test1");
+    } else {
+      var aux;
+      // console.log(this.especialistaElejido);
+      // console.log(this.listadoDias);
+
+      // console.log(this.listadoDias[0].getDate());// 27
+      // console.log(this.listadoDias[0].getDay()); // 4 (raro)
+      // console.log(this.listadoDias[0].getMonth()); // 4 (raro)
+      // console.log(this.listadoDias[0].getFullYear()); // 2021
+      // console.log(this.listadoDias[0].toDateString()); // Thu May 27 2021
+      // console.log(this.listadoDias[0].toLocaleDateString());// 27/5/2021
+      // console.log(this.especialistaElejido.diasDeAtencion[0]);
+      this.listadoDias.forEach(dia => {
+        var diaSemana = this.queDiaEs(dia);
+        // console.log(diaSemana);
+        var d = this.queDiaDeEspecialistaDevuelvo(diaSemana);
+
+        aux = {
+          dia: dia,
+          diaExacto: dia.toLocaleDateString(),
+          diaSemana: diaSemana,
+          data: d,
+        }
+        this.listadoDeObjetosDias.push(aux);
+      });
+      console.log(this.listadoDeObjetosDias);
+    }
+  }
+
+  queDiaDeEspecialistaDevuelvo(diaSemana: string) {
+    var retorno;
+    this.especialistaElejido.diasDeAtencion.forEach((d: Dia) => {
+      if (diaSemana == d.dia) {
+        retorno = d;
+      }
+    });
+    return retorno;
+  }
+
+  queDiaEs(dia: Date) {
+    // console.log("--------");
+    // console.log(dia.toDateString().split(' ')[0]);
+    var retorno = "";
+    switch (dia.toDateString().split(' ')[0]) {
+      case 'Mon':
+        retorno = "LUNES";
+        break;
+      case 'Tue':
+        retorno = "MARTES";
+        break;
+      case 'Wed':
+        retorno = "MIERCOLES";
+        break;
+      case 'Thu':
+        retorno = "JUEVES";
+        break;
+      case 'Fri':
+        retorno = "VIERNES";
+        break;
+      case 'Sat':
+        retorno = "SABADO";
+        break;
+      case 'Sun':
+        retorno = "DOMINGO";
+        break;
+    }
+    return retorno;
+  }
+
+  auxiliar() {
+    this.filtradoDeDias()
     // console.log(this.)
   }
 
@@ -82,15 +157,15 @@ export class SolicitarTurnoComponent implements OnInit {
 
   onChangeEspecialista(data: any) {
     // console.log(this.especialistaNombre);
-    var auxEmail="";
+    var auxEmail = "";
     this.listadoUsuariosEspecialistasCalificados.forEach(especialista => {
-      if(especialista.nombre == this.especialistaNombre){
-        auxEmail=especialista.email;
+      if (especialista.nombre == this.especialistaNombre) {
+        auxEmail = especialista.email;
       }
     });
     this._Uservice.getUsuarioPorEmail(auxEmail).then(user => {
       if (user) {
-        console.log(user);
+        //console.log(user);
         this.especialistaElejido = user;
       }
     });
@@ -120,12 +195,12 @@ export class SolicitarTurnoComponent implements OnInit {
     var fecha8 = new Date(Date.now());
     var fecha9 = new Date(Date.now());
     var fecha10 = new Date(Date.now());
-    var fecha11= new Date(Date.now());
+    var fecha11 = new Date(Date.now());
     var fecha12 = new Date(Date.now());
     var fecha13 = new Date(Date.now());
     var fecha14 = new Date(Date.now());
     var fecha15 = new Date(Date.now());
-    
+
     fecha2.setDate(fecha2.getDate() + 1);
     fecha3.setDate(fecha3.getDate() + 2);
     fecha4.setDate(fecha4.getDate() + 3);
