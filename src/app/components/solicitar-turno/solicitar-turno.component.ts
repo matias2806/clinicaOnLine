@@ -22,6 +22,7 @@ export class SolicitarTurnoComponent implements OnInit {
   public listadoUsuariosEspecialistas: Usuario[] = [];
   public listadoUsuariosEspecialistasCalificados: Usuario[] = [];
   public especialistaNombre: string = "";
+  public especialistaElejido!: any ;
 
   public fechaActual: Date | null = null;
   public listadoDias: Date[] = [];
@@ -60,6 +61,10 @@ export class SolicitarTurnoComponent implements OnInit {
     // console.log("entra");
   }
 
+  auxiliar(){
+    console.log("p");
+    // console.log(this.)
+  }
 
 
   onChangeEspecialidad(data: any) {
@@ -77,6 +82,19 @@ export class SolicitarTurnoComponent implements OnInit {
 
   onChangeEspecialista(data: any) {
     // console.log(this.especialistaNombre);
+    var auxEmail="";
+    this.listadoUsuariosEspecialistasCalificados.forEach(especialista => {
+      if(especialista.nombre == this.especialistaNombre){
+        auxEmail=especialista.email;
+      }
+    });
+    this._Uservice.getUsuarioPorEmail(auxEmail).then(user => {
+      if (user) {
+        console.log(user);
+        this.especialistaElejido = user;
+      }
+    });
+    console.log(this.especialistaElejido);
   }
 
   filtrarListaEspecialistas() {
@@ -139,6 +157,6 @@ export class SolicitarTurnoComponent implements OnInit {
     this.listadoDias.push(fecha14);
     this.listadoDias.push(fecha15);
 
-    console.log( this.listadoDias);
+    // console.log( this.listadoDias);
   }
 }
