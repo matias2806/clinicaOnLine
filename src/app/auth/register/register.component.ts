@@ -128,12 +128,12 @@ export class RegisterComponent implements OnInit {
 
   agregarDias() {
 
-    this.listaDiasSeleccionadas.push(new Dia(true,'LUNES','8:00','19:00'));
-    this.listaDiasSeleccionadas.push(new Dia(true,'MARTES','8:00','19:00'));
-    this.listaDiasSeleccionadas.push(new Dia(true,'MIERCOLES','8:00','19:00'));
-    this.listaDiasSeleccionadas.push(new Dia(true,'JUEVES','8:00','19:00'));
-    this.listaDiasSeleccionadas.push(new Dia(true,'VIERNES','8:00','19:00'));
-    this.listaDiasSeleccionadas.push(new Dia(true,'SABADO','8:00','14:00'));
+    this.listaDiasSeleccionadas.push(new Dia(true, 'LUNES', 8, 19));
+    this.listaDiasSeleccionadas.push(new Dia(true, 'MARTES', 8, 19));
+    this.listaDiasSeleccionadas.push(new Dia(true, 'MIERCOLES', 8, 19));
+    this.listaDiasSeleccionadas.push(new Dia(true, 'JUEVES', 8, 19));
+    this.listaDiasSeleccionadas.push(new Dia(true, 'VIERNES', 8, 19));
+    this.listaDiasSeleccionadas.push(new Dia(true, 'SABADO', 8, 14));
   }
 
   eliminarEspecialidad(especialidad: Especialidad) {

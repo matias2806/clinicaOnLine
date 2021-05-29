@@ -49,24 +49,24 @@
                                 <tr>
                                     <th scope="col">Trabajo este dia ?</th>
                                     <th scope="col">Dias</th>
+                                    <!-- <th scope="col">Rango prueba</th> -->
                                     <th scope="col">Comienzo de jornada</th>
                                     <th scope="col">Fin de jornada</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let data of usuario.diasDeAtencion ">
-                                    <td><input type="checkbox" name="" [(ngModel)]="data.trabaja" [value]="data.trabaja" id=""></td>
+                                <tr *ngFor="let data of usuario.diasDeAtencion let i=index">
+                                    <td><input type="checkbox" name="" [(ngModel)]="data.trabaja" [value]="data.trabaja"
+                                            id=""></td>
                                     <td>{{data.dia}}</td>
-                                    <td>
-                                        <select class="custom-select" [(ngModel)]="data.inicia" id="profesionalInput">
-                                            <option [value]="item" *ngFor="let item of this.listaHorarios">{{item}}
-                                            </option>
-                                        </select>
+                                    <td><input type="range" min="8" max="11" [(ngModel)]="data.inicia">
+                                        <h6>{{data.inicia | pipeHora}}</h6>
                                     </td>
-                                    <td>
-                                        <select class="custom-select" [(ngModel)]="data.finaliza" id="profesionalInput"> 
-                                            <option [value]="item" *ngFor="let item of this.listaHorariossalida">{{item}}</option>
-                                        </select>
+                                    <td><input type="range" min="14" max="19" *ngIf="data.dia != 'SABADO'"
+                                            [(ngModel)]="data.finaliza">
+                                        <input type="range" min="12" max="14" *ngIf="data.dia == 'SABADO'"
+                                            [(ngModel)]="data.finaliza">
+                                        <h6>{{data.finaliza | pipeHora}}</h6>
                                     </td>
                                 </tr>
                             </tbody>

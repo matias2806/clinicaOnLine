@@ -20,6 +20,7 @@ import { UsuarioComponent } from './auth/usuario/usuario.component';
 import { OpcionesDeUsuariosComponent } from './auth/opciones-de-usuarios/opciones-de-usuarios.component';
 import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
+import { PipeHoraPipe } from './pipe/pipe-hora.pipe';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
     OpcionesDeUsuariosComponent,
     SolicitarTurnoComponent,
     MiPerfilComponent,
+    PipeHoraPipe,
   ],
   imports: [
     BrowserModule,

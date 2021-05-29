@@ -1,9 +1,10 @@
 .tamanioFoto{
-height: 60px;
-width: 60px;
+height: 120px;
+width: 120px;
 margin-left: 5px;
 }
 
 .largo{
-    width: 200px;
+    width: 220px;
+    height: 150px;
 }

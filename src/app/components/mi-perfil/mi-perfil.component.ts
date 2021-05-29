@@ -13,19 +13,20 @@ import { Dia } from 'src/Models/Dia';
 export class MiPerfilComponent implements OnInit {
 
   public usuario: Usuario | null = null;
+  public iniciaJornada: any;
 
   constructor(public authSvc: AuthService, private _Uservice: UsuariosService,) { }
-  
+
   // dias:Dia[]=[];
-  listaHorarios:string[]=['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00'];
-  listaHorariossalida:string[]=['9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+  listaHorarios: string[] = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+  listaHorariossalida: string[] = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
 
   async ngOnInit() {
     var user = await this.authSvc.getCurrentUser();
     if (user?.email != null && user) {
       // console.log(user.email);
       var dataUser: any = await this._Uservice.getUsuarioPorEmail(user.email);
-      // console.log(dataUser);
+      console.log(dataUser);
       this.usuario = dataUser;
     }
   }
@@ -34,12 +35,12 @@ export class MiPerfilComponent implements OnInit {
     console.log("pepe");
   }
 
-  async guardar(){
+  async guardar() {
     console.log(this.usuario);
-    if(this.usuario != null){
+    if (this.usuario != null) {
       var idUser = await this._Uservice.obtenerKeyUsuario(this.usuario);
       if (idUser != null) {
-        this._Uservice.updateDiasEspecialistas(idUser,this.usuario);
+        this._Uservice.updateDiasEspecialistas(idUser, this.usuario);
       }
     }
   }

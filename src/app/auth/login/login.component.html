@@ -22,10 +22,12 @@
             </div>
         </div>
         <div class="row">
-            <div *ngFor="let user of usuariosAccesoRapido" class="mt-2 col-md-3">
+            <div *ngFor="let user of usuariosAccesoRapido" class="mt-2 col-md-4 text-center">
                 <button class="animate__animated animate__backInUp btn btn-info mt-1 largo"
-                    (click)="cargaUsuario(user.nombre)">{{user.tipoPerfil | uppercase}}: {{user.nombre}}<img src="{{user.URLfoto1}}"
-                        class="tamanioFoto" alt=""> </button>
+                    (click)="cargaUsuario(user.nombre)">
+                    <img src="{{user.URLfoto1}}" class="tamanioFoto" alt=""> 
+                    <h6>{{user.tipoPerfil | uppercase}}: {{user.nombre}}</h6>
+                </button>
             </div>
         </div>
 
