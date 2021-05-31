@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PipeHoraPipe implements PipeTransform {
 
   transform(value: number): string {
-    console.log(value);
+    // console.log(value);
     var retorno = "";
     switch (value) {
       case 8:

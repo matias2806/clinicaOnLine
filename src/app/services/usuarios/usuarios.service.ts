@@ -76,6 +76,14 @@ export class UsuariosService {
     }));
   }
 
+  obtenerPacientes() {
+    return this.usuarios.pipe(map(dato => {
+      return dato.filter(f => {
+        return f.tipoPerfil == "Paciente";
+      });
+    }));
+  }
+
 
 
   async obtenerKeyUsuario(user: Usuario) {

@@ -1,4 +1,145 @@
-<div class="row">
+<!-- PACIENTE -->
+<div class="row" *ngIf="usuarioRegistrado != null">
+    <div class="col-md-9 mx-auto mt-4" *ngIf="usuarioRegistrado.tipoPerfil == 'Paciente'">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center mb-3"><b>Solicitar Turno.</b></h1>
+                <div class="row formulario">
+                    <div class="form-group col-md-6 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3"
+                            *ngIf="listadoEspecialidades != null">
+                            <h4 class="text-primary text-center">Listado de especialidades</h4>
+                            <span class="badge bg-primary rounded-pill">{{listadoEspecialidades.length}}</span>
+                        </h4>
+                        <ul class="list-group mb-3 ">
+                            <li class="list-group-item d-flex justify-content-between lh-sm especialidad"
+                                *ngFor="let especialidad of listadoEspecialidades let i=index"
+                                (click)="clickEspecialidad(especialidad)">
+                                <div class="marco">
+                                    <h6 class="my-0 text-info"><b>{{especialidad.nombre}} </b></h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group col-md-6 mb-3" *ngIf="especialidadElejida != null">
+                        <!-- <div class="form-group col-md-6 mb-3" *ngIf="listadoUsuariosEspecialistasCalificados != null"> -->
+                        <h4 class="d-flex justify-content-between align-items-center mb-3"
+                            *ngIf="listadoUsuariosEspecialistasCalificados != null">
+                            <h4 class="text-primary text-center">Listado de medicos calificados</h4>
+                            <span
+                                class="badge bg-primary rounded-pill">{{listadoUsuariosEspecialistasCalificados.length}}</span>
+                        </h4>
+                        <ul class="list-group mb-3 ">
+                            <li class="list-group-item d-flex justify-content-between lh-sm especialidad"
+                                *ngFor="let especialista of listadoUsuariosEspecialistasCalificados let i=index"
+                                (click)="clickEspecialista(especialista)">
+                                <div class="marco">
+                                    <h6 class="my-0 text-info"><b>{{especialista.nombre}} </b></h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ADMIN -->
+<div class="row" *ngIf="usuarioRegistrado != null">
+    <div class="col-md-9 mx-auto mt-4" *ngIf="usuarioRegistrado.tipoPerfil == 'Admin'">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center mb-3"><b>Solicitar turno admin.</b></h1>
+                <div class="row formulario">
+                    <div class="form-group col-md-4 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3"
+                            *ngIf="listadoEspecialidades != null">
+                            <h4 class="text-primary text-center">Listado de especialidades</h4>
+                            <span class="badge bg-primary rounded-pill">{{listadoEspecialidades.length}}</span>
+                        </h4>
+                        <ul class="list-group mb-3 ">
+                            <li class="list-group-item d-flex justify-content-between lh-sm especialidad"
+                                *ngFor="let especialidad of listadoEspecialidades let i=index"
+                                (click)="clickEspecialidad(especialidad)">
+                                <div class="marco">
+                                    <h6 class="my-0 text-info"><b>{{especialidad.nombre}} </b></h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group col-md-4 mb-3" *ngIf="especialidadElejida != null">
+                        <!-- <div class="form-group col-md-6 mb-3" *ngIf="listadoUsuariosEspecialistasCalificados != null"> -->
+                        <h4 class="d-flex justify-content-between align-items-center mb-3"
+                            *ngIf="listadoUsuariosEspecialistasCalificados != null">
+                            <h4 class="text-primary text-center">Listado de medicos calificados</h4>
+                            <span
+                                class="badge bg-primary rounded-pill">{{listadoUsuariosEspecialistasCalificados.length}}</span>
+                        </h4>
+                        <ul class="list-group mb-3 ">
+                            <li class="list-group-item d-flex justify-content-between lh-sm especialidad"
+                                *ngFor="let especialista of listadoUsuariosEspecialistasCalificados let i=index"
+                                (click)="clickEspecialista(especialista)">
+                                <div class="marco">
+                                    <h6 class="my-0 text-info"><b>{{especialista.nombre}} </b></h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group col-md-4 mb-3" *ngIf="especialistaElejido != null">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3"
+                        *ngIf="listadoUsuariosPacientes != null">
+                        <h4 class="text-primary text-center">Listado de usuarios tipo pacientes</h4>
+                        <span
+                            class="badge bg-primary rounded-pill">{{listadoUsuariosPacientes.length}}</span>
+                    </h4>
+                    <ul class="list-group mb-3 ">
+                        <li class="list-group-item d-flex justify-content-between lh-sm especialidad"
+                            *ngFor="let paciente of listadoUsuariosPacientes let i=index"
+                            (click)="clickPaciente(paciente)">
+                            <div class="marco">
+                                <h6 class="my-0 text-info"><b>{{paciente.nombre}} </b></h6>
+                            </div>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TABLA TURNOS -->
+<div class="row" *ngIf="especialidadElejida != null && especialistaElejido != null && pacienteElejido != null">
+    <div class="col-md-11 mx-auto mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center mb-3"><b>Listado de dias y horarios.</b></h1>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Dia del turno</th>
+                            <th scope="col" class="text-center">Horario del turno</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let dia of listadoDeObjetosDias">
+                        <tr *ngIf="dia.diaSemana != 'DOMINGO' && dia.data.trabaja != false ">
+                            <td class="text-left">{{dia.dia | date: 'fullDate'}}</td>
+                            <td class="text-center"><button class="btn btn-success hora"
+                                    *ngFor="let horario of dia.turnos let i=index"
+                                    (click)="reservarTurno(horario, dia)">
+                                    {{horario | pipeHora}}</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="row">
     <div class="col-md-9 mx-auto mt-4">
         <div class="card">
             <div class="card-body">
@@ -28,8 +169,8 @@
             </div>
         </div>
     </div>
-</div>
-
+</div> -->
+<!-- 
 <div class="row">
     <div class="col-md-9 mx-auto mt-4">
         <div class="card">
@@ -60,4 +201,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
