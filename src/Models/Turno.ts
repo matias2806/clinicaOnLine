@@ -1,7 +1,9 @@
 import { Usuario } from "./Usuario";
 import { Especialidad } from "./Especialidad";
 
+
 export class Turno {
+    id: string = '';
     paciente: Usuario | null = null;
     profesional: Usuario | null = null;
     estado: string = 'PENDIENTE';

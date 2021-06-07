@@ -57,15 +57,23 @@ export class MisTurnosComponent implements OnInit {
     // this.router.navigate(['/cancelarTurno']);
   }
 
+  
   eventoCancelarTurno(event$: any) {
-    setTimeout(() => {
+    setTimeout(async () => {
       console.log(event$);
       console.log(this.mensaje);
       if (event$) {
 
-        // this.turnoActual.comentarioPaciente = this.mensaje;
-        // this.itemActual.estado = 'CANCELADO';
-        // ACTUALIZAR EN FIREBASE
+        this.turnoActual!.comentarioPaciente = this.mensaje;
+        this.turnoActual!.estado = 'CANCELADO';
+        
+        var idTurno = await this._Tservice.obtenerKeyTurno(this.turnoActual!);
+        console.log(this.turnoActual);
+        console.log(idTurno);
+        if (idTurno != null) {
+          this._Tservice.updateTurnoCancelar(idTurno, this.turnoActual!);
+          
+        }
       }
       this.cancelarTurnoPantalla = false;
       this.verTabla = true;

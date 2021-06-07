@@ -38,6 +38,16 @@ export class TurnosService {
     return this.turnos;
   }
 
+  async obtenerKeyTurno(turno: Turno) {
+    var aux = await this.db.collection(this.path).ref.where('id', '==', turno.id).get();
+    if (aux.docs[0].exists) {
+      return aux.docs[0].id;
+    }
+    else {
+      return null;
+    }
+  }
+
   obtenerTurnoDe(uid:string) {
     return this.turnos.pipe(map(dato => {
       return dato.filter(t => {
@@ -46,4 +56,20 @@ export class TurnosService {
     }));
   }
   
+  updateTurnoCancelar(id: any, turno: Turno) {
+    var tur = this.db.collection(this.path).doc(id);
+
+    return tur.update({
+      estado: turno.estado,
+      comentarioPaciente: turno.comentarioPaciente
+    })
+      .then(() => {
+        console.log("Documento actualizado!");
+        this._Mservice.mensajeExitoso("Turno cancelado");
+      })
+      .catch((error) => {
+        console.error("Error en la actualizacion: ", error);
+        this._Mservice.mensajeExitoso("El turno no pudo ser cancelado, por favor reintente!");
+      });
+  }
 }

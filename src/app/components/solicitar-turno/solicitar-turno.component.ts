@@ -11,6 +11,7 @@ import { Dia } from 'src/Models/Dia';
 import { Especialidad } from 'src/Models/Especialidad';
 import { Turno } from 'src/Models/Turno';
 import { Usuario } from 'src/Models/Usuario';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -110,6 +111,7 @@ export class SolicitarTurnoComponent implements OnInit {
     // console.log(this.usuarioRegistrado);
     if (this.usuarioRegistrado?.tipoPerfil == "Paciente") {
       auxTurno = {
+        id : uuidv4(),
         paciente: this.usuarioRegistrado,
         profesional: this.especialistaElejido,
         estado: 'PENDIENTE',
@@ -133,6 +135,7 @@ export class SolicitarTurnoComponent implements OnInit {
 
     if (this.usuarioRegistrado?.tipoPerfil == "Admin") {
       auxTurno = {
+        id : uuidv4(),
         paciente: this.pacienteElejido,
         profesional: this.especialistaElejido,
         estado: 'PENDIENTE',
