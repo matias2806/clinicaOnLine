@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-10 mx-auto mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">¿Seguro que desea cancelar el turno?</h3>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    
+                    <h6 class="text-center">Ingrese el motivo por el cual desea cancelar su turno, le recordamos que una vez cancelado no hay vuelta atrás.</h6>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"
+                        [(ngModel)]="mensaje"></textarea>
+                </div>
+                <h6 [(ngModel)]="error" class="invalid mb-3 text-center" value="error" name="error" ngDefaultControl> <b>{{error | errores}}</b></h6>
+                <div class="d-grid gap-2 mx-auto">
+                    <button class="btn btn-success" type="button" (click)="Confirmar(true)">CONTINUAR</button>
+                    <button class="btn btn-danger" type="button" (click)="Confirmar(false)">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

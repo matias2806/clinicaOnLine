@@ -37,5 +37,13 @@ export class TurnosService {
   traerTodos() {
     return this.turnos;
   }
+
+  obtenerTurnoDe(uid:string) {
+    return this.turnos.pipe(map(dato => {
+      return dato.filter(t => {
+        return t.paciente!.uid == uid;
+      });
+    }));
+  }
   
 }

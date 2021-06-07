@@ -16,7 +16,11 @@
                                 *ngFor="let especialidad of listadoEspecialidades let i=index"
                                 (click)="clickEspecialidad(especialidad)">
                                 <div class="marco">
-                                    <h6 class="my-0 text-info"><b>{{especialidad.nombre}} </b></h6>
+                                    <h6 class="my-0 text-info text-center"><b>{{especialidad.nombre}} </b></h6>
+                                    <div class="text-center">
+                                        <img src="{{especialidad.imagen}}" class="imagenTamanio"
+                                            alt="foto especialidad">
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -62,7 +66,11 @@
                                 *ngFor="let especialidad of listadoEspecialidades let i=index"
                                 (click)="clickEspecialidad(especialidad)">
                                 <div class="marco">
-                                    <h6 class="my-0 text-info"><b>{{especialidad.nombre}} </b></h6>
+                                    <h6 class="my-0 text-info text-center"><b>{{especialidad.nombre}} </b></h6>
+                                    <div class="text-center">
+                                        <img src="{{especialidad.imagen}}" class="imagenTamanio"
+                                            alt="foto especialidad">
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -87,20 +95,19 @@
                     </div>
                     <div class="form-group col-md-4 mb-3" *ngIf="especialistaElejido != null">
                         <h4 class="d-flex justify-content-between align-items-center mb-3"
-                        *ngIf="listadoUsuariosPacientes != null">
-                        <h4 class="text-primary text-center">Listado de usuarios tipo pacientes</h4>
-                        <span
-                            class="badge bg-primary rounded-pill">{{listadoUsuariosPacientes.length}}</span>
-                    </h4>
-                    <ul class="list-group mb-3 ">
-                        <li class="list-group-item d-flex justify-content-between lh-sm especialidad"
-                            *ngFor="let paciente of listadoUsuariosPacientes let i=index"
-                            (click)="clickPaciente(paciente)">
-                            <div class="marco">
-                                <h6 class="my-0 text-info"><b>{{paciente.nombre}} </b></h6>
-                            </div>
-                        </li>
-                    </ul>
+                            *ngIf="listadoUsuariosPacientes != null">
+                            <h4 class="text-primary text-center">Listado de usuarios tipo pacientes</h4>
+                            <span class="badge bg-primary rounded-pill">{{listadoUsuariosPacientes.length}}</span>
+                        </h4>
+                        <ul class="list-group mb-3 ">
+                            <li class="list-group-item d-flex justify-content-between lh-sm especialidad"
+                                *ngFor="let paciente of listadoUsuariosPacientes let i=index"
+                                (click)="clickPaciente(paciente)">
+                                <div class="marco">
+                                    <h6 class="my-0 text-info"><b>{{paciente.nombre}} </b></h6>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -108,37 +115,69 @@
     </div>
 </div>
 
-<!-- TABLA TURNOS -->
-<div class="row" *ngIf="especialidadElejida != null && especialistaElejido != null && pacienteElejido != null">
-    <div class="col-md-11 mx-auto mt-4">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="text-center mb-3"><b>Listado de dias y horarios.</b></h1>
+<!-- TABLA TURNOS ADMIN-->
+<div *ngIf="usuarioRegistrado != null">
+    <div class="row" *ngIf="especialidadElejida != null && especialistaElejido != null && pacienteElejido != null && usuarioRegistrado.tipoPerfil == 'Admin'">
+        <div class="col-md-11 mx-auto mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-center mb-3"><b>Listado de dias y horarios.</b></h1>
 
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Dia del turno</th>
-                            <th scope="col" class="text-center">Horario del turno</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngFor="let dia of listadoDeObjetosDias">
-                        <tr *ngIf="dia.diaSemana != 'DOMINGO' && dia.data.trabaja != false ">
-                            <td class="text-left">{{dia.dia | date: 'fullDate'}}</td>
-                            <td class="text-center"><button class="btn btn-success hora"
-                                    *ngFor="let horario of dia.turnos let i=index"
-                                    (click)="reservarTurno(horario, dia)">
-                                    {{horario | pipeHora}}</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Dia del turno</th>
+                                <th scope="col" class="text-center">Horario del turno</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let dia of listadoDeObjetosDias">
+                            <tr *ngIf="dia.diaSemana != 'DOMINGO' && dia.data.trabaja != false ">
+                                <td class="text-left">{{dia.dia | date: 'fullDate'}}</td>
+                                <td class="text-center"><button class="btn btn-success hora"
+                                        *ngFor="let horario of dia.turnos let i=index"
+                                        (click)="reservarTurno(horario, dia)">
+                                        {{horario | pipeHora}}</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- TABLA TURNOS PACIENTE-->
+<div *ngIf="usuarioRegistrado != null">
+    <div class="row" *ngIf="especialidadElejida != null && especialistaElejido != null &&  usuarioRegistrado.tipoPerfil == 'Paciente'">
+        <div class="col-md-11 mx-auto mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-center mb-3"><b>Listado de dias y horarios.</b></h1>
 
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Dia del turno</th>
+                                <th scope="col" class="text-center">Horario del turno</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let dia of listadoDeObjetosDias">
+                            <tr *ngIf="dia.diaSemana != 'DOMINGO' && dia.data.trabaja != false ">
+                                <td class="text-left">{{dia.dia | date: 'fullDate'}}</td>
+                                <td class="text-center"><button class="btn btn-success hora"
+                                        *ngFor="let horario of dia.turnos let i=index"
+                                        (click)="reservarTurno(horario, dia)">
+                                        {{horario | pipeHora}}</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- <div class="row">
     <div class="col-md-9 mx-auto mt-4">
         <div class="card">

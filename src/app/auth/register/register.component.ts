@@ -101,6 +101,13 @@ export class RegisterComponent implements OnInit {
     console.log(this.listaDiasSeleccionadas);
   }
 
+  validaCaptcha(){
+    // var response =  grecaptcha.getResponse();
+    // if(response.length != 0){
+
+    // }
+  }
+
   agregarNuevaEspecialidad() {
     console.log(this.nombreEspecialidad);
     console.log(this.duracionEspecialidad);
@@ -109,6 +116,7 @@ export class RegisterComponent implements OnInit {
       let especialidad: Especialidad = {
         nombre: this.nombreEspecialidad,
         duracion: parseFloat(this.duracionEspecialidad),
+        imagen: 'https://firebasestorage.googleapis.com/v0/b/clinicaonline-cfa90.appspot.com/o/especialidades%2Fgenerica.png?alt=media&token=708d9d2f-c51b-4310-8e56-8d814e2b240b',
       };
       this._Eservice.altaEspecialidad(especialidad);
     } else {

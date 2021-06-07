@@ -20,6 +20,7 @@ import { UsuarioComponent } from './auth/usuario/usuario.component';
 import { OpcionesDeUsuariosComponent } from './auth/opciones-de-usuarios/opciones-de-usuarios.component';
 import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
+
 import { PipeHoraPipe } from './pipe/pipe-hora.pipe';
 
 
@@ -30,6 +31,9 @@ import localePy from '@angular/common/locales/es-PY';
 import localePt from '@angular/common/locales/pt';
 import localeEn from '@angular/common/locales/en';
 import localeEsAr from '@angular/common/locales/es-AR';
+import { MisTurnosComponent } from './components/mis-turnos/mis-turnos.component';
+import { CancelarComponent } from './components/opcionesTurno/cancelar/cancelar.component';
+import { ErroresPipe } from './pipe/errores.pipe';
 
 // registrar los locales con el nombre que quieras utilizar a la hora de proveer
 // registerLocaleData(localePy, 'es');
@@ -49,6 +53,9 @@ registerLocaleData(localeEsAr, 'es-Ar');
     SolicitarTurnoComponent,
     MiPerfilComponent,
     PipeHoraPipe,
+    MisTurnosComponent,
+    CancelarComponent,
+    ErroresPipe
   ],
   imports: [
     BrowserModule,

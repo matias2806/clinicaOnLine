@@ -1,0 +1,48 @@
+<div class="row" *ngIf="usuarioRegistrado != null && verTabla == true">
+    <div class="col-md-10 mx-auto mt-4" *ngIf="usuarioRegistrado.tipoPerfil == 'Paciente'">
+        <p>mis-turnos works!</p>
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center mb-3"><b>Mis turnos.</b></h1>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Nº</th>
+                            <th scope="col" class="text-center">Fecha</th>
+                            <th scope="col" class="text-center">Hora</th>
+                            <th scope="col" class="text-center">Profesional</th>
+                            <th scope="col" class="text-center">Especialidad</th>
+                            <th scope="col" class="text-center">Paciente</th>
+                            <th scope="col" class="text-center">Estado</th>
+                            <th scope="col" class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let turno of listadoTurnos let i=index">
+                        <tr>
+                            <td class="text-left" class="text-center">{{i+1}}</td>
+                            <td class="text-left" class="text-center">{{turno.fecha}}</td>
+                            <td class="text-left" class="text-center">{{turno.hora | pipeHora}}</td>
+                            <td class="text-left" class="text-center">{{turno.profesional!.nombre}} </td>
+                            <td class="text-left" class="text-center">{{turno.especialidad!.nombre}} </td>
+                            <td class="text-left" class="text-center">{{turno.paciente!.nombre}}</td>
+                            <td class="text-left" class="text-center">{{turno.estado}}</td>
+                            <td class="text-left" class="text-center">
+                                <button type="button" class="btn btn-danger" title="Cancelar turno"
+                                    (click)="cancelarTurno(turno)">
+                                    <i class="far fa-calendar-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="cancelarTurnoPantalla">
+    <app-cancelar (OpcionEvent)="eventoCancelarTurno($event)" (mensajeEvent)="eventoMensaje($event)">
+    </app-cancelar>
+</div>

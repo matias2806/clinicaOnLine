@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "clinicaonline-cfa90",
+  "private_key_id": "03919b340205d0f0c19f2f195ac4cb8e472805d2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQClxY/Pv2aya8Qr\nNcQ9ufiGWMYRa3M5qXuNCGcSWZfuCptz+/tXDDDxgloyoo6v3824VRtNQuiL49qf\nMIPIFAMwDmZykUD4X+7JFI5j2g51OP023q4dERHmizw1aBY8KwEwSzR3dlz3VZr3\n9OtyXdJiSCYWh4/ECo0NgGRY9jG659Ucw/YSY8UrAu2K/JbIAPgrZdcSxO1vNjOZ\nweYGUierzQULLFlk+G7UlZ4f5TPafV75uB+GS00HhLghbkR58UDgLafprC1t7alL\nQzqldfrqFI5C4AmCGm2pOsZjUp27GEgXftA/MJSWuuU1YI3gXplHwKPkr44Eb/x/\nlM+WkjJ3AgMBAAECggEACWSf6Pwl9A8yLuadh4fdorMuCfemMEq/svaabIpCFx1n\nwJMzIzQQI+coeD0Iy8NpMzwzT1Xuulp/XUzQ8snbgmIWgQBlB43cCG3PQa4t6ot/\noZfNkt0QQBl8oGQU+nTPXO6t+uTskKE7pjgtDS5uyN3gtp8Y0NluM6kmRnowyC/a\nXumkwtvZtbtycHtXDNIXBExH3AqRliqZWB5fIDsD4r9LMxI5n0KiSlDAjCSI/Luu\nDNNCKMzYZiDsLVnBca65aiMjCwRYoWEWaTSuaK9/AwZ+qE+dDFoN3zVysDDxooDS\nGkGijhKAz/7uuLVaIBkyO7XudE1yJnK073/ItUpXbQKBgQDX6AX/V4FpMsw1vSvE\nAgWRkthI+jQIwHJLzv4hIF6AMSAmPPHyl5zI4Byd6nli2cfEK7dmD8ZB5iFz9gb3\nsSN1WnqL2E61cMnfHIsrsDJBte4dyr1Nys3AOtJORMjHE/I+Tm4QNx2tr1DGgKdZ\n48vhIyvRZXnU3KIa6K49BeTUuwKBgQDEjjALK3x28/aYGPkUqqxOVmvVbJsfKPqb\nUz8U7YZy7jykvCMfLU0zzDXLyfEQX1lqYCnzQ14dTBtgsN8X4QYcQf/TJ9ivQuPC\n2tmWtJuJUzTECP1PUF5YNMnink4mhVZ1quOKPvG3Z+6RlLJjw4odG8fKT8mh3KM3\ngYyhCXPbdQKBgCVqKufl5SIy0FqbrqLn6skgVmTHHw9JMkVa2IUrE9VJLhYSR6dP\niLbyx2LCSEjODqU7IiwIncW7uJ5cyzZPNyLWDBiB4pnkssb8Lk3i2cKzYVE+WfHK\nLD+csecoWlbNaRRNCRu8QWNg1zGfB+E27ZTVQHmoCSXPGjRpkBA5Hj+TAoGAJe1h\n6+XaQIHW5YZ8GbbNRNh8OlSYoiygHvSzSXCD7w11ejwrcsqlCQewocA32fbsJBCm\nR6CKOpEC/2dhxRPQwAckPDSGJVt8446jSedT0+3QUruBVZqmedLF2gq9/cTg6Bev\njG+U6NUPPdw5h/KlZfSEWs+GkssmW4GOB0zxpDkCgYBtyiHoF9Kp5MlB8QmsGGCH\nQqkhicyGYdnOYkaP+uRlCazDBp9lli9ah74Nz3B1KMFZyMdnBksXPWVUof/Gc19T\nvz0peOFIci1CaQ/T7q5MnRaoPg1eWmQD95b2/yQAoi+L+O2+jDzL5x1qVIRQP2/A\nPTOehW55R7sx6tFfe4HJSw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "clinicaonline-cfa90@appspot.gserviceaccount.com",
+  "client_id": "106509248379756792222",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/clinicaonline-cfa90%40appspot.gserviceaccount.com"
+}
