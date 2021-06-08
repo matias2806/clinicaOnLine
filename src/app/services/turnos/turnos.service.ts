@@ -55,13 +55,22 @@ export class TurnosService {
       });
     }));
   }
+
+  obtenerTurnoProfesionalDe(uid:string) {
+    return this.turnos.pipe(map(dato => {
+      return dato.filter(t => {
+        return t.profesional!.uid == uid;
+      });
+    }));
+  }
   
   updateTurnoCancelar(id: any, turno: Turno) {
     var tur = this.db.collection(this.path).doc(id);
 
     return tur.update({
       estado: turno.estado,
-      comentarioPaciente: turno.comentarioPaciente
+      comentarioPaciente: turno.comentarioPaciente,
+      comentarioProfesional: turno.comentarioProfesional,
     })
       .then(() => {
         console.log("Documento actualizado!");

@@ -18,7 +18,10 @@
                 <a class="nav-link" [routerLink]="['/solicitarTurno']">Solicitar Turno</a>
             </li>
             <li class="nav-item active" *ngIf="authSvc.usuario.uid && this.usuario?.tipoPerfil =='Paciente' ">
-                <a class="nav-link" [routerLink]="['/misTurnos']">Mis Turno</a>
+                <a class="nav-link" [routerLink]="['/misTurnos']">Mis Turnos</a>
+            </li>
+            <li class="nav-item active" *ngIf="authSvc.usuario.uid && this.usuario?.tipoPerfil =='Especialista' ">
+                <a class="nav-link" [routerLink]="['/MisTurnos']">Mis Turnos</a>
             </li>
             <!--<li class="nav-item active" *ngIf="authSvc.usuario.uid">
                 <a class="nav-link" [routerLink]="['/Listado']">Juegos</a>

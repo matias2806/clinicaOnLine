@@ -34,6 +34,7 @@ import localeEsAr from '@angular/common/locales/es-AR';
 import { MisTurnosComponent } from './components/mis-turnos/mis-turnos.component';
 import { CancelarComponent } from './components/opcionesTurno/cancelar/cancelar.component';
 import { ErroresPipe } from './pipe/errores.pipe';
+import { MisTurnosEspecialistaComponent } from './components/mis-turnos-especialista/mis-turnos-especialista.component';
 
 // registrar los locales con el nombre que quieras utilizar a la hora de proveer
 // registerLocaleData(localePy, 'es');
@@ -55,7 +56,8 @@ registerLocaleData(localeEsAr, 'es-Ar');
     PipeHoraPipe,
     MisTurnosComponent,
     CancelarComponent,
-    ErroresPipe
+    ErroresPipe,
+    MisTurnosEspecialistaComponent
   ],
   imports: [
     BrowserModule,

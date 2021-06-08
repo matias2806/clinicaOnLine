@@ -8,17 +8,16 @@ import { Usuario } from 'src/Models/Usuario';
 import { Turno } from 'src/Models/Turno';
 
 @Component({
-  selector: 'app-mis-turnos',
-  templateUrl: './mis-turnos.component.html',
-  styleUrls: ['./mis-turnos.component.scss']
+  selector: 'app-mis-turnos-especialista',
+  templateUrl: './mis-turnos-especialista.component.html',
+  styleUrls: ['./mis-turnos-especialista.component.scss']
 })
-export class MisTurnosComponent implements OnInit {
+export class MisTurnosEspecialistaComponent implements OnInit {
 
   public usuarioRegistrado: Usuario | null = null;
 
   public listadoTurnos: Turno[] = [];
   turnoActual: Turno | null = null;
-
 
   mensaje: string = '';
 
@@ -26,14 +25,7 @@ export class MisTurnosComponent implements OnInit {
   verTabla: boolean = true;
   cancelarTurnoPantalla: boolean = false;
 
-  constructor(private AuthSvc: AuthService, private _Uservice: UsuariosService, private _Mservice: MensajesService, private _Tservice: TurnosService, private router: Router,) {
-    // this._Tservice.traerTodos().subscribe((turnos: Turno[]) => {
-    //   this.listadoTurnos = turnos;
-    //   console.log(this.listadoTurnos);
-    // });
-
-
-  }
+  constructor(private AuthSvc: AuthService, private _Uservice: UsuariosService, private _Mservice: MensajesService, private _Tservice: TurnosService, private router: Router,) { }
 
   async ngOnInit() {
     var user = await this.AuthSvc.getCurrentUser();
@@ -41,11 +33,12 @@ export class MisTurnosComponent implements OnInit {
       var dataUser: any = await this._Uservice.getUsuarioPorEmail(user.email);
       this.usuarioRegistrado = dataUser;
 
-      this._Tservice.obtenerTurnoDe(this.usuarioRegistrado?.uid).subscribe(data => {
+      this._Tservice.obtenerTurnoProfesionalDe(this.usuarioRegistrado?.uid).subscribe(data => {
         this.listadoTurnos = data;
       });
     }
   }
+
 
   cancelarTurno(turno: Turno) {
     this.turnoActual = turno;
@@ -53,22 +46,20 @@ export class MisTurnosComponent implements OnInit {
     this.cancelarTurnoPantalla = true;
   }
 
-  
   eventoCancelarTurno(event$: any) {
     setTimeout(async () => {
       console.log(event$);
       console.log(this.mensaje);
       if (event$) {
 
-        this.turnoActual!.comentarioPaciente = this.mensaje;
+        this.turnoActual!.comentarioProfesional = this.mensaje;
         this.turnoActual!.estado = 'CANCELADO';
-        
+
         var idTurno = await this._Tservice.obtenerKeyTurno(this.turnoActual!);
         console.log(this.turnoActual);
         console.log(idTurno);
         if (idTurno != null) {
           this._Tservice.updateTurnoCancelar(idTurno, this.turnoActual!);
-          
         }
       }
       this.cancelarTurnoPantalla = false;
@@ -82,4 +73,6 @@ export class MisTurnosComponent implements OnInit {
   eventoMensaje(event$: any) {
     this.mensaje = event$;
   }
+
+
 }
