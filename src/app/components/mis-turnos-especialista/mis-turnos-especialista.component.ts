@@ -24,6 +24,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
   //Pantallas
   verTabla: boolean = true;
   cancelarTurnoPantalla: boolean = false;
+  FinalizarTurnoPantalla: boolean = false;
 
   constructor(private AuthSvc: AuthService, private _Uservice: UsuariosService, private _Mservice: MensajesService, private _Tservice: TurnosService, private router: Router,) { }
 
@@ -39,11 +40,56 @@ export class MisTurnosEspecialistaComponent implements OnInit {
     }
   }
 
+  async aceptarTurno(turno: Turno) {
+    var idTurno = await this._Tservice.obtenerKeyTurno(turno);
+    console.log(turno);
+    console.log(idTurno);
+    turno!.estado = 'ACEPTADO';
+    if (idTurno != null) {
+      this._Tservice.updateTurnoEstadosYcomentarios(idTurno, turno, "Turno aceptado!", "El turno no pudo ser aceptado, por favor reintente!", false);
+    }
+    console.log("entro");
+  }
 
   cancelarTurno(turno: Turno) {
     this.turnoActual = turno;
     this.verTabla = false;
     this.cancelarTurnoPantalla = true;
+  }
+
+  finalizarTurno(turno: Turno) {
+    this.turnoActual = turno;
+    this.verTabla = false;
+    this.FinalizarTurnoPantalla = true;
+  }
+  resenaTurno(turno: Turno) {
+    if(turno.comentarioProfesional){
+      this._Mservice.mensajeExitosoReserva(turno.comentarioProfesional);
+    }
+  }
+
+  eventoFinalizarTurno($event: any) {
+    setTimeout(async () => {
+      console.log($event);
+      console.log(this.mensaje);
+      if ($event) {
+
+        this.turnoActual!.comentarioProfesional = this.mensaje;
+        this.turnoActual!.estado = 'FINALIZADO';
+
+        var idTurno = await this._Tservice.obtenerKeyTurno(this.turnoActual!);
+        console.log(this.turnoActual);
+        console.log(idTurno);
+        if (idTurno != null) {
+          this._Tservice.updateTurnoEstadosYcomentarios(idTurno, this.turnoActual!, "Turno Finalizado", "El turno no pudo ser finalizado, por favor reintente!", true);
+        }
+      }
+      this.FinalizarTurnoPantalla = false;
+      this.verTabla = true;
+
+      this.turnoActual = null;
+      this.mensaje = '';
+    }, 100);
   }
 
   eventoCancelarTurno(event$: any) {
@@ -59,7 +105,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
         console.log(this.turnoActual);
         console.log(idTurno);
         if (idTurno != null) {
-          this._Tservice.updateTurnoCancelar(idTurno, this.turnoActual!);
+          this._Tservice.updateTurnoEstadosYcomentarios(idTurno, this.turnoActual!, "Turno cancelado", "El turno no pudo ser cancelado, por favor reintente!", true);
         }
       }
       this.cancelarTurnoPantalla = false;

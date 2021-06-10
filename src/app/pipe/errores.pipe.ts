@@ -12,6 +12,9 @@ export class ErroresPipe implements PipeTransform {
         retorno = 'Por favor ingrese la razón de la cancelación del turno!';
         break;
       case "2":
+        retorno = 'Por favor ingrese un comentario/reseña de lo que fue el turno!';
+        break;
+      case "3":
         retorno = 'error Atipico';
         break;
     }

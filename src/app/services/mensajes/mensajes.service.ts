@@ -8,6 +8,32 @@ export class MensajesService {
 
   constructor() { }
 
+  mensajeExitosoReserva(mensaje:String){
+    Swal.fire({
+      icon: 'warning',
+      title: 'Reseña/Comentarios medicos',
+      text: mensaje.toString(),
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
+  }
+
+  mensajeExitosoCentrado(mensaje:String){
+    Swal.fire({
+      icon: 'success',
+      title: mensaje,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
+  }
 
   mensajeExitoso(mensaje:string){
     const Toast = Swal.mixin({

@@ -23,8 +23,13 @@ export class MisTurnosComponent implements OnInit {
   mensaje: string = '';
 
   //Pantallas
-  verTabla: boolean = true;
+  // verTabla: boolean = true;
+  // cancelarTurnoPantalla: boolean = false;
+  // encuestaTurnoPantalla: boolean = false;
+
+  verTabla: boolean = false;
   cancelarTurnoPantalla: boolean = false;
+  encuestaTurnoPantalla: boolean = true;
 
   constructor(private AuthSvc: AuthService, private _Uservice: UsuariosService, private _Mservice: MensajesService, private _Tservice: TurnosService, private router: Router,) {
     // this._Tservice.traerTodos().subscribe((turnos: Turno[]) => {
@@ -47,13 +52,25 @@ export class MisTurnosComponent implements OnInit {
     }
   }
 
+  resenaTurno(turno: Turno) {
+    if (turno.comentarioProfesional) {
+      this._Mservice.mensajeExitosoReserva(turno.comentarioProfesional);
+    }
+  }
+
+  completarEncuesta(turno: Turno) {
+    this.turnoActual = turno;
+    this.verTabla = false;
+    this.encuestaTurnoPantalla = true;
+  }
+
   cancelarTurno(turno: Turno) {
     this.turnoActual = turno;
     this.verTabla = false;
     this.cancelarTurnoPantalla = true;
   }
 
-  
+
   eventoCancelarTurno(event$: any) {
     setTimeout(async () => {
       console.log(event$);
@@ -62,13 +79,13 @@ export class MisTurnosComponent implements OnInit {
 
         this.turnoActual!.comentarioPaciente = this.mensaje;
         this.turnoActual!.estado = 'CANCELADO';
-        
+
         var idTurno = await this._Tservice.obtenerKeyTurno(this.turnoActual!);
         console.log(this.turnoActual);
         console.log(idTurno);
         if (idTurno != null) {
-          this._Tservice.updateTurnoCancelar(idTurno, this.turnoActual!);
-          
+          this._Tservice.updateTurnoEstadosYcomentarios(idTurno, this.turnoActual!, "Turno cancelado", "El turno no pudo ser cancelado, por favor reintente!", true);
+
         }
       }
       this.cancelarTurnoPantalla = false;

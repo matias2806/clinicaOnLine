@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-10 mx-auto mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Encuesta turno</h3>
+            </div>
+            <div class="card-body">
+                <div class="row formulario">
+                    <div class="col-md-6 mb-5 text-center">
+                        <label class="text-center posicion" for="clasificacion">Puntuación de la
+                            atención&nbsp;&nbsp;</label>
+                        <div>
+                            <p class="clasificacion">
+                                <input id="radio1" type="radio" name="puntuacion" value="5" title="Excelente">
+                                <label for="radio1" id="star" title="Excelente..">★</label>
+                                <input id="radio2" type="radio" name="puntuacion" value="4">
+                                <label for="radio2" id="star">★</label>
+                                <input id="radio3" type="radio" name="puntuacion" value="3">
+                                <label for="radio3" id="star">★</label>
+                                <input id="radio4" type="radio" name="puntuacion" value="2">
+                                <label for="radio4" id="star">★</label>
+                                <input id="radio5" type="radio" name="puntuacion" value="1" checked>
+                                <label for="radio5" id="star">★</label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-5 text-center">
+                        <label class="text-center posicion" for="volveria">¿Volveria a atenderse en nuestra clinica?&nbsp;&nbsp;</label>
+                        <div>
+                            <p class="volveria">
+                                <input type="radio" id="volveriaSI" name="volveria" value="SI" checked>
+                                <label for="volveriaSI" id="volveriaSI" >SI</label>
+                                <input type="radio" class="espacio" id="volveriaNO" name="volveria" value="NO">
+                                <label for="volveriaNO" id="volveriaNO" >NO</label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mb-5">
+                        <label for="exampleTextarea" class="text-center">Ingrese su opinión o mejoras</label>
+                        <textarea class="form-control tamanio" id="exampleTextarea" rows="3" maxlength="240"></textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2 mx-auto">
+                        <button class="btn btn-success" type="button" (click)="Confirmar(true)">CONTINUAR</button>
+                        <button class="btn btn-danger" type="button" (click)="Confirmar(false)">CANCELAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

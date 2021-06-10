@@ -48,7 +48,7 @@ export class TurnosService {
     }
   }
 
-  obtenerTurnoDe(uid:string) {
+  obtenerTurnoDe(uid: string) {
     return this.turnos.pipe(map(dato => {
       return dato.filter(t => {
         return t.paciente!.uid == uid;
@@ -56,15 +56,15 @@ export class TurnosService {
     }));
   }
 
-  obtenerTurnoProfesionalDe(uid:string) {
+  obtenerTurnoProfesionalDe(uid: string) {
     return this.turnos.pipe(map(dato => {
       return dato.filter(t => {
         return t.profesional!.uid == uid;
       });
     }));
   }
-  
-  updateTurnoCancelar(id: any, turno: Turno) {
+
+  updateTurnoEstadosYcomentarios(id: any, turno: Turno, mensajeExitoso: string, mensajeFallo: string, flag1:boolean) {
     var tur = this.db.collection(this.path).doc(id);
 
     return tur.update({
@@ -74,11 +74,16 @@ export class TurnosService {
     })
       .then(() => {
         console.log("Documento actualizado!");
-        this._Mservice.mensajeExitoso("Turno cancelado");
+        if(flag1){
+          this._Mservice.mensajeExitoso(mensajeExitoso);
+        }else{
+          this._Mservice.mensajeExitosoCentrado("Turno aceptado");
+        }
       })
       .catch((error) => {
         console.error("Error en la actualizacion: ", error);
-        this._Mservice.mensajeExitoso("El turno no pudo ser cancelado, por favor reintente!");
+        this._Mservice.mensajeExitoso(mensajeFallo);
       });
   }
+
 }

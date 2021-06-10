@@ -1,0 +1,48 @@
+.tamanio{
+    height: 120px;
+    padding-left: 10px;
+}
+
+.volveria{
+  margin-top: 25px;
+}
+.espacio{
+  padding-left: 20px;
+}
+#volveriaNO{
+  padding-right: 10px;
+}
+#volveriaSI{
+  padding-right: 20px;
+}
+
+/* ESTRELLAS */
+#star{
+    font-size: 300% !important;
+    
+}
+p.clasificacion {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  p.clasificacion input {
+    position: absolute;
+    top: -100px;
+  }
+  
+  p.clasificacion label {
+    float: right;
+    color: #333;
+  }
+  
+  p.clasificacion label:hover,
+  p.clasificacion label:hover ~ label,
+  p.clasificacion input:checked ~ label {
+    color: gold;
+  }
+
+  .posicion{
+      margin-left: 20px;
+  }

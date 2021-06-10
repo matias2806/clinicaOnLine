@@ -28,8 +28,19 @@
                             <td class="text-left" class="text-center">{{turno.estado}}</td>
                             <td class="text-left" class="text-center">
                                 <button type="button" class="btn btn-danger" title="Cancelar turno"
-                                    (click)="cancelarTurno(turno)" *ngIf="turno.estado != 'CANCELADO'">
+                                    (click)="cancelarTurno(turno)"
+                                    *ngIf="turno.estado != 'CANCELADO' && turno.estado != 'FINALIZADO'  && turno.estado != 'ACEPTADO'">
                                     <i class="far fa-calendar-times"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-info btnmio" title="Ver Reseña"
+                                    (click)="resenaTurno(turno)" *ngIf="turno.estado == 'FINALIZADO'">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-warning btnmio" title="Completar Encuesta"
+                                    (click)="completarEncuesta(turno)" *ngIf="turno.estado == 'FINALIZADO'">
+                                    <i class="far fa-copy"></i>
                                 </button>
                             </td>
                         </tr>
@@ -44,4 +55,8 @@
 <div *ngIf="cancelarTurnoPantalla">
     <app-cancelar (OpcionEvent)="eventoCancelarTurno($event)" (mensajeEvent)="eventoMensaje($event)">
     </app-cancelar>
+</div>
+
+<div *ngIf="encuestaTurnoPantalla">
+    <app-encuesta ></app-encuesta>
 </div>
