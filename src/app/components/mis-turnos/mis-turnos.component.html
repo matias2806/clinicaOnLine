@@ -42,6 +42,11 @@
                                     (click)="completarEncuesta(turno)" *ngIf="turno.estado == 'FINALIZADO'">
                                     <i class="far fa-copy"></i>
                                 </button>
+
+                                <button type="button" class="btn btn-success btnmio" title="Calificar Atención"
+                                    (click)="calificarAtencion(turno)" *ngIf="turno.estado == 'FINALIZADO'">
+                                    <i class="fas fa-concierge-bell"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -58,5 +63,9 @@
 </div>
 
 <div *ngIf="encuestaTurnoPantalla">
-    <app-encuesta ></app-encuesta>
+    <app-encuesta (encuestaEvent)="eventoEncuesta($event)" ></app-encuesta>
+</div>
+
+<div *ngIf="calificarAtencionTurnoPantalla">
+    <app-calificar (calificacionEvent)="eventoCalificar($event)" ></app-calificar>
 </div>

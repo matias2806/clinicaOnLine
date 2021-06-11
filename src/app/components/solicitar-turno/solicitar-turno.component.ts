@@ -100,7 +100,7 @@ export class SolicitarTurnoComponent implements OnInit {
     }
   }
   clickPaciente(paciente: any) {
-    this.pacienteElejido=paciente;
+    this.pacienteElejido = paciente;
     this.cargarListaDeTurnos();
   }
 
@@ -111,7 +111,7 @@ export class SolicitarTurnoComponent implements OnInit {
     // console.log(this.usuarioRegistrado);
     if (this.usuarioRegistrado?.tipoPerfil == "Paciente") {
       auxTurno = {
-        id : uuidv4(),
+        id: uuidv4(),
         paciente: this.usuarioRegistrado,
         profesional: this.especialistaElejido,
         estado: 'PENDIENTE',
@@ -122,9 +122,9 @@ export class SolicitarTurnoComponent implements OnInit {
         comentarioPaciente: '',
         encuesta: {
           atencionRecibida: '',
-          servicioOnline: '',
-          estadoEstablecimiento: '',
-          recomiendaClinida: ''
+          volveria: '',
+          sugerenciaMejora: '',
+          opcion: false
         }
       }
       console.log(auxTurno);
@@ -135,7 +135,7 @@ export class SolicitarTurnoComponent implements OnInit {
 
     if (this.usuarioRegistrado?.tipoPerfil == "Admin") {
       auxTurno = {
-        id : uuidv4(),
+        id: uuidv4(),
         paciente: this.pacienteElejido,
         profesional: this.especialistaElejido,
         estado: 'PENDIENTE',
@@ -146,9 +146,9 @@ export class SolicitarTurnoComponent implements OnInit {
         comentarioPaciente: '',
         encuesta: {
           atencionRecibida: '',
-          servicioOnline: '',
-          estadoEstablecimiento: '',
-          recomiendaClinida: ''
+          volveria: '',
+          sugerenciaMejora: '',
+          opcion: false
         }
       }
       console.log(auxTurno);

@@ -23,13 +23,14 @@ export class MisTurnosComponent implements OnInit {
   mensaje: string = '';
 
   //Pantallas
-  // verTabla: boolean = true;
-  // cancelarTurnoPantalla: boolean = false;
-  // encuestaTurnoPantalla: boolean = false;
-
-  verTabla: boolean = false;
+  verTabla: boolean = true;
   cancelarTurnoPantalla: boolean = false;
-  encuestaTurnoPantalla: boolean = true;
+  encuestaTurnoPantalla: boolean = false;
+  calificarAtencionTurnoPantalla: boolean = false;
+
+  // verTabla: boolean = false;
+  // cancelarTurnoPantalla: boolean = false;
+  // encuestaTurnoPantalla: boolean = true;
 
   constructor(private AuthSvc: AuthService, private _Uservice: UsuariosService, private _Mservice: MensajesService, private _Tservice: TurnosService, private router: Router,) {
     // this._Tservice.traerTodos().subscribe((turnos: Turno[]) => {
@@ -64,12 +65,49 @@ export class MisTurnosComponent implements OnInit {
     this.encuestaTurnoPantalla = true;
   }
 
+  
+
   cancelarTurno(turno: Turno) {
     this.turnoActual = turno;
     this.verTabla = false;
     this.cancelarTurnoPantalla = true;
   }
 
+  calificarAtencion(turno: Turno){
+    this.turnoActual = turno;
+    this.verTabla = false;
+    this.calificarAtencionTurnoPantalla = true;    
+  }
+
+  eventoCalificar($event: any){
+
+    this.encuestaTurnoPantalla = false;
+    this.verTabla = true;
+
+    this.turnoActual = null;
+  }
+
+  //ESTADO FINALIZADO
+  async eventoEncuesta($event: any){
+    console.log("----------");
+    console.log($event);
+    if($event.opcion){
+      console.log(this.turnoActual);
+      this.turnoActual!.encuesta = $event;
+
+      var idTurno = await this._Tservice.obtenerKeyTurno(this.turnoActual!);
+      console.log(this.turnoActual);
+      console.log(idTurno);
+      if (idTurno != null) {
+        this._Tservice.updateTurno(idTurno, this.turnoActual!, "Encuesta completa", "La encuesta no pudo ser completada");
+      }
+    }
+    
+    this.encuestaTurnoPantalla = false;
+    this.verTabla = true;
+
+    this.turnoActual = null;
+  }
 
   eventoCancelarTurno(event$: any) {
     setTimeout(async () => {
@@ -84,7 +122,7 @@ export class MisTurnosComponent implements OnInit {
         console.log(this.turnoActual);
         console.log(idTurno);
         if (idTurno != null) {
-          this._Tservice.updateTurnoEstadosYcomentarios(idTurno, this.turnoActual!, "Turno cancelado", "El turno no pudo ser cancelado, por favor reintente!", true);
+          this._Tservice.updateTurnoEstadosYcomentarios(idTurno, this.turnoActual!,"El turno no pudo ser cancelado, por favor reintente!", "Turno cancelado", true);
 
         }
       }

@@ -64,7 +64,7 @@ export class TurnosService {
     }));
   }
 
-  updateTurnoEstadosYcomentarios(id: any, turno: Turno, mensajeExitoso: string, mensajeFallo: string, flag1:boolean) {
+  updateTurnoEstadosYcomentarios(id: any, turno: Turno, mensajeExitoso: string, mensajeFallo: string, flag1: boolean) {
     var tur = this.db.collection(this.path).doc(id);
 
     return tur.update({
@@ -74,11 +74,36 @@ export class TurnosService {
     })
       .then(() => {
         console.log("Documento actualizado!");
-        if(flag1){
+        if (flag1) {
           this._Mservice.mensajeExitoso(mensajeExitoso);
-        }else{
+        } else {
           this._Mservice.mensajeExitosoCentrado("Turno aceptado");
         }
+      })
+      .catch((error) => {
+        console.error("Error en la actualizacion: ", error);
+        this._Mservice.mensajeExitoso(mensajeFallo);
+      });
+  }
+
+  updateTurno(id: any, turno: Turno, mensajeExitoso: string, mensajeFallo: string) {
+    var tur = this.db.collection(this.path).doc(id);
+
+    return tur.update({
+      id: turno.id,
+      paciente: turno.paciente,
+      profesional: turno.profesional,
+      estado: turno.estado,
+      hora: turno.hora,
+      fecha: turno.fecha,
+      especialidad: turno.especialidad,
+      comentarioProfesional: turno.comentarioProfesional,
+      comentarioPaciente: turno.comentarioPaciente,
+      encuesta: turno.encuesta
+    })
+      .then(() => {
+        console.log("Documento actualizado!");
+        this._Mservice.mensajeExitoso(mensajeExitoso);
       })
       .catch((error) => {
         console.error("Error en la actualizacion: ", error);

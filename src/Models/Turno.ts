@@ -14,9 +14,9 @@ export class Turno {
     comentarioPaciente: string = '';
     encuesta: any = {
         atencionRecibida: '',
-        servicioOnline: '',
-        estadoEstablecimiento: '',
-        recomiendaClinida: ''
+        volveria: '',
+        sugerenciaMejora: '',
+        opcion: false
     };
 }
 

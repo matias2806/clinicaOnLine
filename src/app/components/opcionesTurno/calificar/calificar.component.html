@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-10 mx-auto mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Calificar la atención
+                    recibida</h3>
+            </div>
+            <div class="card-body">
+                <div class="row formulario">
+                    <div class="col-md-12 mb-5 text-center">
+                        <div class="col-md-12 mb-5">
+                            <label for="exampleTextarea" class="text-center">Ingrese su comentario comentandonos la
+                                atención recibida</label>
+                            <textarea class="form-control tamanio" id="exampleTextarea" rows="3" maxlength="240"
+                                [(ngModel)]="mensaje"></textarea>
+                        </div>
+
+                        <h6 [(ngModel)]="error" class="invalid mb-3 text-center" value="error" name="error"
+                            ngDefaultControl> <b>{{error | errores}}</b></h6>
+                        <div class="d-grid gap-2 mx-auto">
+                            <button class="btn btn-success" type="button" (click)="Confirmar(true)">CONTINUAR</button>
+                            <button class="btn btn-danger" type="button" (click)="Confirmar(false)">CANCELAR</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>

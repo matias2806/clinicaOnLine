@@ -6,6 +6,7 @@ import { UsuarioComponent } from './auth/usuario/usuario.component';
 import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 import { MisTurnosEspecialistaComponent } from './components/mis-turnos-especialista/mis-turnos-especialista.component';
 import { MisTurnosComponent } from './components/mis-turnos/mis-turnos.component';
+import { CalificarComponent } from './components/opcionesTurno/calificar/calificar.component';
 import { CancelarComponent } from './components/opcionesTurno/cancelar/cancelar.component';
 import { EncuestaComponent } from './components/opcionesTurno/encuesta/encuesta.component';
 import { FinalizarComponent } from './components/opcionesTurno/finalizar/finalizar.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'cancelarTurno', component:  CancelarComponent },
   { path: 'finalizarTurno', component:  FinalizarComponent },
   { path: 'encuestaTurno', component:  EncuestaComponent },
+  { path: 'calificarTurno', component:  CalificarComponent },
   
 ];
 
