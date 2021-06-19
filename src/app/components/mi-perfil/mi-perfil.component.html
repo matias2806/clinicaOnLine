@@ -1,4 +1,4 @@
-<div class="row animate__animated animate__bounceInRight"> 
+<div class="row animate__animated animate__bounceInRight">
     <div class="col-md-8 mx-auto mt-5">
         <div class="card">
             <div class="card-body FormularioPaciente">
@@ -72,6 +72,13 @@
                             </tbody>
                         </table>
                         <button class="btn btn-primary btn-block" (click)="guardar()">Guardar</button>
+
+                    </div>
+
+
+                    <div class="col-md-12 mx-auto mt-2 text-center" *ngIf="usuario.tipoPerfil == 'Paciente'">
+                        
+                        <app-detalle-hc [hc]='this.hc!'></app-detalle-hc>
 
                     </div>
                 </div>

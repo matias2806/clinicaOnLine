@@ -62,9 +62,9 @@
                         </div>
 
                     </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block mt-2"
+                    <button type="submit" class="btn btn-primary btn-lg btn-block mt-2"
                         [disabled]="registerForm.invalid">Crear cuenta nueva</button>
-                    
+
                 </form>
                 <!-- <button type="submit" class="btn btn-primary" (click)="CargaDatos()">Carga trucho</button>
                 <button type="submit" class="btn btn-primary" (click)="veoForm()">VeoForm</button> -->
@@ -111,10 +111,10 @@
                 </table>
             </div>
         </div>
+        
     </div>
 
 </div>
-
 <div class="row">
     <div class="col-md-4 mx-auto mt-4">
         <div class="card">
@@ -123,5 +123,14 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8 col-lg-8 order-md-last mt-5"></div>
+    <div class="col-md-8 col-lg-8 order-md-last" id="box">
+        <div class="card">
+            <div class="card-body">
+                <!-- *ngFor="let especialidad of listadoEspecialidades let i=index" -->
+                <div class="col-md-12" *ngFor="let hc of historiasClinicas let i=index">
+                    <app-detalle-hc [hc]='this.hc'></app-detalle-hc>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

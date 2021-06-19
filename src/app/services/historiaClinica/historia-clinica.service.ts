@@ -72,6 +72,14 @@ export class HistoriaClinicaService {
     }
   }
 
+  obtenerHCconKeyPaciente(idPaciente: string) {
+    return this.hclinicas.pipe(map(dato => {
+      return dato.filter(hc => {
+        return (hc.idPaciente == idPaciente);
+      });
+    }));
+  }
+
   public getHCPorId(id: string) {
     return new Promise((resolve, reject) => {
       this.db.collection(this.path).get().subscribe((querySnapshot) => {

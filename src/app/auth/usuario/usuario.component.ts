@@ -2,9 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
+import { HistoriaClinicaService } from 'src/app/services/historiaClinica/historia-clinica.service';
 import { MensajesService } from 'src/app/services/mensajes/mensajes.service';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
 import { Dia } from 'src/Models/Dia';
+import { HistoriaClinica } from 'src/Models/HistoriaClinica';
 import { Usuario } from 'src/Models/Usuario';
 import { AuthService } from '../service/auth.service';
 
@@ -22,8 +24,9 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   // public listadoUsuarios!: Usuario[];
   public listadoUsuariosEspecialistas: Usuario[] = [];
 
+  public historiasClinicas: HistoriaClinica[] =[];
 
-  constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService) {
+  constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService, private _HCservice: HistoriaClinicaService) {
     this.actualizarListas();
 
   }
@@ -43,6 +46,13 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       'email': ['', [Validators.required]],//Obli
       'contraseña': ['', [Validators.required, Validators.minLength(6)]],//Obli
       'foto1': ['', [Validators.required]],//Obli
+    });
+    this.buscarHC();
+  }
+
+  async buscarHC(){
+    this._HCservice.traerTodos().subscribe((historiasClinicas: HistoriaClinica[]) => {
+      this.historiasClinicas = historiasClinicas;
     });
   }
 
