@@ -19,6 +19,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
   public listadoTurnos: Turno[] = [];
   turnoActual: Turno | null = null;
 
+  filterPasadoProf = "";
   mensaje: string = '';
 
   //Pantallas

@@ -8,7 +8,7 @@
                     <div class="col">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Busqueda por especialidad o especialista..."
-                                name="filterPasado" [(ngModel)]="filterPasado">
+                                name="filterPasadoT" [(ngModel)]="filterPasadoT">
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let turno of listadoTurnos | filtroTurnos:filterPasado let i=index">
+                    <tbody *ngFor="let turno of listadoTurnos | filtroTurnos:filterPasadoT let i=index">
                         <tr>
                             <td class="text-left" class="text-center">{{i+1}}</td>
                             <td class="text-left" class="text-center">{{turno.fecha}}</td>

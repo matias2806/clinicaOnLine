@@ -17,6 +17,10 @@ export class FiltroTurnosPipe implements PipeTransform {
       else {
         if (turno.profesional.nombre.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
           resultTurnos.push(turno);
+        }else{
+          if (turno.paciente.nombre.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
+            resultTurnos.push(turno);
+          }
         }
       }
 

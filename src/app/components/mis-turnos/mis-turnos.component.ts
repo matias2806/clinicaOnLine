@@ -19,7 +19,7 @@ export class MisTurnosComponent implements OnInit {
   public listadoTurnos: Turno[] = [];
   turnoActual: Turno | null = null;
 
-  filterPasado = "";
+  filterPasadoT = "";
   mensaje: string = '';
 
   //Pantallas
