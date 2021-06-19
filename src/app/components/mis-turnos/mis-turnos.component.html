@@ -4,6 +4,15 @@
             <div class="card-body">
                 <h1 class="text-center mb-3"><b>Mis turnos.</b></h1>
 
+                <div class="row mt-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Busqueda por especialidad o especialista..."
+                                name="filterPasado" [(ngModel)]="filterPasado">
+                        </div>
+                    </div>
+                </div>
+
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -17,7 +26,7 @@
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let turno of listadoTurnos let i=index">
+                    <tbody *ngFor="let turno of listadoTurnos | filtroTurnos:filterPasado let i=index">
                         <tr>
                             <td class="text-left" class="text-center">{{i+1}}</td>
                             <td class="text-left" class="text-center">{{turno.fecha}}</td>

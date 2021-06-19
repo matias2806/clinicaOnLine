@@ -50,6 +50,7 @@ export class UsuariosService {
     return this.usuarios;
   }
 
+
   public getUsuarioPorEmail(email: string) {
     return new Promise((resolve, reject) => {
       this.db.collection(this.path).get().subscribe((querySnapshot) => {

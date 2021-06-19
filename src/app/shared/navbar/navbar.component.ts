@@ -17,15 +17,13 @@ export class NavbarComponent implements OnInit {
   constructor(public authSvc: AuthService, private _Uservice: UsuariosService, private router: Router) { }
 
   async ngOnInit() {
-    var user = await this.authSvc.getCurrentUser();
-    if (user?.email != null && user) {
-      // console.log(user.email);
-      var dataUser = await this._Uservice.getUsuarioPorEmail(user.email);
-      //console.log(dataUser);
-      this.usuario = dataUser;
-    }
+    this.user$.subscribe(async r => {
+      if (r && r.email != null ) {
+        var dataUser = await this._Uservice.getUsuarioPorEmail(r.email);
+        this.usuario = dataUser;
+      }
+    });
   }
-
 
   async onLogout() {
 

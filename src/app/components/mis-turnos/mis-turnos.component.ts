@@ -19,7 +19,7 @@ export class MisTurnosComponent implements OnInit {
   public listadoTurnos: Turno[] = [];
   turnoActual: Turno | null = null;
 
-
+  filterPasado = "";
   mensaje: string = '';
 
   //Pantallas
@@ -82,6 +82,7 @@ export class MisTurnosComponent implements OnInit {
   eventoCalificar($event: any){
 
     this.encuestaTurnoPantalla = false;
+    this.calificarAtencionTurnoPantalla = false; 
     this.verTabla = true;
 
     this.turnoActual = null;

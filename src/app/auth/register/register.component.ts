@@ -234,13 +234,6 @@ export class RegisterComponent implements OnInit {
             diasDeAtencion: this.listaDiasSeleccionadas,
           };
           console.log(user);
-          // console.log("ADENTRO4");
-          // this._Uservice.altaUsuario(user);
-          // this.SubirFoto(user.uid);
-          // console.log("ADENTRO3");
-          // this._Mservice.mensajeExitoso("Especialista dado de alta");
-          // this.router.navigate(['/verificacion', user.email]);
-
           this._Uservice.subirUsuarioCon1Imagenes(this.foto1, user);
           this._Mservice.mensajeExitoso("Especialista dado de alta");
           this.foto1 = null;
@@ -255,91 +248,3 @@ export class RegisterComponent implements OnInit {
     }
   }
 }
-  /*
-
-async onRegister() {
-// console.log(this.registerForm);
-// console.log(this.registerForm.value);
-// console.log(this.foto1);
-// console.log(this.foto2);
-
-const { email, contraseña } = this.registerForm.value;
-try {
-console.log(this.perfil);
-if (this.perfil == "Paciente") {
-this.AuthSvc.register(email, contraseña).then((r) => {
-// console.log(r);
-console.log(r?.user?.uid);
-// console.log(r?.operationType);
-
-let user: Usuario = {
-nombre: this.registerForm.controls['nombre'].value,
-apellido: this.registerForm.controls['apellido'].value,
-edad: this.registerForm.controls['edad'].value,
-dni: this.registerForm.controls['dni'].value,
-foto1: this.registerForm.controls['foto1'].value,
-tipoPerfil: this.tipoPerfil,
-email: this.registerForm.controls['email'].value,
-contraseña: this.registerForm.controls['contraseña'].value,
-uid: r?.user?.uid,
-obraSocial: this.registerForm.controls['obraSocial'].value,
-foto2: this.registerForm.controls['foto2'].value,
-};
-console.log(user);
-
-this._Uservice.subirUsuarioCon2Imagenes(this.foto1, this.foto2, user);
-
-this._Mservice.mensajeExitoso("Paciente dado de alta");
-
-//redirect login
-this.router.navigate(['/verificacion']);
-});
-}
-if (this.perfil == "Especialista" && this.listaEspecialidadesSeleccionadas.length >= 1) {
-this.AuthSvc.register(email, contraseña).then((r) => {
-console.log(r);
-console.log(r?.user?.uid);
-// console.log(r?.operationType);
-
-let user: Usuario = {
-nombre: this.registerForm.controls['nombre'].value,
-apellido: this.registerForm.controls['apellido'].value,
-edad: this.registerForm.controls['edad'].value,
-dni: this.registerForm.controls['dni'].value,
-especialidades: this.listaEspecialidadesSeleccionadas,
-foto1: this.registerForm.controls['foto1'].value,
-tipoPerfil: this.registerForm.controls['tipoPerfil'].value,
-email: this.registerForm.controls['email'].value,
-contraseña: this.registerForm.controls['contraseña'].value,
-uid: r?.user?.uid,
-aprovadoPorAdmin: false,
-};
-
-this._Uservice.subirUsuarioCon1Imagenes(this.foto1, user);
-this._Mservice.mensajeExitoso("Especialista dado de alta");
-this.router.navigate(['/verificacion']);
-
-});
-}
-if (this.perfil == "Especialista" && this.listaEspecialidadesSeleccionadas.length == 0) {
-// this.errorSinSeleccion = 'Seleccione 1 especialidad como minimo';
-console.log('Seleccione 1 especialidad como minimo');
-this._Mservice.mensajeError("Seleccione 1 especialidad como minimo");
-}
-if (this.perfil != "Especialista" && this.perfil != "Paciente") {
-console.log("OCURRIO UN ERROR GRABE");
-}
-
-
-} catch (error) {
-console.log(error);
-}
-}
-
-
-
-
-
-
-}
-*/

@@ -38,6 +38,7 @@ import { MisTurnosEspecialistaComponent } from './components/mis-turnos-especial
 import { FinalizarComponent } from './components/opcionesTurno/finalizar/finalizar.component';
 import { EncuestaComponent } from './components/opcionesTurno/encuesta/encuesta.component';
 import { CalificarComponent } from './components/opcionesTurno/calificar/calificar.component';
+import { FiltroTurnosPipe } from './pipe/filtro-turnos.pipe';
 
 // registrar los locales con el nombre que quieras utilizar a la hora de proveer
 // registerLocaleData(localePy, 'es');
@@ -63,7 +64,8 @@ registerLocaleData(localeEsAr, 'es-Ar');
     MisTurnosEspecialistaComponent,
     FinalizarComponent,
     EncuestaComponent,
-    CalificarComponent
+    CalificarComponent,
+    FiltroTurnosPipe,
   ],
   imports: [
     BrowserModule,
