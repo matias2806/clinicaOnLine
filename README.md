@@ -1,27 +1,33 @@
-# ClinicaOnLine
+# TP LABO IV (ClinicaOnLine)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.8.
+### Programador :iphone:
 
-## Development server
+``` 
+- Matias Palmieri
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Organización y Tecnologias :question:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Queres revisar el proyecto podes hacerlo ingresando a [Heroku](https://clinicaonline-mp.herokuapp.com/home) .
+El proyecto esta conectado a [Firebase](https://console.firebase.google.com/project/clinicaonline-cfa90/overview), donde usaremos a la
+misma como nuestro gestor de datos.
+Si queres tener el codigo corriendo en tu servidor local de tu computadora podes seguir estos pasos.
 
-## Build
+``` 
+git clone https://github.com/matias2806/clinicaOnLine.git
+npm install (estando parado sobre la carpeta principal)
+ng serve -o 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
 
-## Running unit tests
+# Descripcion del proyecto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Consiste en una pagina de gestión de turnos en este caso para una Clinica. En la misma podes sacar turnos nuevos con distintos profesionales que se encargan de la atención de distintas especialidades. Los turnos pueden ser sacados segun la disponibilidad de nuestro Profesional.
+Ademas se ofrecen multiples opciones para realizar sobre un turno, Como cancelarlo, dar feedback de la atencion, completar una encuesta entre otras cosas.
 
-## Running end-to-end tests
+Tambien se pueden registrar profesionales que quieran atender en nuestra clinica y ellos veran toda la información que necesitan para brindar la mejor atención.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+# Imagenes
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+-- proximamente
