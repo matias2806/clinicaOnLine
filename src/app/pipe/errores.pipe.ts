@@ -29,6 +29,19 @@ export class ErroresPipe implements PipeTransform {
       case "9":
         retorno = 'error Atipico';
         break;
+      case "11":
+        retorno = 'Por favor ingrese una altura';
+        break;
+      case "12":
+        retorno = 'Por favor ingrese un peso';
+        break;
+      case "13":
+        retorno = 'Por favor ingrese una temperatura';
+        break;
+      case "14":
+        retorno = 'Por favor ingrese una presion';
+        break;
+
     }
     return retorno;
   }

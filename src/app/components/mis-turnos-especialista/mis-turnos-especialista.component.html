@@ -7,8 +7,9 @@
                 <div class="row mt-2">
                     <div class="col">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Busqueda por especialidad o paciente..."
-                                name="filterPasadoProf" [(ngModel)]="filterPasadoProf">
+                            <input type="text" class="form-control"
+                                placeholder="Busqueda por especialidad o paciente..." name="filterPasadoProf"
+                                [(ngModel)]="filterPasadoProf">
                         </div>
                     </div>
                 </div>
@@ -54,6 +55,10 @@
                                     (click)="resenaTurno(turno)" *ngIf="turno.estado == 'FINALIZADO'">
                                     <i class="fas fa-paperclip"></i>
                                 </button>
+                                <button type="button" class="btn negro btnmio" title="Cargar Historia Clinica"
+                                    (click)="historiaClinica(turno)" *ngIf="turno.estado == 'FINALIZADO'">
+                                    <i class="fas fa-hospital-symbol"></i>
+                                </button>
 
                             </td>
                         </tr>
@@ -75,4 +80,9 @@
 
 <div *ngIf="FinalizarTurnoPantalla">
     <app-finalizar (OpcionEvent)="eventoFinalizarTurno($event)" (mensajeEvent)="eventoMensaje($event)"></app-finalizar>
+</div>
+
+<div *ngIf="cargarHistoriaClinicaTurnoPantalla">
+    <app-historia-clinica (historiaClinicaEvent)="eventoHistoriaClinica($event)"></app-historia-clinica>
+    <!-- <app-historia-clinica [hc]='histoClinica' (historiaClinicaEvent)="eventoHistoriaClinica($event)"></app-historia-clinica> -->
 </div>

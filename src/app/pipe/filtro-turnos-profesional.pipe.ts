@@ -9,7 +9,7 @@ export class FiltroTurnosProfesionalPipe implements PipeTransform {
     const resultTurnos = [];
 
     for (const turno of value) {
-      console.log(turno);
+      // console.log(turno);
       resultTurnos.push(turno);
       if (turno.paciente!.nombre.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
         resultTurnos.push(turno);

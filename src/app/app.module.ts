@@ -40,6 +40,7 @@ import { EncuestaComponent } from './components/opcionesTurno/encuesta/encuesta.
 import { CalificarComponent } from './components/opcionesTurno/calificar/calificar.component';
 import { FiltroTurnosPipe } from './pipe/filtro-turnos.pipe';
 import { FiltroTurnosProfesionalPipe } from './pipe/filtro-turnos-profesional.pipe';
+import { HistoriaClinicaComponent } from './components/opcionesTurno/historia-clinica/historia-clinica.component';
 
 // registrar los locales con el nombre que quieras utilizar a la hora de proveer
 // registerLocaleData(localePy, 'es');
@@ -68,6 +69,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
     CalificarComponent,
     FiltroTurnosPipe,
     FiltroTurnosProfesionalPipe,
+    HistoriaClinicaComponent,
   ],
   imports: [
     BrowserModule,

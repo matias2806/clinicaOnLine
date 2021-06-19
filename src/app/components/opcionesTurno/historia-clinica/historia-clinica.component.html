@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-10 mx-auto mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Completar Historia Clinica</h3>
+            </div>
+            <div class="card-body">
+                <div class="row formulario">
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="altura">Altura</label>
+                        <input type="text" id="altura" class="form-control" [(ngModel)]="altura">
+                    </div>
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="peso">Peso</label>
+                        <input type="text" id="peso" class="form-control" [(ngModel)]="peso">
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="temperatura">Temperatura</label>
+                        <input type="text" id="temperatura" class="form-control" [(ngModel)]="temperatura">
+                    </div>
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="presion">Presion</label>
+                        <input type="text" id="presion" class="form-control" [(ngModel)]="presion">
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="key1">Titulo obligatorio 1</label>
+                        <input type="text" id="key1" class="form-control" [(ngModel)]="key1">
+
+                    </div>
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="dato1">Contenido obligatorio 1</label>
+                        <input type="text" id="dato1" class="form-control" [(ngModel)]="dato1">
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="key2">Titulo obligatorio 2</label>
+                        <input type="text" id="key2" class="form-control" [(ngModel)]="key2">
+                    </div>
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="dato2">Contenido obligatorio 2</label>
+                        <input type="text" id="dato2" class="form-control" [(ngModel)]="dato2">
+                    </div>
+
+                    <h6 [(ngModel)]="error" class="invalid mb-3 text-center" value="error" name="error" ngDefaultControl> <b>{{error | errores}}</b></h6>
+                    <div class="d-grid gap-2 mx-auto">
+                        <button class="btn btn-success" type="button" (click)="onRegister()">CONTINUAR</button>
+                        <button class="btn btn-danger" type="button" (click)="Confirmar(false)">CANCELAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
