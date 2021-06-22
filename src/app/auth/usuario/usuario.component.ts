@@ -24,7 +24,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   // public listadoUsuarios!: Usuario[];
   public listadoUsuariosEspecialistas: Usuario[] = [];
 
-  public historiasClinicas: HistoriaClinica[] =[];
+  public historiasClinicas: HistoriaClinica[] = [];
 
   constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService, private _HCservice: HistoriaClinicaService) {
     this.actualizarListas();
@@ -32,7 +32,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   }
 
   async actualizarListas() {
-    var aux = this._Uservice.obtenerEspecialistas().subscribe(data=>{
+    var aux = this._Uservice.obtenerEspecialistas().subscribe(data => {
       this.listadoUsuariosEspecialistas = data;
     })
   }
@@ -50,13 +50,13 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     this.buscarHC();
   }
 
-  async buscarHC(){
+  async buscarHC() {
     this._HCservice.traerTodos().subscribe((historiasClinicas: HistoriaClinica[]) => {
       this.historiasClinicas = historiasClinicas;
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     console.log("se destruyo");
   }
 

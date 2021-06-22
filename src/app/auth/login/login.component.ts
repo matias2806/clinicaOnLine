@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LogUsuariosService } from 'src/app/services/LogUsuarios/log-usuarios.service';
 import { MensajesService } from 'src/app/services/mensajes/mensajes.service';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
+import { LogUsuario } from 'src/Models/LogUsuario';
 import { Usuario } from 'src/Models/Usuario';
 import { AuthService } from '../service/auth.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +23,7 @@ export class LoginComponent implements OnInit {
   })
   public usuariosAccesoRapido: any[] = [];
 
-  constructor(private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Mservice: MensajesService) {
+  constructor(private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Mservice: MensajesService, private _Lservice: LogUsuariosService) {
     this.carga5usuarios();
     console.log(this.usuariosAccesoRapido);
   }
@@ -30,10 +33,20 @@ export class LoginComponent implements OnInit {
 
   async onLogin() {
     const { email, password } = this.loginForm.value;
+    var log : LogUsuario
     //console.log('form ->',this.loginForm.value);
     try {
       const user = await this.AuthSvc.login(email, password);
       if (user && user.user?.emailVerified) {
+
+        log = {
+          id: uuidv4(),
+          fecha: new Date(),
+          emailUsuario: email ,
+        }
+        this._Lservice.altaLog(log);
+        
+
         //Redirect to home page
         console.log("imprimo", user);
         console.log("UID", user.user.uid);

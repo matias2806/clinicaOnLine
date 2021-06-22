@@ -5,6 +5,6 @@ import { Time } from "highcharts";
 
 export class LogUsuario {
     id: string = '';
-    fecha: number = Date.now();
-    emailUsuario: string="";
+    fecha: Date = new Date();
+    emailUsuario: string = "";
 }
