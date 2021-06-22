@@ -22,7 +22,7 @@ export class MensajesService {
     })
   }
 
-  mensajeExitosoCentrado(mensaje:String){
+  mensajeExitosoCentrado(mensaje:string){
     Swal.fire({
       icon: 'success',
       title: mensaje,
@@ -32,7 +32,7 @@ export class MensajesService {
       hideClass: {
         popup: 'animate__animated animate__fadeOutUp'
       }
-    })
+    });
   }
 
   mensajeExitoso(mensaje:string){

@@ -42,6 +42,7 @@ import { FiltroTurnosPipe } from './pipe/filtro-turnos.pipe';
 import { FiltroTurnosProfesionalPipe } from './pipe/filtro-turnos-profesional.pipe';
 import { HistoriaClinicaComponent } from './components/opcionesTurno/historia-clinica/historia-clinica.component';
 import { DetalleHCComponent } from './components/historiaClinica/detalle-hc/detalle-hc.component';
+import { PageGraficosComponent } from './components/admin/page-graficos/page-graficos.component';
 
 // registrar los locales con el nombre que quieras utilizar a la hora de proveer
 // registerLocaleData(localePy, 'es');
@@ -72,6 +73,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
     FiltroTurnosProfesionalPipe,
     HistoriaClinicaComponent,
     DetalleHCComponent,
+    PageGraficosComponent,
   ],
   imports: [
     BrowserModule,
