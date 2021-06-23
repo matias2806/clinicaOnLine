@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
         'foto1': ['', [Validators.required]],//Obli
         'email': ['', [Validators.required]],//Obli
         'contraseña': ['', [Validators.required, Validators.minLength(6)]],//Obli
-        'recaptchaReactive' : ['',[Validators.required]],
+        'recaptchaReactive': ['', [Validators.required]],
         'foto2': ['', [Validators.required]],//Solo Paciente
         'obraSocial': ['', [Validators.required]],//Solo Paciente  
       });
@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
         'foto1': ['', [Validators.required]],//Obli
         'email': ['', [Validators.required]],//Obli
         'contraseña': ['', [Validators.required, Validators.minLength(6)]],//Obli
-        'recaptchaReactive' : ['',[Validators.required]],
+        'recaptchaReactive': ['', [Validators.required]],
         'especialidad': ['', [Validators.required]],//Solo Especialista
         //public especialidad: string = ''; 
 
@@ -101,6 +101,12 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm);
     console.log(this.listaEspecialidadesSeleccionadas);
     console.log(this.listaDiasSeleccionadas);
+  }
+
+  resolved2(captchaResponse: any) {
+    console.log(`Resolved response token: ${captchaResponse}`);
+    this.captcha = captchaResponse;
+    //res.getResponse(captchaResponse);
   }
 
   

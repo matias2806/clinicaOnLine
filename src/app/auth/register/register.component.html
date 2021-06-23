@@ -1,3 +1,4 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div class="row">
     <div class="col-md-7 mx-auto mt-5" *ngIf="registerForm != undefined">
         <div class="card">
@@ -106,13 +107,14 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12">
-                            <h2>sd</h2>
-                            <re-captcha (resolved)="resolved($event,'as')" formControlName="recaptchaReactive"
+                        <div class="col-sm-4 text-center mt-4"></div>
+                        <div class="col-sm-2 text-center mt-4">
+                            <!-- <h2>sd</h2> -->
+                            <re-captcha (resolved)="resolved2($event)" formControlName="recaptchaReactive" 
                                 siteKey="6Lcv5fgUAAAAALZuvhQHpOBljPWXfGeD165TICyR">
                             </re-captcha>
                         </div>
-
+                        <div class="col-sm-5 text-center mt-4"></div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block"
                         [disabled]="registerForm.invalid">Crear cuenta nueva</button>
