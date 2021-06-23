@@ -30,4 +30,11 @@ Tambien se pueden registrar profesionales que quieran atender en nuestra clinica
 
 # Imagenes
 
--- proximamente
+Imagen de visualizacion de la home sin estar registrado
+![Home](src/assets/imagenesReadMe/home.jpeg "home:")
+
+Imagen del login
+![Login](src/assets/imagenesReadMe/login.jpeg "login:")
+
+Imagen de seccion Graficos siendo Administrador del sistema
+![Graficos](src/assets/imagenesReadMe/graficos.jpeg "graficos:")
