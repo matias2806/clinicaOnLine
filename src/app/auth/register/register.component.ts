@@ -35,6 +35,8 @@ export class RegisterComponent implements OnInit {
   private foto1: any | null = null;
   private foto2: any | null = null;
   public urlImage: string | any = "";
+
+  public captcha:any;
   // public errorSinSeleccion: string = "";
 
   // public perfil: string = "Paciente"; //"Especialista"; // "Paciente";
@@ -59,7 +61,7 @@ export class RegisterComponent implements OnInit {
         'foto1': ['', [Validators.required]],//Obli
         'email': ['', [Validators.required]],//Obli
         'contraseña': ['', [Validators.required, Validators.minLength(6)]],//Obli
-
+        'recaptchaReactive' : ['',[Validators.required]],
         'foto2': ['', [Validators.required]],//Solo Paciente
         'obraSocial': ['', [Validators.required]],//Solo Paciente  
       });
@@ -72,7 +74,7 @@ export class RegisterComponent implements OnInit {
         'foto1': ['', [Validators.required]],//Obli
         'email': ['', [Validators.required]],//Obli
         'contraseña': ['', [Validators.required, Validators.minLength(6)]],//Obli
-
+        'recaptchaReactive' : ['',[Validators.required]],
         'especialidad': ['', [Validators.required]],//Solo Especialista
         //public especialidad: string = ''; 
 
@@ -101,11 +103,11 @@ export class RegisterComponent implements OnInit {
     console.log(this.listaDiasSeleccionadas);
   }
 
-  validaCaptcha(){
-    // var response =  grecaptcha.getResponse();
-    // if(response.length != 0){
-
-    // }
+  
+  resolved(captchaResponse: any, res: string) {
+    console.log(`Resolved response token: ${captchaResponse}`);
+    this.captcha = captchaResponse;
+    //res.getResponse(captchaResponse);
   }
 
   agregarNuevaEspecialidad() {

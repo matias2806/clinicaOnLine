@@ -44,7 +44,9 @@ import { HistoriaClinicaComponent } from './components/opcionesTurno/historia-cl
 import { DetalleHCComponent } from './components/historiaClinica/detalle-hc/detalle-hc.component';
 import { PageGraficosComponent } from './components/admin/page-graficos/page-graficos.component';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
-import exporting from 'highcharts/modules/exporting.src.js'
+import { RecaptchaModule } from "ng-recaptcha";
+
+import exporting from 'highcharts/modules/exporting.src.js';
 export function highchartModules() {
   return [exporting]
 }
@@ -88,7 +90,8 @@ registerLocaleData(localeEsAr, 'es-Ar');
     AngularFireAuthModule,
     HttpClientModule,
     AngularFireDatabaseModule,
-    ChartModule
+    ChartModule,
+    RecaptchaModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es-Ar' },
   { provide: HIGHCHARTS_MODULES, useFactory: highchartModules }],

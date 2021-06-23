@@ -106,16 +106,16 @@
                             </div>
                         </div>
 
-                    </div>
-                    <!-- captcha -->
-                    <!-- <div class="g-recaptcha" data-sitekey="6LdqbwMbAAAAAEYxMfKiiCNmDgOXlcD0homLcOZZ"></div>
-                    <br>
-                    <div id="status"></div>
-                    <input type="button" (click)="validaCaptcha()" value="Descargar"> -->
+                        <div class="col-sm-12">
+                            <h2>sd</h2>
+                            <re-captcha (resolved)="resolved($event,'as')" formControlName="recaptchaReactive"
+                                siteKey="6Lcv5fgUAAAAALZuvhQHpOBljPWXfGeD165TICyR">
+                            </re-captcha>
+                        </div>
 
+                    </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block"
                         [disabled]="registerForm.invalid">Crear cuenta nueva</button>
-
                 </form>
                 <button type="submit" class="btn btn-primary" (click)="CargaDatos()">Carga trucho</button>
                 <button type="submit" class="btn btn-primary" (click)="veoForm()">VeoForm</button>
