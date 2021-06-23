@@ -1,4 +1,4 @@
-import { NgModule ,LOCALE_ID} from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { ReactiveFormsModule } from '@angular/forms'
@@ -43,7 +43,11 @@ import { FiltroTurnosProfesionalPipe } from './pipe/filtro-turnos-profesional.pi
 import { HistoriaClinicaComponent } from './components/opcionesTurno/historia-clinica/historia-clinica.component';
 import { DetalleHCComponent } from './components/historiaClinica/detalle-hc/detalle-hc.component';
 import { PageGraficosComponent } from './components/admin/page-graficos/page-graficos.component';
-
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import exporting from 'highcharts/modules/exporting.src.js'
+export function highchartModules() {
+  return [exporting]
+}
 // registrar los locales con el nombre que quieras utilizar a la hora de proveer
 // registerLocaleData(localePy, 'es');
 // registerLocaleData(localePt, 'pt');
@@ -84,8 +88,10 @@ registerLocaleData(localeEsAr, 'es-Ar');
     AngularFireAuthModule,
     HttpClientModule,
     AngularFireDatabaseModule,
+    ChartModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'es-Ar' } ],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-Ar' },
+  { provide: HIGHCHARTS_MODULES, useFactory: highchartModules }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

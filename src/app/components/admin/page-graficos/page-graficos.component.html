@@ -5,21 +5,34 @@
                 <h2 class="text-center"><b>Pagina de graficos.</b></h2>
                 <div class="row">
                     <div class="col-md-4 mx-auto mt-5 text-center">
-                        <button class="btn btn-primary btn-block mt-3" (click)="descargar(1)">Descargar logs de ingresos al sistema &nbsp;&nbsp; <i class="fa fa-download"></i></button>
-                        <button class="btn btn-primary btn-block mt-3">Cantidad de turnos por especialidad</button>
-                        <button class="btn btn-primary btn-block mt-3">Cantidad de turnos por día</button>
+                        <button class="btn btn-primary btn-block mt-3" (click)="descargar(1)">Descargar logs de ingresos
+                            al sistema &nbsp;&nbsp; <i class="fa fa-download"></i></button>
+                        <button class="btn btn-primary btn-block mt-3" (click)="ver(2)">Cantidad de turnos por
+                            especialidad</button>
+                        <button class="btn btn-primary btn-block mt-3" (click)="ver(3)">Cantidad de turnos por
+                            día</button>
                         <button class="btn btn-primary btn-block mt-3">Cantidad de turnos solicitado por médico en un
                             lapso de tiempo</button>
                         <button class="btn btn-primary btn-block mt-3">Cantidad de turnos finalizados por médico en un
                             lapso de tiempo</button>
+
+
                     </div>
                     <div class="col-md-8 mx-auto mt-5 text-center">
-                        
+                        <div [chart]="chart2" *ngIf="dos"></div>
+                        <button class="btn btn-secondary" *ngIf="dos" (click)="descargar(2)"><i
+                                class="fa fa-download"></i> Descargar excel</button>
+
+                        <div [chart]="chart3" *ngIf="tres"></div>
+                        <button class="btn btn-secondary" *ngIf="tres" (click)="descargar(3)"><i
+                                class="fa fa-download"></i> Descargar excel</button>
                     </div>
+
+
+
                 </div>
 
             </div>
         </div>
     </div>
 </div>
-

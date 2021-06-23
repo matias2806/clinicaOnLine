@@ -26,6 +26,7 @@
     "@angular/router": "~11.2.9",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@ng-bootstrap/ng-bootstrap": "^9.1.2",
+    "angular-highcharts": "^12.0.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^4.5.0",
     "chart.js": "^3.3.2",
