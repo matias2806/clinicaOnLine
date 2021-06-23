@@ -47,6 +47,7 @@ import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 import exporting from 'highcharts/modules/exporting.src.js';
+import { ResaltarDirective } from './directives/resaltar.directive';
 export function highchartModules() {
   return [exporting]
 }
@@ -80,6 +81,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
     HistoriaClinicaComponent,
     DetalleHCComponent,
     PageGraficosComponent,
+    ResaltarDirective,
   ],
   imports: [
     BrowserModule,

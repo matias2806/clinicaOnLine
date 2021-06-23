@@ -97,7 +97,7 @@
                             <td>{{usuario.apellido}}</td>
                             <td>{{usuario.email}}</td>
                             <td>{{usuario.tipoPerfil}}</td>
-                            <td>{{usuario.aprovadoPorAdmin}}</td>
+                            <td [appResaltar]=usuario.aprovadoPorAdmin>{{usuario.aprovadoPorAdmin}}</td>
                             <td><button class="btn btn-success" *ngIf="usuario.tipoPerfil == 'Especialista'"
                                     (click)="aprobarUsuario(usuario)">Aprobar</button></td>
                             <td><button class="btn btn-danger" *ngIf="usuario.tipoPerfil == 'Especialista'"

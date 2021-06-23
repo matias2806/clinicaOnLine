@@ -26,6 +26,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
   public historiasClinicas: HistoriaClinica[] = [];
 
+  color:string="blue";
   constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService, private _HCservice: HistoriaClinicaService) {
     this.actualizarListas();
 
