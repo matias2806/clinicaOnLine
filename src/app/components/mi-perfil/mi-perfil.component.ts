@@ -97,6 +97,7 @@ export class MiPerfilComponent implements OnInit {
         tur.push({
           FECHA: turno.fecha,
           HORA: turno.hora,
+          ESTADO: turno.estado,
           NOMBREPROFESIONAL: turno.profesional?.nombre,
           EMAILPROFESIONAL: turno.profesional?.email,
           ESPECIALIDAD: turno.especialidad?.nombre,
