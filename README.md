@@ -1,6 +1,6 @@
 # TP LABO IV (ClinicaOnLine)
 
-![Logo](src/assets/imagenesReadMe/logo.jpeg "Logo")
+![Logo](src/assets/imagenesReadMe/logo.png "Logo")
 
 ### Programador :iphone:
 
