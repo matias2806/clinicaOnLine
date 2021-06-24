@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ArchivosService } from 'src/app/services/Archivos/archivos.service';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
 import { HistoriaClinicaService } from 'src/app/services/historiaClinica/historia-clinica.service';
 import { MensajesService } from 'src/app/services/mensajes/mensajes.service';
@@ -21,15 +22,18 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   private foto1: any;
   public primeraVez: boolean = true;
 
-  // public listadoUsuarios!: Usuario[];
+  public listadoUsuarios!: Usuario[];
   public listadoUsuariosEspecialistas: Usuario[] = [];
 
   public historiasClinicas: HistoriaClinica[] = [];
 
-  color:string="blue";
-  constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService, private _HCservice: HistoriaClinicaService) {
+  color: string = "blue";
+  constructor(private fb: FormBuilder, private AuthSvc: AuthService, private router: Router, private _Uservice: UsuariosService, private _Eservice: EspecialidadService, private _Mservice: MensajesService, private _HCservice: HistoriaClinicaService, private _Aservice: ArchivosService) {
     this.actualizarListas();
 
+    this._Uservice.traerTodos().subscribe(data => {
+      this.listadoUsuarios = data;
+    })
   }
 
   async actualizarListas() {
@@ -119,6 +123,26 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     }
   }
 
+  descargar() {
+    this._Aservice.exportAsExcelFile(this.armaExcel(), 'listadoUsuarios');
+  }
+
+  armaExcel() {
+    let user: any[] = []
+    this.listadoUsuarios.forEach(us => {
+
+      user.push({
+        NOMBRE: us.nombre,
+        APELLIDO: us.apellido,
+        EMAIL: us.email,
+        EDAD: us.edad,
+        TIPOPERFIL: us.tipoPerfil,
+        DNI: us.dni,
+      });
+
+    });
+    return user;
+  }
 
   CargaDatos() {
 

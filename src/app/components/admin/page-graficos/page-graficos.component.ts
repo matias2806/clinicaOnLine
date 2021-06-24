@@ -150,7 +150,6 @@ export class PageGraficosComponent implements OnInit {
   }
 
 
-
   armarchart3() {
     this.chart3 = new Chart({
       chart: {
