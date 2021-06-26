@@ -83,6 +83,6 @@
 </div>
 
 <div *ngIf="cargarHistoriaClinicaTurnoPantalla">
-    <app-historia-clinica (historiaClinicaEvent)="eventoHistoriaClinica($event)"></app-historia-clinica>
-    <!-- <app-historia-clinica [hc]='histoClinica' (historiaClinicaEvent)="eventoHistoriaClinica($event)"></app-historia-clinica> -->
+    <!-- <app-historia-clinica (historiaClinicaEvent)="eventoHistoriaClinica($event)"></app-historia-clinica> -->
+    <app-historia-clinica [hc]="this.HCseleccionada!" (historiaClinicaEvent)="eventoHistoriaClinica($event)"></app-historia-clinica>
 </div>

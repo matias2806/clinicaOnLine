@@ -27,8 +27,13 @@ export class HistoriaClinicaComponent implements OnInit {
   @Input()hc!: HistoriaClinica ;
 
   ngOnInit(): void {
+    console.log("YA EN EL OTRO LADO");
+    console.log(this.hc);
+    this.cargarFormulario();
+    
 
   }
+
 
   Confirmar(opcion: boolean) {
     if (opcion == false) {
@@ -55,6 +60,33 @@ export class HistoriaClinicaComponent implements OnInit {
     }
     else {
       this.historiaClinicaEvent.emit(null);
+    }
+  }
+
+  cargarFormulario(){
+    if(this.hc.altura != null){
+      this.altura = this.hc.altura.toString();
+    }
+    if(this.hc.peso != null){
+      this.peso = this.hc.peso.toString();
+    }
+    if(this.hc.temperatura != null){
+      this.temperatura = this.hc.temperatura;
+    }
+    if(this.hc.presion != null){
+      this.presion = this.hc.presion;
+    }
+    if(this.hc.key1 != null){
+      this.key1 = this.hc.key1;
+    }
+    if(this.hc.key2 != null){
+      this.key2 = this.hc.key2;
+    }
+    if(this.hc.dato1 != null){
+      this.dato1 = this.hc.dato1;
+    }
+    if(this.hc.dato2 != null){
+      this.dato2 = this.hc.dato2;
     }
   }
 

@@ -20,6 +20,8 @@ export class MisTurnosEspecialistaComponent implements OnInit {
   public usuarioRegistrado: Usuario | null = null;
 
   public listadoTurnos: Turno[] = [];
+  public listadoDeHistoriasClinicas: HistoriaClinica[] | undefined;
+  HCseleccionada: HistoriaClinica | null = null;
   turnoActual: Turno | null = null;
 
   filterPasadoProf = "";
@@ -43,6 +45,10 @@ export class MisTurnosEspecialistaComponent implements OnInit {
 
       this._Tservice.obtenerTurnoProfesionalDe(this.usuarioRegistrado?.uid).subscribe(data => {
         this.listadoTurnos = data;
+      });
+
+      this._HCservice.traerTodos().subscribe(data => {
+        this.listadoDeHistoriasClinicas = data;
       });
     }
   }
@@ -76,10 +82,28 @@ export class MisTurnosEspecialistaComponent implements OnInit {
   }
 
   historiaClinica(turno: Turno) {
+    // console.log(turno);
+    this.buscarMiHC(turno.paciente?.uid);
+    // console.log(this.HCseleccionada);
     this.turnoActual = turno;
     this.verTabla = false;
     this.cargarHistoriaClinicaTurnoPantalla = true;
 
+  }
+
+  buscarMiHC(uid: string) {
+    var bandera: boolean = false;
+    // console.log(uid);
+    // console.log("-------------");
+    this.listadoDeHistoriasClinicas!.forEach(hc => {
+      if (!bandera) {
+        if (hc.idPaciente == uid) {
+          this.HCseleccionada = hc;
+          bandera = true;
+        }
+      }
+    });
+    // console.log("TERMINO");
   }
 
 
@@ -91,7 +115,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
     console.log(this.turnoActual);
 
     if ($event != null) {
-      hc = {        
+      hc = {
         idPaciente: this.turnoActual?.paciente?.uid,
         paciente: this.turnoActual?.paciente!,
         altura: $event.altura,
@@ -113,7 +137,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
           console.log("UPDATE");
           console.log(hc);
 
-          this._HCservice.updateHC(r, hc, "Historia clinica ACTUALIZADA", "No se pudo actualiza la Historia Clinica");          
+          this._HCservice.updateHC(r, hc, "Historia clinica ACTUALIZADA", "No se pudo actualiza la Historia Clinica");
         });
       }).catch(e => {
         //No existe entonces creo la HC
@@ -121,8 +145,8 @@ export class MisTurnosEspecialistaComponent implements OnInit {
         //busco todos los turnos de mi paciente
         this._Tservice.obtenerTurnoDe(hc.idPaciente).subscribe(data => {
           hc.listadoTurnos = data;
-          hc.id= uuidv4(),
-          console.log("Nuevo");
+          hc.id = uuidv4(),
+            console.log("Nuevo");
           console.log(hc);
           this._HCservice.alta(hc);
           this._Mservice.mensajeExitoso("Historia Clinica CREADA");
