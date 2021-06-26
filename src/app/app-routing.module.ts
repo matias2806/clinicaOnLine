@@ -4,6 +4,7 @@ import { EmailEnviadoComponent } from './auth/email-enviado/email-enviado.compon
 import { OpcionesDeUsuariosComponent } from './auth/opciones-de-usuarios/opciones-de-usuarios.component';
 import { UsuarioComponent } from './auth/usuario/usuario.component';
 import { PageGraficosComponent } from './components/admin/page-graficos/page-graficos.component';
+import { VerMiHCComponent } from './components/historiaClinica/ver-mi-hc/ver-mi-hc.component';
 import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 import { MisTurnosEspecialistaComponent } from './components/mis-turnos-especialista/mis-turnos-especialista.component';
 import { MisTurnosComponent } from './components/mis-turnos/mis-turnos.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'encuestaTurno', component:  EncuestaComponent },
   { path: 'calificarTurno', component:  CalificarComponent },
   { path: 'graficos', component:  PageGraficosComponent },
+  { path: 'verMiHC', component:  VerMiHCComponent },
   
 ];
 

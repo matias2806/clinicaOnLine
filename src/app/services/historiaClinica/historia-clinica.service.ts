@@ -52,6 +52,14 @@ export class HistoriaClinicaService {
     }
   }
 
+  obtenerHCDe(uid: string) {
+    return this.hclinicas.pipe(map(dato => {
+      return dato.filter(hc => {
+        return hc.idPaciente == uid;
+      });
+    }));
+  }
+
   async obtenerKeyIdPacienteHC(hclinica: HistoriaClinica) {
     var aux = await this.db.collection(this.path).ref.where('idPaciente', '==', hclinica.idPaciente).get();
     if (aux.docs[0].exists) {

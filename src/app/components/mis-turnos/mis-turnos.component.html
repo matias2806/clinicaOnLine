@@ -4,11 +4,16 @@
             <div class="card-body">
                 <h1 class="text-center mb-3"><b>Mis turnos.</b></h1>
 
-                <div class="row mt-2">
-                    <div class="col">
+                <div class="row mt-2 text-center">
+                    <div class="col-md-9">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Busqueda por especialidad o especialista..."
                                 name="filterPasadoT" [(ngModel)]="filterPasadoT">
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="form-group">
+                            <button class="btn btn-warning btn-block" title="Ver Historia clinica" (click)="verHistoriaClinica()">Ver mi Historia Clinica &nbsp;<i class="fas fa-hospital-user"></i></button>
                         </div>
                     </div>
                 </div>
@@ -77,4 +82,8 @@
 
 <div *ngIf="calificarAtencionTurnoPantalla">
     <app-calificar (calificacionEvent)="eventoCalificar($event)" ></app-calificar>
+</div>
+
+<div *ngIf="verMiHCPantalla">
+    <app-ver-mi-hc [hc]="this.historiaClinica![0]" ></app-ver-mi-hc>
 </div>
