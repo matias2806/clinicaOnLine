@@ -130,8 +130,8 @@ export class MisTurnosComponent implements OnInit {
         this.turnoActual!.estado = 'CANCELADO';
 
         var idTurno = await this._Tservice.obtenerKeyTurno(this.turnoActual!);
-        console.log(this.turnoActual);
-        console.log(idTurno);
+        // console.log(this.turnoActual);
+        // console.log(idTurno);
         if (idTurno != null) {
           this._Tservice.updateTurnoEstadosYcomentarios(idTurno, this.turnoActual!,"El turno no pudo ser cancelado, por favor reintente!", "Turno cancelado", true);
 
@@ -151,7 +151,7 @@ export class MisTurnosComponent implements OnInit {
   }
 
   verHistoriaClinica(){
-    console.log(this.historiaClinica); 
+    // console.log(this.historiaClinica); 
     this.verMiHCPantalla = true   ;
     this.encuestaTurnoPantalla = false;
     this.calificarAtencionTurnoPantalla = false; 
@@ -159,7 +159,7 @@ export class MisTurnosComponent implements OnInit {
   }
 
   eventoHC($event: any){
-    console.log($event);
+    // console.log($event);
     this.verMiHCPantalla = false;
     this.encuestaTurnoPantalla = false;
     this.calificarAtencionTurnoPantalla = false; 

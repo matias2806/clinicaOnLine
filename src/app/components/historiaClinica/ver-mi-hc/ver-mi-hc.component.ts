@@ -13,7 +13,6 @@ export class VerMiHCComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.hc!);
   }
 
   volver(){
