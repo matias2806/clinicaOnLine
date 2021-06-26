@@ -85,5 +85,5 @@
 </div>
 
 <div *ngIf="verMiHCPantalla">
-    <app-ver-mi-hc [hc]="this.historiaClinica![0]" ></app-ver-mi-hc>
+    <app-ver-mi-hc [hc]="this.historiaClinica![0]"  (volverHCEvent)="eventoHC($event)" ></app-ver-mi-hc>
 </div>

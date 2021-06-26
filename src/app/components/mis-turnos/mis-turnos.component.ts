@@ -157,4 +157,12 @@ export class MisTurnosComponent implements OnInit {
     this.calificarAtencionTurnoPantalla = false; 
     this.verTabla = false;
   }
+
+  eventoHC($event: any){
+    console.log($event);
+    this.verMiHCPantalla = false;
+    this.encuestaTurnoPantalla = false;
+    this.calificarAtencionTurnoPantalla = false; 
+    this.verTabla = true;
+  }
 }

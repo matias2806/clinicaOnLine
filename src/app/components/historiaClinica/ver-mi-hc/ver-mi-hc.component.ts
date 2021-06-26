@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HistoriaClinica } from 'src/Models/HistoriaClinica';
 
@@ -9,11 +9,15 @@ import { HistoriaClinica } from 'src/Models/HistoriaClinica';
 })
 export class VerMiHCComponent implements OnInit {
   @Input() hc: HistoriaClinica | undefined;
-
+  @Output() volverHCEvent = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
     console.log(this.hc!);
   }
 
+  volver(){
+    this.volverHCEvent.emit(true);
+  }
+  
 }
