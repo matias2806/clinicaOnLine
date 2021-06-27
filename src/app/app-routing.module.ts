@@ -12,6 +12,7 @@ import { CalificarComponent } from './components/opcionesTurno/calificar/calific
 import { CancelarComponent } from './components/opcionesTurno/cancelar/cancelar.component';
 import { EncuestaComponent } from './components/opcionesTurno/encuesta/encuesta.component';
 import { FinalizarComponent } from './components/opcionesTurno/finalizar/finalizar.component';
+import { PacienteComponent } from './components/paciente/paciente/paciente.component';
 import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'calificarTurno', component:  CalificarComponent },
   { path: 'graficos', component:  PageGraficosComponent },
   { path: 'verMiHC', component:  VerMiHCComponent },
+  { path: 'pacientes', component:  PacienteComponent },
   
 ];
 

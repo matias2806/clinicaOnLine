@@ -49,6 +49,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import exporting from 'highcharts/modules/exporting.src.js';
 import { ResaltarDirective } from './directives/resaltar.directive';
 import { VerMiHCComponent } from './components/historiaClinica/ver-mi-hc/ver-mi-hc.component';
+import { PacienteComponent } from './components/paciente/paciente/paciente.component';
 export function highchartModules() {
   return [exporting]
 }
@@ -84,6 +85,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
     PageGraficosComponent,
     ResaltarDirective,
     VerMiHCComponent,
+    PacienteComponent,
   ],
   imports: [
     BrowserModule,
