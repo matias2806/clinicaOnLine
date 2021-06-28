@@ -17,10 +17,13 @@ export class PacienteComponent implements OnInit {
   public usuarioRegistrado: Usuario | null = null;
   public listadoTurnos: Turno[] = [];
   public listadoHC: HistoriaClinica[] = [];
+  public listadoHCOriginal: HistoriaClinica[] = [];
 
   public cantidadTurnos = 0;
   public cantidadTurnosAceptados = 0;
   public cantidadTurnosFinalizados = 0;
+
+  filtroPasado = "";
   constructor(private AuthSvc: AuthService, private _Uservice: UsuariosService, private _Tservice: TurnosService, private _HCservice: HistoriaClinicaService) { }
 
   async ngOnInit() {
@@ -63,12 +66,81 @@ export class PacienteComponent implements OnInit {
       aux.forEach(el => {
         this._HCservice.obtenerHCDe(el).subscribe(data => {
           this.listadoHC.push(data[0]);
-          // console.log(this.listadoHC);
+          this.listadoHCOriginal.push(data[0]);
         });
       });
     }
-    
+  }
 
+  busqueda(){
+    if(this.filtroPasado != ""){
+      this.listadoHC = [];
+      var bandera = true;
+      this.listadoHCOriginal.forEach(hc => {
+        if(bandera){
+          if (hc.key1.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
+        if(bandera){
+          if (hc.key2.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
+        if(bandera){
+          if (hc.dato1.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
+        if(bandera){
+          if (hc.dato2.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
+        if(bandera){
+          if (hc.temperatura.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
+        if(bandera){
+          if (hc.presion.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
+        if(bandera){
+          if (hc.altura.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
+        if(bandera){
+          if (hc.peso.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
+        if(bandera){
+          if (hc.paciente!.nombre!.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
+        if(bandera){
+          if (hc.paciente!.apellido!.toLowerCase().indexOf(this.filtroPasado.toLowerCase()) > -1) {
+            this.listadoHC.push(hc);
+            bandera=false;
+          }
+        }
 
+      });
+    }else{
+      this.listadoHC = this.listadoHCOriginal;
+    }
   }
 }
