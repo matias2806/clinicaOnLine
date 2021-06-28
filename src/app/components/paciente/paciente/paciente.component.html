@@ -5,7 +5,16 @@
                 <div class="row">
                     <h2><b>Listado de pacientes que atendi por lo menos 1 vez</b></h2>
                 </div>
-                <div class="row mt-3">
+                <div class="row form-group mt-4">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" placeholder="Busqueda por especialidad o paciente..."
+                            name="filterPasado" [(ngModel)]="filtroPasado">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-warning btn-block" (click)="busqueda()">Buscar</button>
+                    </div>
+                </div>
+                <div class="row mt-4">
                     <div class="col-md-4 text-center">Cantidad Turnos Totales: {{cantidadTurnos}}</div>
                     <div class="col-md-4 text-center">Cantidad Turnos Aceptados: {{cantidadTurnosAceptados}}</div>
                     <div class="col-md-4 text-center">Cantidad Turnos Finalizados: {{cantidadTurnosFinalizados}}</div>
