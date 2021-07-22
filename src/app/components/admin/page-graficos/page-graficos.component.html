@@ -3,6 +3,14 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="text-center"><b>Pagina de graficos.</b></h2>
+                <div class="row" *ngIf="filtroDeDias">
+                    <div class="col-md-4 mx-auto mt-5 text-center color">
+                        <label for="desde">Desde : &nbsp;</label>
+                        <input class="largo" type="date" name="desde" id="desde" [(ngModel)]="fecha">
+                        &nbsp;&nbsp;
+                        <button class="btn btn-warning" (click)="consultar()">Consultar</button>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-4 mx-auto mt-5 text-center">
                         <button class="btn btn-primary btn-block mt-3" (click)="descargar(1)">Descargar logs de ingresos
@@ -11,12 +19,12 @@
                             especialidad</button>
                         <button class="btn btn-primary btn-block mt-3" (click)="ver(3)">Cantidad de turnos por
                             día</button>
-                        <button class="btn btn-primary btn-block mt-3">Cantidad de turnos solicitado por médico en un
+                        <button class="btn btn-primary btn-block mt-3" (click)="filtro(4)">Cantidad de turnos solicitado
+                            por médico en un
                             lapso de tiempo</button>
-                        <button class="btn btn-primary btn-block mt-3">Cantidad de turnos finalizados por médico en un
+                        <button class="btn btn-primary btn-block mt-3" (click)="filtro(5)">Cantidad de turnos
+                            finalizados por médico en un
                             lapso de tiempo</button>
-
-
                     </div>
                     <div class="col-md-8 mx-auto mt-5 text-center">
                         <div [chart]="chart2" *ngIf="dos"></div>
@@ -26,12 +34,12 @@
                         <div [chart]="chart3" *ngIf="tres"></div>
                         <button class="btn btn-secondary" *ngIf="tres" (click)="descargar(3)"><i
                                 class="fa fa-download"></i> Descargar excel</button>
+
+                        <div [chart]="chart4" *ngIf="cuatro"></div>
+                        <button class="btn btn-secondary" *ngIf="cuatro" (click)="descargar(4)"><i
+                                class="fa fa-download"></i> Descargar excel</button>
                     </div>
-
-
-
                 </div>
-
             </div>
         </div>
     </div>
