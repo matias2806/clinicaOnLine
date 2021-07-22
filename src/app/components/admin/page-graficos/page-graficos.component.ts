@@ -11,6 +11,8 @@ import { Turno } from 'src/Models/Turno';
 import { DatoGrafico, DatoGraficoPie, DatoGrafico2, DatoGrafico3, auxiliar } from 'src/Models/Graficos';
 import { EspecialidadService } from 'src/app/services/especialidad/especialidad.service';
 import { Especialidad } from 'src/Models/Especialidad';
+import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
+import { Usuario } from 'src/Models/Usuario';
 
 
 @Component({
@@ -23,7 +25,11 @@ export class PageGraficosComponent implements OnInit {
   public logsUsuarios: LogUsuario[] = [];
   public listadoTurnos: Turno[] = [];
   public listadoEspecialidad: Especialidad[] = [];
+  public listadoUsuariosEspecialistas: Usuario[] = [];
 
+  public filtroDeDias: boolean = false;
+  public consultaNumero: number = 0;
+  fecha: any = "";
 
   uno: boolean = false;
   dos: boolean = false;
@@ -39,7 +45,7 @@ export class PageGraficosComponent implements OnInit {
   datachart4: any[] = [];
   datachart5: any[] = [];
 
-  constructor(private _Aservice: ArchivosService, private _Lservice: LogUsuariosService, private _Tservice: TurnosService, private _Eservice: EspecialidadService) {
+  constructor(private _Aservice: ArchivosService, private _Lservice: LogUsuariosService, private _Tservice: TurnosService, private _Eservice: EspecialidadService, private _Uservice: UsuariosService) {
   }
 
   async ngOnInit() {
@@ -55,6 +61,10 @@ export class PageGraficosComponent implements OnInit {
       this.listadoTurnos = turnos;
       this.armaInfo2();
       this.preparachart3(turnos);
+    });
+
+    this._Uservice.obtenerEspecialistas().subscribe(data => {
+      this.listadoUsuariosEspecialistas = data;
     });
 
   }
@@ -79,6 +89,11 @@ export class PageGraficosComponent implements OnInit {
     return indice;
   }
 
+  consultar() {
+    if (this.fecha != "" && this.fecha != null) {
+      this.ver(this.consultaNumero);
+    }
+  }
   ver(numero: number) {
     switch (numero) {
       case 2:
@@ -88,6 +103,8 @@ export class PageGraficosComponent implements OnInit {
         this.tres = false;
         this.cuatro = false;
         this.cinco = false;
+        this.filtroDeDias = false;
+        this.consultaNumero = 0;
         break;
       case 3:
         this.armarchart3();
@@ -96,50 +113,86 @@ export class PageGraficosComponent implements OnInit {
         this.tres = true;
         this.cuatro = false;
         this.cinco = false;
+        this.filtroDeDias = false;
+        this.consultaNumero = 0;
         break;
-      // case 4:
-      //   this.armarchart4();
-      //   this.dos = false;
-      //   this.tres = false;
-      //   this.cuatro = !this.cuatro;
-      //   this.cinco = false;
-      //   break;
-      // case 5:
-      //   this.armarchart5();
-      //   this.dos = false;
-      //   this.tres = false;
-      //   this.cuatro = false;
-      //   this.cinco = !this.cinco;
-      //   break;
+      case 4:
+        this.armarchart4();
+        this.uno = false;
+        this.dos = false;
+        this.tres = false;
+        this.cuatro = true;
+        this.cinco = false;
+        this.filtroDeDias = false;
+        this.consultaNumero = 0;
+        break;
+      case 5:
+        //this.armarchart5();
+        this.uno = false;
+        this.dos = false;
+        this.tres = false;
+        this.cuatro = false;
+        this.cinco = true;
+        this.filtroDeDias = false;
+        this.consultaNumero = 0;
+        break;
       default:
         this.uno = false;
         this.dos = false;
         this.tres = false;
         this.cuatro = false;
         this.cinco = false;
+        this.filtroDeDias = false;
+        this.consultaNumero = 0;
         break;
     }
   }
+
+  filtro(numero: number) {
+    switch (numero) {
+      case 4:
+        this.filtroDeDias = true;
+        this.consultaNumero = numero;
+        break;
+      case 5:
+        this.filtroDeDias = true;
+        this.consultaNumero = numero;
+        break;
+      default:
+        break;
+    }
+  }
+
+
   descargar(numero: number) {
     switch (numero) {
       case 1:
         this._Aservice.exportAsExcelFile(this.armarExcel1(), 'LogsUsuarios');
+        this.filtroDeDias = false;
+        this.consultaNumero = 0;
         break;
       case 2:
         this._Aservice.exportAsExcelFile(this.preparaParaDescargar(this.datachart2), 'cantOperaciones');
         break;
       case 3:
+        console.log("datachart3", this.datachart3);
         this._Aservice.exportAsExcelFile(this.preparaParaDescargar(this.datachart3), 'turnosXDia');
+        break;
+      case 4:
+       //NO ANDA
+      //this._Aservice.exportAsExcelFile(this.preparaParaDescargar(this.datachart4), 'turnosXMedicoConFiltroDeDdias');
         break;
     }
   }
 
   preparaParaDescargar(lista: any[]) {
+    console.log("lista",lista);
     return lista.map(dato => {
       return { name: dato.name, data: dato.data[0] }
     })
   }
 
+  
   armarExcel1() {
     let logs: any[] = []
     this.logsUsuarios.forEach(log => {
@@ -245,24 +298,83 @@ export class PageGraficosComponent implements OnInit {
     });
   }
 
-  // armaData4() {
-  //   var b: any[] = [];
-  //   var a: any;
-  //   var c: any;
-  //   a = {
-  //     name: 'coca',
-  //     y: 15,
-  //   }
-  //   c = {
-  //     name: 'pepsi',
-  //     y: 25,
-  //   }
-  //   b.push(a);
-  //   b.push(c);
-  //   return b;
-  // }
-  //COSAS DEL 2DO BOTON
+  cargaChart4(lista: any[]){
+    this.datachart4 = lista;
+  }
+  //Aca nuevo
+  armarchart4() {
+    var info = this.armaData4();
+    console.log("Info",info);
+    this.cargaChart4(info)
 
+    this.chart4 = new Chart({
+      chart: {
+        renderTo: 'container',
+        type: 'pie'
+      },
+      title: {
+        text: 'Cantidad de turnos solicitado por médico en un lapso de tiempo.'
+      },
+      series: [{
+        type: 'pie',
+        name: 'graf',
+        data: info
+      }]
+    });
+  }
+
+  parseaFecha(dato: string) {
+    var aux = dato.split("/");
+    //console.log("A=> ",aux);
+    var retorno = aux[1] + "/" + aux[0] + "/" + aux[2];
+    //console.log("ret => ", retorno);
+    return retorno;
+  }
+
+  armaData4() {
+    var b: any[] = [];
+    var arrayEspecialistas: string[] = [];
+    var listadoTurnosFiltrada: Turno[] = [];
+    var dia: any;
+    var diaSeleccionado: any;
+
+    diaSeleccionado = Date.parse(this.fecha);
+    //console.log(diaSeleccionado)
+    //Mes dia anio
+    this.listadoTurnos.forEach(turno => {
+      dia = Date.parse(this.parseaFecha(turno.fecha));
+      //console.log(turno);
+      //console.log(dia);
+      if (dia <= diaSeleccionado) {
+        listadoTurnosFiltrada.push(turno);
+      }
+    });
+
+    console.log(listadoTurnosFiltrada, listadoTurnosFiltrada.length);
+
+    this.listadoUsuariosEspecialistas.forEach(esp => {
+      arrayEspecialistas.push(esp.nombre);
+    });
+    //console.log(arrayEspecialistas);
+    //console.log(this.fecha);
+
+    arrayEspecialistas.forEach(nombreEsp => {
+      var info: any;
+      info = {
+        name: nombreEsp,
+        y: 0,
+      }
+
+      listadoTurnosFiltrada.forEach(turno => {
+        if (turno.profesional?.nombre == nombreEsp) {
+          info.y++;
+        }
+      });
+      b.push(info);
+
+    });
+    return b;
+  }
 
 
 
