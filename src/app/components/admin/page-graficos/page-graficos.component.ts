@@ -127,7 +127,7 @@ export class PageGraficosComponent implements OnInit {
         this.consultaNumero = 0;
         break;
       case 5:
-        //this.armarchart5();
+        this.armarchart5();
         this.uno = false;
         this.dos = false;
         this.tres = false;
@@ -141,7 +141,7 @@ export class PageGraficosComponent implements OnInit {
         this.dos = false;
         this.tres = false;
         this.cuatro = false;
-        this.cinco = false;
+        this.cinco = true;
         this.filtroDeDias = false;
         this.consultaNumero = 0;
         break;
@@ -157,8 +157,6 @@ export class PageGraficosComponent implements OnInit {
       case 5:
         this.filtroDeDias = true;
         this.consultaNumero = numero;
-        break;
-      default:
         break;
     }
   }
@@ -179,20 +177,34 @@ export class PageGraficosComponent implements OnInit {
         this._Aservice.exportAsExcelFile(this.preparaParaDescargar(this.datachart3), 'turnosXDia');
         break;
       case 4:
-       //NO ANDA
-      //this._Aservice.exportAsExcelFile(this.preparaParaDescargar(this.datachart4), 'turnosXMedicoConFiltroDeDdias');
+        //NO ANDA
+        this._Aservice.exportAsExcelFile(this.arma( this.datachart4), 'turnosXMedicoConFiltroDeDdias');
+        break;
+      case 5:
+        //NO ANDA
+        this._Aservice.exportAsExcelFile(this.arma(this.datachart5), 'turnosXMedicoEstadoFinalizadoConFiltroDeDdias');
         break;
     }
   }
 
+  arma(lista: any[]) {
+    lista.forEach(dato => {
+      if (this.contains3(this.datachart3, dato.fecha) == -1) {
+        this.datachart3.push(new DatoGrafico(dato.fecha, [1]));
+      } else {
+        this.datachart3[this.contains3(this.datachart3, dato.fecha)].data[0]++;
+      }
+    })
+    return lista
+  }
+
   preparaParaDescargar(lista: any[]) {
-    console.log("lista",lista);
     return lista.map(dato => {
       return { name: dato.name, data: dato.data[0] }
     })
   }
 
-  
+
   armarExcel1() {
     let logs: any[] = []
     this.logsUsuarios.forEach(log => {
@@ -244,7 +256,6 @@ export class PageGraficosComponent implements OnInit {
     })
   }
 
-
   //COSAS DEL 2DO BOTON
   armaInfo2() {
     this.listadoTurnos.forEach(turno => {
@@ -280,7 +291,6 @@ export class PageGraficosComponent implements OnInit {
   }
   armarchart2() {
     var info = this.armaData2();
-    // console.log(info);
 
     this.chart2 = new Chart({
       chart: {
@@ -298,13 +308,12 @@ export class PageGraficosComponent implements OnInit {
     });
   }
 
-  cargaChart4(lista: any[]){
+  cargaChart4(lista: any[]) {
     this.datachart4 = lista;
   }
-  //Aca nuevo
   armarchart4() {
     var info = this.armaData4();
-    console.log("Info",info);
+    console.log("Info", info);
     this.cargaChart4(info)
 
     this.chart4 = new Chart({
@@ -325,9 +334,8 @@ export class PageGraficosComponent implements OnInit {
 
   parseaFecha(dato: string) {
     var aux = dato.split("/");
-    //console.log("A=> ",aux);
     var retorno = aux[1] + "/" + aux[0] + "/" + aux[2];
-    //console.log("ret => ", retorno);
+
     return retorno;
   }
 
@@ -339,24 +347,17 @@ export class PageGraficosComponent implements OnInit {
     var diaSeleccionado: any;
 
     diaSeleccionado = Date.parse(this.fecha);
-    //console.log(diaSeleccionado)
-    //Mes dia anio
+
     this.listadoTurnos.forEach(turno => {
       dia = Date.parse(this.parseaFecha(turno.fecha));
-      //console.log(turno);
-      //console.log(dia);
       if (dia <= diaSeleccionado) {
         listadoTurnosFiltrada.push(turno);
       }
     });
 
-    console.log(listadoTurnosFiltrada, listadoTurnosFiltrada.length);
-
     this.listadoUsuariosEspecialistas.forEach(esp => {
       arrayEspecialistas.push(esp.nombre);
     });
-    //console.log(arrayEspecialistas);
-    //console.log(this.fecha);
 
     arrayEspecialistas.forEach(nombreEsp => {
       var info: any;
@@ -377,5 +378,66 @@ export class PageGraficosComponent implements OnInit {
   }
 
 
+  cargaChart5(lista: any[]) {
+    this.datachart5 = lista;
+  }
+
+  armarchart5() {
+    var info = this.armaData5();
+    console.log("InfoDel5", info);
+    this.cargaChart5(info)
+
+    this.chart5 = new Chart({
+      chart: {
+        renderTo: 'container',
+        type: 'pie'
+      },
+      title: {
+        text: 'Cantidad de turnos finalizados por médico en un lapso de tiempo.'
+      },
+      series: [{
+        type: 'pie',
+        name: 'graf',
+        data: info
+      }]
+    });
+  }
+
+  armaData5() {
+    var b: any[] = [];
+    var arrayEspecialistas: string[] = [];
+    var listadoTurnosFiltrada: Turno[] = [];
+    var dia: any;
+    var diaSeleccionado: any;
+
+    diaSeleccionado = Date.parse(this.fecha);
+    this.listadoTurnos.forEach(turno => {
+      dia = Date.parse(this.parseaFecha(turno.fecha));
+      if (dia <= diaSeleccionado) {
+        listadoTurnosFiltrada.push(turno);
+      }
+    });
+
+    this.listadoUsuariosEspecialistas.forEach(esp => {
+      arrayEspecialistas.push(esp.nombre);
+    });
+
+    arrayEspecialistas.forEach(nombreEsp => {
+      var info: any;
+      info = {
+        name: nombreEsp,
+        y: 0,
+      }
+
+      listadoTurnosFiltrada.forEach(turno => {
+        if (turno.profesional?.nombre == nombreEsp && turno.estado == "FINALIZADO") {
+          info.y++;
+        }
+      });
+      b.push(info);
+
+    });
+    return b;
+  }
 
 }
