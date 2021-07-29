@@ -51,6 +51,7 @@ import { ResaltarDirective } from './directives/resaltar.directive';
 import { VerMiHCComponent } from './components/historiaClinica/ver-mi-hc/ver-mi-hc.component';
 import { PacienteComponent } from './components/paciente/paciente/paciente.component';
 import { FiltroHCPipe } from './pipe/filtro-hc.pipe';
+import { MostrarEstadoDirective } from './directives/mostrar-estado.directive';
 export function highchartModules() {
   return [exporting]
 }
@@ -88,6 +89,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
     VerMiHCComponent,
     PacienteComponent,
     FiltroHCPipe,
+    MostrarEstadoDirective,
   ],
   imports: [
     BrowserModule,
